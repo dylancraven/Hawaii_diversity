@@ -1,5 +1,11 @@
 __To-Do__
-- [ ] 1) ...   
-- [ ] 2) bla 
-- [ ] 3) bla  
-- [ ] 4) sss  
+- [ ] 1) Natives (size class all): Fig.1a & b     
+- [ ] 2) Natives (size class all): Fig. 2   
+- [ ] 3) Natives (size class all): Fig. 3    
+- [ ] 4) Natives (size class all): Fig. SI X (beta diversity)  
+- [ ] 5) Natives (size class **Big**): Scenario 1    
+- [ ] 6) Natives (size class **Big**): Scenario 2 
+- [ ] 7) Natives (size class **Big**): Scenario 3 
+- [ ] 8) Natives (size class **Big**): Fig. 1a & b 
+- [ ] 9) Natives (size class **Big**): Fig. 2
+- [ ] 10) Natives (size class **Big**): Fig. 3 

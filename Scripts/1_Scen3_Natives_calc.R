@@ -3,7 +3,7 @@
 # 1. natives       ##
 ##2. 7 plots      ### 
 #####################
-rm(list = ls())
+
 require(dplyr)
 require(reshape2)
 require(iNEXT)
@@ -11,7 +11,6 @@ require(vegan)
 require(BBmisc)
 require(ggplot2)
 require(mobr)
-#require(gambin)
 
 sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
   # regroup when done
@@ -30,8 +29,7 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 dat3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_SimComms.csv")
 dat3$Abundance_ha<-round(dat3$Abundance_ha)
 
-
-length(unique(dat3$iteration)) # 6973
+length(unique(dat3$iteration)) # 7198
 
 
 ######################
@@ -68,7 +66,7 @@ summ2<-summarize(group_by(dat33,geo_entity2), r_PET=mean(r_PET),PlotArea=mean(to
 summ3<-summarize(group_by(dat33,Iteration2,geo_entity2),PlotN=length(unique(PlotIDn)))
 summ33<-summarize(group_by(summ3,geo_entity2), meanPlotN=mean(PlotN), minP=min(PlotN),maxP=max(PlotN))
 
-
+summ33
 ######################
 
 set.seed(27)
@@ -78,8 +76,6 @@ for(i in 1:100){
   
   testt<-subset(dat33, dat33$Iteration2==(unique(dat33$Iteration2))[i])  
   
-  # all species combined (native and alien)
-  #togg3<-togg
   togg2<-summarize(group_by(testt, geo_entity2, SPP_CODE3A),Abundance=sum(Abundance_ha))
   
   hcomm2<-dcast(togg2, SPP_CODE3A~geo_entity2, value.var="Abundance",sum)
@@ -88,8 +84,9 @@ for(i in 1:100){
   
   #togg<-ungroup(togg)
   
-  
-  # all
+  ########
+  # SACs #
+  ########
   
   h<-iNEXT(hcomm2,q=c(0),size=c(1,100,200,300,400,500,600,700,800,900,1000),datatype="abundance")
   curves<-do.call(rbind.data.frame,h$iNextEst)
@@ -97,64 +94,18 @@ for(i in 1:100){
   curves$geo_entity2 <- gsub("\\..*","",curves$geo_entity2)
   curves$iteration<-i   
   
+  #########
+  # Hill N#
+  #########
+  
   orders<-estimateD(hcomm2,datatype="abundance",base="coverage", level=0.98,conf=0.95 )
   colnames(orders)[1]<-"geo_entity2"
   
   orders$iteration<-i
-  
-  # betaPIE
-  h_comm3<-dcast(testt, PlotIDn~SPP_CODE3A, value.var="Abundance_ha",sum)
-  rownames(h_comm3)<-h_comm3$PlotIDn
-  h_comm3<-select(h_comm3,-PlotIDn)
-  
-  # group information
-  
-  h_attr<-unique(select(testt,PlotIDn, geo_entity2))
-  
-  h_attr<-arrange(h_attr,PlotIDn)
-  
-  h_attr<-data.frame(h_attr)
-  rownames(h_attr)<-h_attr$PlotIDn
-  h_attr<-select(h_attr,-PlotIDn)
-  colnames(h_attr)<-"group"
-  h_attr$group<-as.factor(h_attr$group)
-  
-  # make mob structure
-  h_mob_in <- make_mob_in(h_comm3, h_attr)
-  
-  h_stats <- get_mob_stats(h_mob_in, group_var = "group",nperm=10)
-  
-  h_betapie<-data.frame(h_stats$samples$beta_ENS_PIE, h_stats$samples$beta_S)
-  h_betapie$PlotIDn<-rownames(h_betapie)
-  colnames(h_betapie)[1]<-"beta_ENS_PIE"
-  colnames(h_betapie)[2]<-"beta_S"
-  
-  h_help<-unique(select(testt, geo_entity2, PlotIDn))
-  
-  h_betapie<-merge(h_help,h_betapie,by.y="PlotIDn")
-  
-  h_betapie$geo_entity2<-as.character(h_betapie$geo_entity2)
-  h_betapie$geo_entity2<-ifelse(h_betapie$geo_entity2=="Hawai'i Island","Hawai'i",h_betapie$geo_entity2)
-  h_betapie$geo_entity2<-ifelse(h_betapie$geo_entity2=="Kaua'i Island","Kaua'i",h_betapie$geo_entity2)
-  h_betapie$geo_entity2<-ifelse(h_betapie$geo_entity2=="O'ahu Island (incl. Mokoli'i Islet)","O'ahu",h_betapie$geo_entity2)
-  h_betapie$geo_entity2<-as.factor(h_betapie$geo_entity2)
-  
-  
-  h_betapie<-select(h_betapie, geo_entity2, PlotIDn, beta_S, beta_ENS_PIE)
-  
-  h_betapie$Iteration<-i
-  
-  
-  
-  # env
-  
-  rangezz<-unique(select(testt, geo_entity2, r_PET, totPlotArea))
-  
-  rangezz$Iteration<-i
-  #rangezz<-ungroup(rangezz)
-  
-  
-  # RAD fun
+
+  ###########
+  # RAD fun #
+  ###########
   
   datt2<-dcast(testt, geo_entity2~SPP_CODE3A,value.var="Abundance_ha",sum)
   rownames(datt2)<-datt2$geo_entity2
@@ -203,6 +154,56 @@ for(i in 1:100){
   
   radd$iteration<-i
   
+  
+  ###########
+  # betaPIE #
+  ###########
+  
+  h_comm3<-dcast(testt, PlotIDn~SPP_CODE3A, value.var="Abundance_ha",sum)
+  rownames(h_comm3)<-h_comm3$PlotIDn
+  h_comm3<-select(h_comm3,-PlotIDn)
+  
+  # group information
+  
+  h_attr<-unique(select(testt,PlotIDn, geo_entity2))
+  
+  h_attr<-arrange(h_attr,PlotIDn)
+  
+  h_attr<-data.frame(h_attr)
+  rownames(h_attr)<-h_attr$PlotIDn
+  h_attr<-select(h_attr,-PlotIDn)
+  colnames(h_attr)<-"group"
+  h_attr$group<-as.factor(h_attr$group)
+  
+  # make mob structure
+  h_mob_in <- make_mob_in(h_comm3, h_attr)
+  
+  h_stats <- get_mob_stats(h_mob_in, group_var = "group",nperm=10)
+  
+  h_betapie<-data.frame(h_stats$samples$beta_ENS_PIE, h_stats$samples$beta_S)
+  h_betapie$PlotIDn<-rownames(h_betapie)
+  colnames(h_betapie)[1]<-"beta_ENS_PIE"
+  colnames(h_betapie)[2]<-"beta_S"
+  
+  h_help<-unique(select(testt, geo_entity2, PlotIDn))
+  
+  h_betapie<-merge(h_help,h_betapie,by.y="PlotIDn")
+  
+  h_betapie<-select(h_betapie, geo_entity2, PlotIDn, beta_S, beta_ENS_PIE)
+  
+  h_betapie$Iteration<-i
+  
+  
+  #######
+  # env #
+  #######
+  
+  rangezz<-unique(select(testt, geo_entity2, r_PET, totPlotArea))
+  
+  rangezz$Iteration<-i
+  #rangezz<-ungroup(rangezz)
+  
+  
   # output
   cat("progress", i, sep=' ','\n')
   
@@ -239,15 +240,15 @@ rad.tog<-do.call(rbind.data.frame,radZ)
 
 # All
 
-write.table(orders.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/SC_diversity_estimates_Hawaii_notsummarized_Scen3natives_7plots.csv",sep=",",row.names=F)
+write.table(orders.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_HillN.csv",sep=",",row.names=F)
 
-write.table(curves.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Curves_estimates_Hawaii_Scen3natives_7plots.csv",sep=",",row.names=F)
+write.table(curves.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_curves_estimates.csv",sep=",",row.names=F)
 
 envs<-summarize(group_by(rangez.tog, geo_entity2), r_PET=mean(r_PET), m_PlotArea=mean(totPlotArea))
 
-write.table(envs,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Env_conditions_Hawaii_Scen3natives_7plots.csv",sep=",",row.names=F)
+write.table(envs,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Native_7plots_EnvConditions_summarized.csv",sep=",",row.names=F)
 
-#write.table(alpha.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/GambinAlpha_Area_Hawaii_Scen3.csv",sep=",",row.names=F)
-write.table(beta.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/BetaPIE_AreaHawaii_Scen3natives_7plots.csv",sep=",",row.names=F)
-write.table(rad.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/RAD_AreaHawaii_Scen3natives_7plots.csv",sep=",",row.names=F)
+write.table(beta.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_BetaPIE.csv",sep=",",row.names=F)
+
+write.table(rad.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data//Scen3_Natives_7plots_RAD.csv",sep=",",row.names=F)
 

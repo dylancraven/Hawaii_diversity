@@ -1,4 +1,6 @@
 __To-Do__
+- [ ] 1) Natives (size class all): GAMMs for SACs  
+- [ ] 1) Natives (size class all): GAMMs for RADs  
 - [ ] 1) Natives (size class all): Fig.1a & b     
 - [ ] 2) Natives (size class all): Fig. 2   
 - [ ] 3) Natives (size class all): Fig. 3    

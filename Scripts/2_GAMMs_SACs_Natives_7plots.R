@@ -64,15 +64,13 @@ sac_OA$pred<-predict(fit.oa, sac_OA,type="response")
 sac_togg1<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
 colnames(sac_togg1)[11]<-"qD_pred"
 
-write.table(sac_togg1,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_SACs_Estimates.csv",sep=",",row.names=T)
-
-#### stop here
+write.table(sac_togg1,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_SACs_GAMMestimates.csv",sep=",",row.names=T)
 
 ##############
 # Scenario 2 #
 ##############
 
-sac.tog<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Curves_estimates_Hawaii_Sc2natives_7plots.csv")
+sac.tog<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_curves_estimates.csv")
 
 sac.tog$iteration<-as.factor(sac.tog$iteration)
 
@@ -87,7 +85,6 @@ sac_KA$geo_entity2<-droplevels(sac_KA$geo_entity2)
 
 sac_OA<-filter(sac.tog,geo_entity2=="O'ahu Island")
 sac_OA$geo_entity2<-droplevels(sac_OA$geo_entity2)
-
 
 ############
 # FIT GAMM #
@@ -122,18 +119,15 @@ sac_OA$pred<-predict(fit.oa$gam, sac_OA,type="response")
 sac_togg<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
 colnames(sac_togg)[12]<-"qD_pred"
 
-write.table(sac_togg,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Curves_estimates_Hawaii_Sc2natives_7plots_NEW.csv",sep=",",row.names=T)
+write.table(sac_togg,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_SACs_GAMMestimates.csv",sep=",",row.names=T)
 
 
 ##########
 # SCEN 3 #
 ##########
 
-#################
-# SAC data ######
-#################
 
-sac.tog<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Curves_estimates_Hawaii_Scen3natives_7plots.csv")
+sac.tog<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_curves_estimates.csv")
 
 sac.tog$iteration<-as.factor(sac.tog$iteration)
 
@@ -183,5 +177,4 @@ sac_OA$pred<-predict(fit.oa$gam, sac_OA,type="response")
 sac_togg<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
 colnames(sac_togg)[12]<-"qD_pred"
 
-write.table(sac_togg,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Curves_estimates_Hawaii_Scen3natives_7plots_NEW.csv",sep=",",row.names=T)
-
+write.table(sac_togg,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_SACs_GAMMestimates.csv",sep=",",row.names=T)

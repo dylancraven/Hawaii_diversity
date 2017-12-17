@@ -1,13 +1,13 @@
 __To-Do__  
 - [x] 1) Natives (size class all): GAMMs for SACs  
-- [x] 1) Natives (size class all): GAMMs for RADs  
-- [ ] 1) Natives (size class all): Fig.1a & b     
-- [ ] 2) Natives (size class all): Fig. 2   
-- [ ] 3) Natives (size class all): Fig. 3    
-- [ ] 4) Natives (size class all): Fig. SI X (beta diversity)  
-- [ ] 5) Natives (size class **Big**): Scenario 1    
-- [ ] 6) Natives (size class **Big**): Scenario 2 
-- [ ] 7) Natives (size class **Big**): Scenario 3 
-- [ ] 8) Natives (size class **Big**): Fig. 1a & b 
-- [ ] 9) Natives (size class **Big**): Fig. 2
-- [ ] 10) Natives (size class **Big**): Fig. 3 
+- [x] 2) Natives (size class all): GAMMs for RADs  
+- [ ] 3) Natives (size class all): Fig.1a & b     
+- [x] 4) Natives (size class all): Fig. 2   
+- [x] 5) Natives (size class all): Fig. 3    
+- [ ] 6) Natives (size class all): Fig. SI X (beta diversity)  
+- [ ] 7) Natives (size class **Big**): Scenario 1    
+- [ ] 8) Natives (size class **Big**): Scenario 2 
+- [ ] 9) Natives (size class **Big**): Scenario 3 
+- [ ] 10) Natives (size class **Big**): Fig. 1a & b 
+- [ ] 11) Natives (size class **Big**): Fig. 2
+- [ ] 12) Natives (size class **Big**): Fig. 3 

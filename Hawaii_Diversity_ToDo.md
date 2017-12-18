@@ -1,7 +1,7 @@
 __To-Do__  
 - [x] 1) Natives (size class all): GAMMs for SACs  
 - [x] 2) Natives (size class all): GAMMs for RADs  
-- [ ] 3) Natives (size class all): Fig.1a & b     
+- [x] 3) Natives (size class all): Fig.1a & b     
 - [x] 4) Natives (size class all): Fig. 2   
 - [x] 5) Natives (size class all): Fig. 3    
 - [ ] 6) Natives (size class all): Fig. SI X (beta diversity)  

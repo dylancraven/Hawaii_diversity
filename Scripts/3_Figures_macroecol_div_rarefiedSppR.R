@@ -5,8 +5,9 @@ require(grid)
 require(ggsci)
 require(reshape2)
 
-####################
-
+#########
+# data ##
+#########
 
 macro<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Data/Hawaii_Div_Macro_SIE.csv",sep=",",header=T)
 
@@ -24,6 +25,11 @@ macroo$Div<-as.factor(macroo$Div)
 macroo$Div<-factor(macroo$Div,levels=c("Single Island Endemic","Native Woody Spp.","Total Woody Spp."))
 
 macroo2<-filter(macroo, Div!="Total Woody Spp.")
+
+###########
+# figure ##
+###########
+
 
 macro_g<-ggplot(macroo2,aes(x=geo_entity2,y=Div2,colour=Div, fill=Div))+ 
   geom_bar(stat="identity",position=position_dodge())+
@@ -47,7 +53,9 @@ macro_g<-ggplot(macroo2,aes(x=geo_entity2,y=Div2,colour=Div, fill=Div))+
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-### 
+###############
+# get colors ##
+###############
 
 g<-ggplot_build(macro_g)
 
@@ -57,13 +65,18 @@ unique(g$data[[1]]["fill"])
 # bar graph with rarefied species richness   #
 ##############################################
 
-SppR<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/SppRarefy_alldata.csv",header=T)
+#########
+# data ##
+#########
+
+
+
+SppR<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/RarefySppRichness_alldata.csv",header=T)
 
 SppR$Rarefy<-factor(SppR$Rarefy, levels=c("N100","N1000","N10000","all"))
 SppR$Location<-factor(SppR$Location,levels=c("Hawai'i Island","Maui Nui","O'ahu Island","Kaua'i Island"))
 
 SppR$Loc_Rare<-as.factor(paste(SppR$Location,SppR$Rarefy,sep="_"))
-
 
 SppR$Loc_Rare<-factor(SppR$Loc_Rare, levels=c("Hawai'i Island_N100","Hawai'i Island_N1000","Hawai'i Island_N10000","Hawai'i Island_all",
                                               "Maui Nui_N100","Maui Nui_N1000","Maui Nui_N10000","Maui Nui_all" ,
@@ -78,6 +91,9 @@ SppR$Rarefy2<-ifelse(SppR$Rarefy=="all","all",SppR$Rarefy2)
 SppR$Rarefy2<-as.factor(SppR$Rarefy2)
 SppR$Rarefy2<-factor(SppR$Rarefy2, levels=c("100","1,000","10,000","all"))
 
+###########
+# figure ##
+###########
 
 All_bar<-ggplot(SppR,aes(x=Loc_Rare,y=S,colour=Rarefy2, fill=Rarefy2))+ 
   geom_bar(stat="identity",position=position_dodge())+
@@ -90,7 +106,7 @@ All_bar<-ggplot(SppR,aes(x=Loc_Rare,y=S,colour=Rarefy2, fill=Rarefy2))+
   scale_fill_manual(values=c("#C5CAE9","#7986CB","#3949AB","#1A2373"))+
   scale_colour_manual(values=c("#C5CAE9","#7986CB","#3949AB","#1A2373"))+
   
-  scale_y_continuous(breaks=c(0, 10, 20, 30, 40, 50, 60))+
+  scale_y_continuous(limits=c(0,64),breaks=c(0, 10, 20, 30, 40, 50, 60))+
   guides(colour=FALSE,fill=guide_legend(title="Sample size (individuals)",title.position = "top"))+
   labs(x="",y="Species diversity")+
   theme_bw()+theme(legend.position="top", 
@@ -108,12 +124,12 @@ All_bar<-ggplot(SppR,aes(x=Loc_Rare,y=S,colour=Rarefy2, fill=Rarefy2))+
 
 
 #################
+# combine panels#
+#################
 
 require(cowplot)
 
-
-
-png(filename="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/HawaiiDiversity_SppDiv_Fig1.png", 
+png(filename="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Figures/Macro_Diversity_SppDiv_Fig1.png", 
     units="in", 
     width=4, 
     height=8, 

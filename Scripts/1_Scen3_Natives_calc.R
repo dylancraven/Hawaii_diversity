@@ -251,4 +251,3 @@ write.table(envs,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitori
 write.table(beta.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_BetaPIE.csv",sep=",",row.names=F)
 
 write.table(rad.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data//Scen3_Natives_7plots_RAD.csv",sep=",",row.names=F)
-

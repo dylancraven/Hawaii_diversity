@@ -190,5 +190,3 @@ rad_tog3<-dplyr::select(rad_tog3,-logRelAbund)
 colnames(rad_tog3)[7]<-"RankN_pred"
 
 write.table(rad_tog3,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
-
-

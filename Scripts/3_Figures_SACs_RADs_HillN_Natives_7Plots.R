@@ -42,7 +42,7 @@ SACs_3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitori
 
 HillN_3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_HillN.csv")
 
-RAD_3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_RAD_GAMMestimates.csv")
+RAD_3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_RAD_GAMMestimates.csv")
 
 
 ##################

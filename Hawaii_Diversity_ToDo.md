@@ -7,10 +7,12 @@ __To-Do__
 - [x] 6) Natives (size class all): Fig. SI X (beta diversity)  
 - [x] 7) Natives (size class all): SACs using all data (SI figure)
 - [x] 8) Natives (size class **Big**): Scenario 1 _now using .RData_      
-- [ ] 9) Natives (size class **Big**): Scenario 2 
-- [ ] 10) Natives (size class **Big**): Scenario 3 
-- [ ] 11) Natives (size class **Big**): Fig. 1a & b 
-- [ ] 12) Natives (size class **Big**): Fig. 2
-- [ ] 13) Natives (size class **Big**): Fig. 3 
-- [ ] 14) Map of plot locations across Hawaiian Islands: Fig. S1  
+- [x] 9) Natives (size class **Big**): Scenario 2 
+- [x] 10) Natives (size class **Big**): Scenario 3 
+- [ ] 11) Natives (size class **Big**): GAMMs for SACs 
+- [ ] 12) Natives (size class **Big**): GAMMs for RADs   
+- [ ] 13) Natives (size class **Big**): Fig. 1a & b 
+- [ ] 14) Natives (size class **Big**): Fig. 2
+- [ ] 15) Natives (size class **Big**): Fig. 3 
+- [ ] 16) Map of plot locations across Hawaiian Islands: Fig. S1  
 

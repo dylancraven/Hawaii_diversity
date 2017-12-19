@@ -111,9 +111,9 @@ for(i in 1:100000){
   togg_out[[i]]<-rbind.data.frame(togg1)  
 }  
 
-Scen2_tog_het<-do.call(rbind.data.frame,togg_out)
+Scen3_tog_het<-do.call(rbind.data.frame,togg_out)
 
 
-save(Scen2_tog_het,file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_BIG_7plots_SimComms.RData")
+save(Scen3_tog_het,file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_BIG_7plots_SimComms.RData")
 
 

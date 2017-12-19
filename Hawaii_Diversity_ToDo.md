@@ -6,7 +6,7 @@ __To-Do__
 - [x] 5) Natives (size class all): Fig. 3    
 - [x] 6) Natives (size class all): Fig. SI X (beta diversity)  
 - [x] 7) Natives (size class all): SACs using all data (SI figure)
-- [ ] 8) Natives (size class **Big**): Scenario 1    
+- [x] 8) Natives (size class **Big**): Scenario 1 _now using .RData_      
 - [ ] 9) Natives (size class **Big**): Scenario 2 
 - [ ] 10) Natives (size class **Big**): Scenario 3 
 - [ ] 11) Natives (size class **Big**): Fig. 1a & b 

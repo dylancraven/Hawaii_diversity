@@ -12,3 +12,5 @@ __To-Do__
 - [ ] 11) Natives (size class **Big**): Fig. 1a & b 
 - [ ] 12) Natives (size class **Big**): Fig. 2
 - [ ] 13) Natives (size class **Big**): Fig. 3 
+- [ ] 14) Map of plot locations across Hawaiian Islands: Fig. S1  
+

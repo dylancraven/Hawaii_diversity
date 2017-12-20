@@ -2,6 +2,7 @@
 # Island - Scen. 3 ##
 # 1. natives       ##
 ##2. 7 plots      ### 
+##3. BIG trees ######
 #####################
 
 require(dplyr)
@@ -240,7 +241,5 @@ Scen3_rad.tog<-do.call(rbind.data.frame,radZ)
 
 
 Scen3_envs<-summarize(group_by(Scen3_rangez.tog, geo_entity2), r_PET=mean(r_PET), m_PlotArea=mean(totPlotArea))
-
-
 
 save(Scen3_orders.tog, Scen3_curves.tog, Scen3_envs, Scen3_beta.tog,Scen3_rad.tog, file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_natives_BIG.RData")

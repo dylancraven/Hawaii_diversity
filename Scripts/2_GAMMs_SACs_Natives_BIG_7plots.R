@@ -137,8 +137,6 @@ Scen3_curves.tog<-filter(Scen3_curves.tog, m %in% c(1,100,200,300,400,500, 600,7
 
 Scen3_curves.tog$iteration<-as.factor(Scen3_curves.tog$iteration)
 
-Scen3_curves.tog$iteration<-as.factor(Scen3_curves.tog$iteration)
-
 sac_MN<-filter(Scen3_curves.tog,geo_entity2=="Maui Nui")
 sac_MN$geo_entity2<-droplevels(sac_MN$geo_entity2)
 
@@ -182,7 +180,7 @@ sac_OA$pred<-predict(fit.oa$gam, sac_OA,type="response")
 
 # merge
 
-sac_togg<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
-colnames(sac_togg)[12]<-"qD_pred"
+sac_togg3<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
+colnames(sac_togg3)[12]<-"qD_pred"
 
-write.table(sac_togg,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_SACs_GAMMestimates.csv",sep=",",row.names=T)
+save(sac_togg1,sac_togg2, sac_togg3, file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen123_Native_Big_GAMMestimates.RData")

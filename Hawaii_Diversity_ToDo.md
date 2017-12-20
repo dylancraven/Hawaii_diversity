@@ -9,7 +9,7 @@ __To-Do__
 - [x] 8) Natives (size class **Big**): Scenario 1 _now using .RData_      
 - [x] 9) Natives (size class **Big**): Scenario 2 
 - [x] 10) Natives (size class **Big**): Scenario 3 
-- [ ] 11) Natives (size class **Big**): GAMMs for SACs 
+- [x] 11) Natives (size class **Big**): GAMMs for SACs 
 - [ ] 12) Natives (size class **Big**): GAMMs for RADs   
 - [ ] 13) Natives (size class **Big**): Fig. 1a & b 
 - [ ] 14) Natives (size class **Big**): Fig. 2

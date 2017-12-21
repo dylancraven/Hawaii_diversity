@@ -17,7 +17,6 @@ require(gamm4)
 
 load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_natives_BIG.RData")
 
-
 radd$logRelAbund<-log(radd$RelAbund)
 
 rad_MN<-filter(radd,geo_entity2=="Maui Nui")

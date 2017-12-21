@@ -10,9 +10,9 @@ __To-Do__
 - [x] 9) Natives (size class **Big**): Scenario 2 
 - [x] 10) Natives (size class **Big**): Scenario 3 
 - [x] 11) Natives (size class **Big**): GAMMs for SACs 
-- [ ] 12) Natives (size class **Big**): GAMMs for RADs   
-- [ ] 13) Natives (size class **Big**): Fig. 1a & b 
-- [ ] 14) Natives (size class **Big**): Fig. 2
-- [ ] 15) Natives (size class **Big**): Fig. 3 
-- [ ] 16) Map of plot locations across Hawaiian Islands: Fig. S1  
+- [x] 12) Natives (size class **Big**): GAMMs for RADs   
+- [x] 14) Natives (size class **Big**): Fig. S2 (RADs & SACs)  
+- [x] 15) Natives (size class **Big**): Fig. S3  (Hill Numbers)
+- [x] 15) Natives (size class **Big**): SACs using all data (Fig. S4)  
+- [x] 16) Map of plot locations across Hawaiian Islands: Fig. S1  
 

@@ -4,6 +4,7 @@
 ##################
 # Natives       ##
 # 7 plots       ##
+# BIG trees     ##
 ##################
 
 require(dplyr)
@@ -32,7 +33,6 @@ rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 rad_OA<-filter(radd,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
 
-## stop here ##
 
 ############
 # FIT GAMM #
@@ -64,34 +64,30 @@ rad_OA$pred<-predict(fit.oa$gam, rad_OA,type="response")
 
 # merge
 
-rad_tog<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
-rad_tog<-dplyr::select(rad_tog,-logRelAbund)
-colnames(rad_tog)[6]<-"RankN_pred"
-
-write.table(rad_tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
+rad_tog1<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
+rad_tog1<-dplyr::select(rad_tog1,-logRelAbund)
+colnames(rad_tog1)[6]<-"RankN_pred"
 
 ##############
 # Scenario 2 #
 ##############
 
-rad.tog2<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_RADs.csv",sep=",",header=T)
+load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_natives_BIG.RData")
 
-rad.tog2$iteration<-as.factor(rad.tog2$iteration)
+Scen2_rad.tog$iteration<-as.factor(Scen2_rad.tog$iteration)
 
-rad.tog2$logRelAbund<-log(rad.tog2$RelAbund)
+Scen2_rad.tog$logRelAbund<-log(Scen2_rad.tog$RelAbund)
 
-
-rad_MN<-filter(rad.tog2,geo_entity2=="Maui Nui")
+rad_MN<-filter(Scen2_rad.tog,geo_entity2=="Maui Nui")
 rad_MN$geo_entity2<-droplevels(rad_MN$geo_entity2)
 
-
-rad_HA<-filter(rad.tog2,geo_entity2=="Hawai'i Island")
+rad_HA<-filter(Scen2_rad.tog,geo_entity2=="Hawai'i Island")
 rad_HA$geo_entity2<-droplevels(rad_HA$geo_entity2)
 
-rad_KA<-filter(rad.tog2,geo_entity2=="Kaua'i Island")
+rad_KA<-filter(Scen2_rad.tog,geo_entity2=="Kaua'i Island")
 rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 
-rad_OA<-filter(rad.tog2,geo_entity2=="O'ahu Island")
+rad_OA<-filter(Scen2_rad.tog,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
 
 
@@ -129,30 +125,27 @@ rad_tog2<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
 rad_tog2<-dplyr::select(rad_tog2,-logRelAbund)
 colnames(rad_tog2)[7]<-"RankN_pred"
 
-write.table(rad_tog2,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
-
 
 ##########
 # SCEN 3 #
 ##########
 
+load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_natives_BIG.RData")
 
-rad.tog3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_RAD.csv",sep=",",header=T)
+Scen3_rad.tog$iteration<-as.factor(Scen3_rad.tog$iteration)
 
-rad.tog3$iteration<-as.factor(rad.tog3$iteration)
+Scen3_rad.tog$logRelAbund<-log(Scen3_rad.tog$RelAbund)
 
-rad.tog3$logRelAbund<-log(rad.tog3$RelAbund)
-
-rad_MN<-filter(rad.tog3,geo_entity2=="Maui Nui")
+rad_MN<-filter(Scen3_rad.tog,geo_entity2=="Maui Nui")
 rad_MN$geo_entity2<-droplevels(rad_MN$geo_entity2)
 
-rad_HA<-filter(rad.tog3,geo_entity2=="Hawai'i Island")
+rad_HA<-filter(Scen3_rad.tog,geo_entity2=="Hawai'i Island")
 rad_HA$geo_entity2<-droplevels(rad_HA$geo_entity2)
 
-rad_KA<-filter(rad.tog3,geo_entity2=="Kaua'i Island")
+rad_KA<-filter(Scen3_rad.tog,geo_entity2=="Kaua'i Island")
 rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 
-rad_OA<-filter(rad.tog3,geo_entity2=="O'ahu Island")
+rad_OA<-filter(Scen3_rad.tog,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
 
 
@@ -190,4 +183,7 @@ rad_tog3<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
 rad_tog3<-dplyr::select(rad_tog3,-logRelAbund)
 colnames(rad_tog3)[7]<-"RankN_pred"
 
-write.table(rad_tog3,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
+
+####
+
+save(rad_tog1,rad_tog2, rad_tog3, file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen123_Native_Big_RAD_GAMMestimates.RData")

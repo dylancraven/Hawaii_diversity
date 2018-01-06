@@ -27,7 +27,6 @@ tog<-read.delim("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitorin
 
 togg<-select(tog, geo_entity_ref, geo_entity, Study, PlotIDn, Plot_Area,SPP_CODE3A,ID, DBH_cm,Abundance, Abundance_ha)
 
-
 ##############################
 # Part I: Make size classes  #
 ##############################

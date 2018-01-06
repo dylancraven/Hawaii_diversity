@@ -14,7 +14,7 @@ require(gamm4)
 # Scenario 1 #
 ##############
 
-RAD_1<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_RAD.csv")
+RAD_1<-read.csv("Cleaned_Data/Scen1_Natives_RAD.csv")
 
 #RAD_1$iteration<-as.factor(RAD_1$iteration)
 
@@ -67,13 +67,13 @@ rad_tog<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
 rad_tog<-dplyr::select(rad_tog,-logRelAbund)
 colnames(rad_tog)[6]<-"RankN_pred"
 
-write.table(rad_tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
+write.table(rad_tog,"Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
 
 ##############
 # Scenario 2 #
 ##############
 
-rad.tog2<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_RADs.csv",sep=",",header=T)
+rad.tog2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_RADs.csv",sep=",",header=T)
 
 rad.tog2$iteration<-as.factor(rad.tog2$iteration)
 
@@ -92,7 +92,6 @@ rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 
 rad_OA<-filter(rad.tog2,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
-
 
 ############
 # FIT GAMM #
@@ -128,15 +127,14 @@ rad_tog2<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
 rad_tog2<-dplyr::select(rad_tog2,-logRelAbund)
 colnames(rad_tog2)[7]<-"RankN_pred"
 
-write.table(rad_tog2,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
+write.table(rad_tog2,"Cleaned_Data/Scen2_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
 
 
 ##########
 # SCEN 3 #
 ##########
 
-
-rad.tog3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_RAD.csv",sep=",",header=T)
+rad.tog3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD.csv",sep=",",header=T)
 
 rad.tog3$iteration<-as.factor(rad.tog3$iteration)
 
@@ -189,4 +187,4 @@ rad_tog3<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
 rad_tog3<-dplyr::select(rad_tog3,-logRelAbund)
 colnames(rad_tog3)[7]<-"RankN_pred"
 
-write.table(rad_tog3,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
+write.table(rad_tog3,"Cleaned_Data/Scen3_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)

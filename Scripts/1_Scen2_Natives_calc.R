@@ -38,7 +38,7 @@ datt<-filter(datt, Native_Status_HawFlora_simple=="native")
 #####
 
 length(unique(datt$PlotIDn)) # 420 plots
-length(unique(datt$SPP_CODE3A)) #115 spp   
+length(unique(datt$SPP_CODE3A)) #114 spp   
 range(datt$Plot_Area) #  100.0037 1017.8760
 quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
 
@@ -48,7 +48,6 @@ quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
 
 datt2<-summarize(group_by(datt, geo_entity2, SPP_CODE3A),Abundance=sum(Abundance_ha))
 
-
 #########################
 # quick data summary    #
 #########################
@@ -57,6 +56,7 @@ summ<-unique(select(datt, geo_entity2, PlotIDn,Plot_Area))
 
 summ2<-summarize(group_by(summ, geo_entity2), Plots=length(unique(PlotIDn)), PlotArea=sum(Plot_Area))
 
+summ2
 
 ####################
 # separate islands #
@@ -252,18 +252,17 @@ beta.tog<-do.call(rbind.data.frame,betaZ)
 # across samples #
 ##################
 
-
 # All
 
-write.table(orders.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_HillN.csv",sep=",",row.names=F)
+write.table(orders.tog,"Cleaned_Data/Scen2_Natives_7plots_HillN.csv",sep=",",row.names=F)
 
-write.table(curves.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_curves_estimates.csv",sep=",",row.names=F)
+write.table(curves.tog,"Cleaned_Data/Scen2_Natives_7plots_curves_estimates.csv",sep=",",row.names=F)
 
 envs<-summarize(group_by(rangez.tog, geo_entity2), r_MAP=mean(r_MAP),r_MAT=mean(r_MAT),r_PET=mean(r_PET),r_Elev=mean(r_Elev),  m_PlotArea=mean(totPlotArea))
 
-write.table(envs,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_Envconditions_summarized.csv",sep=",",row.names=F)
+write.table(envs,"Cleaned_Data/Scen2_Natives_7plots_Envconditions_summarized.csv",sep=",",row.names=F)
 
-write.table(beta.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_BetaPIE.csv",sep=",",row.names=F)
+write.table(beta.tog,"Cleaned_Data/Scen2_Natives_7plots_BetaPIE.csv",sep=",",row.names=F)
 
-write.table(rad.tog,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_RADs.csv",sep=",",row.names=F)
+write.table(rad.tog,"Cleaned_Data/Scen2_Natives_7plots_RADs.csv",sep=",",row.names=F)
 

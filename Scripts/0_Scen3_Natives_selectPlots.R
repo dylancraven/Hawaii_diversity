@@ -29,7 +29,7 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 ######################
 
 
-datt<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
+datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
 
 datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass=="all")  
 datt$SizeClass<-droplevels(datt$SizeClass)
@@ -41,7 +41,7 @@ datt<-filter(datt, Native_Status_HawFlora_simple=="native")
 #####
 
 length(unique(datt$PlotIDn)) # 420 plots
-length(unique(datt$SPP_CODE3A)) #115 plots   
+length(unique(datt$SPP_CODE3A)) #114 spp   
 range(datt$Plot_Area) #  100.0037 1017.8760
 quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
 
@@ -113,7 +113,6 @@ for(i in 1:100000){
 tog_het<-do.call(rbind.data.frame,togg_out)
 
 
-
-write.table(tog_het,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_SimComms.csv",sep=",",row.names=F)
+write.table(tog_het,"Cleaned_Data/Scen3_Natives_7plots_SimComms.csv",sep=",",row.names=F)
 
 

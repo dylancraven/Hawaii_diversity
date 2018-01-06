@@ -78,7 +78,6 @@ colnames(orders)[1]<-"geo_entity2"
 
 write.table(orders,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_HillNumbers.csv",sep=",",row.names=F)
 
-
 #############
 ## RADs #####
 #############
@@ -167,14 +166,12 @@ h_betapie<-merge(h_help,h_betapie,by.y="PlotIDn")
 
 h_betapie<-select(h_betapie, geo_entity2, PlotIDn, beta_S, beta_ENS_PIE)
 
-
 write.table(h_betapie,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_BetaPIE.csv",sep=",",row.names=F)
 
 
 #####################
 # Environmental data#
 #####################
-
 
 datt_unique<-distinct(select(datt, geo_entity2, PlotIDn, MAT, MAP, PET, Elev_m, Plot_Area))
 datt_unique$dupes<-duplicated(datt_unique$PlotIDn)

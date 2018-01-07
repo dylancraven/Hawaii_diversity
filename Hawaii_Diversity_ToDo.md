@@ -16,5 +16,5 @@ __To-Do__
 - [x] 15) Natives (size class **Big**): beta diversity (Appendix)
 - [x] 16) Natives (size class **Big**): SACs using all data (Fig. S4)
 - [ ] 17) Map of plot locations across Hawaiian Islands: Fig. S1 
-- [ ] 18) Adjust species list (PELBAR/MELBAR)  
+- [x] 18) Adjust species list (PELBAR/MELBAR)  
 

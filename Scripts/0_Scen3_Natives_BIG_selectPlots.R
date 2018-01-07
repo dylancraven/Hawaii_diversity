@@ -30,7 +30,7 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 ######################
 
 
-datt<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
+datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
 
 datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass=="big")  
 datt$SizeClass<-droplevels(datt$SizeClass)
@@ -114,6 +114,6 @@ for(i in 1:100000){
 Scen3_tog_het<-do.call(rbind.data.frame,togg_out)
 
 
-save(Scen3_tog_het,file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_BIG_7plots_SimComms.RData")
+save(Scen3_tog_het,file="Cleaned_Data/Scen3_Natives_BIG_7plots_SimComms.RData")
 
 

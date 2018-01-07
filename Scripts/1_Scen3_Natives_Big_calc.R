@@ -27,14 +27,13 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 ## data ##############
 ######################
 
-load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_BIG_7plots_SimComms.RData")
+load("Cleaned_Data/Scen3_Natives_BIG_7plots_SimComms.RData")
 
-dat3<-Scen2_tog_het
+dat3<-Scen3_tog_het
 
 dat3$Abundance_ha<-round(dat3$Abundance_ha)
 
 length(unique(dat3$iteration)) # 5720
-
 
 ######################
 # select  100 ########
@@ -65,12 +64,13 @@ dat33<-select(dat33, Iteration2, geo_entity2, PlotIDn, SPP_CODE3A, Abundance_ha,
 # is there variation in PET range and Plot Area?
 summ2<-summarize(group_by(dat33,geo_entity2), r_PET=mean(r_PET),PlotArea=mean(totPlotArea), var_PlotArea=sd(totPlotArea))
 summ2
+
 # always 7 plots per island per iteration?
 
 summ3<-summarize(group_by(dat33,Iteration2,geo_entity2),PlotN=length(unique(PlotIDn)))
 summ33<-summarize(group_by(summ3,geo_entity2), meanPlotN=mean(PlotN), minP=min(PlotN),maxP=max(PlotN))
-
 summ33
+
 ######################
 
 set.seed(27)
@@ -242,4 +242,4 @@ Scen3_rad.tog<-do.call(rbind.data.frame,radZ)
 
 Scen3_envs<-summarize(group_by(Scen3_rangez.tog, geo_entity2), r_PET=mean(r_PET), m_PlotArea=mean(totPlotArea))
 
-save(Scen3_orders.tog, Scen3_curves.tog, Scen3_envs, Scen3_beta.tog,Scen3_rad.tog, file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_natives_BIG.RData")
+save(Scen3_orders.tog, Scen3_curves.tog, Scen3_envs, Scen3_beta.tog,Scen3_rad.tog, file="Cleaned_Data/Scen3_natives_BIG.RData")

@@ -28,7 +28,7 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 ## data ##############
 ######################
 
-datt<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
+datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
 
 datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass=="big")  
 datt$SizeClass<-droplevels(datt$SizeClass)
@@ -59,6 +59,7 @@ summ<-unique(select(datt, geo_entity2, PlotIDn,Plot_Area))
 
 summ2<-summarize(group_by(summ, geo_entity2), Plots=length(unique(PlotIDn)), PlotArea=sum(Plot_Area))
 
+summ2
 
 ####################
 # separate islands #
@@ -68,7 +69,6 @@ kauai<-filter(datt,geo_entity2=="Kaua'i Island")
 mn<-filter(datt,geo_entity2=="Maui Nui")
 oh<-filter(datt,geo_entity2=="O'ahu Island")
 big<-filter(datt,geo_entity2=="Hawai'i Island")
-
 
 ###########
 
@@ -249,8 +249,8 @@ Scen2_rad.tog<-do.call(rbind.data.frame,radZ)
 
 Scen2_beta.tog<-do.call(rbind.data.frame,betaZ)
 
-
 Scen2_envs<-summarize(group_by(Scen2_rangez.tog, geo_entity2), r_MAP=mean(r_MAP),r_MAT=mean(r_MAT),r_PET=mean(r_PET),r_Elev=mean(r_Elev),  m_PlotArea=mean(totPlotArea))
 
 
-save(Scen2_orders.tog, Scen2_curves.tog, Scen2_envs, Scen2_beta.tog,Scen2_rad.tog, file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_natives_BIG.RData")
+save(Scen2_orders.tog, Scen2_curves.tog, Scen2_envs, Scen2_beta.tog,Scen2_rad.tog, 
+     file="Cleaned_Data/Scen2_natives_BIG.RData")

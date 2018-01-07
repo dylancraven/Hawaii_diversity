@@ -20,7 +20,7 @@ require(mobr)
 ## data ##############
 ######################
 
-datt<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
+datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
 
 datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass=="big")  
 datt$SizeClass<-droplevels(datt$SizeClass)
@@ -78,7 +78,6 @@ colnames(orders)[1]<-"geo_entity2"
 
 #write.table(orders,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_HillNumbers.csv",sep=",",row.names=F)
 
-
 #############
 ## RADs #####
 #############
@@ -127,8 +126,6 @@ radd$geo_entity2<-as.factor(radd$geo_entity2)
 radd$geo_entity2<-factor(radd$geo_entity2,levels=c("Hawai'i Island","Maui Nui","O'ahu Island","Kaua'i Island"))
 
 #write.table(radd,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_RAD.csv",sep=",",row.names=F)
-
-
 
 ############
 # BetaPIE  #

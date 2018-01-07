@@ -13,7 +13,7 @@ require(stringr)
 ## data ##############
 ######################
 
-datt<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
+datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
 
 datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass=="all")  
 datt$SizeClass<-droplevels(datt$SizeClass)
@@ -25,7 +25,7 @@ datt<-filter(datt, Native_Status_HawFlora_simple=="native")
 #####
 
 length(unique(datt$PlotIDn)) # 420 plots
-length(unique(datt$SPP_CODE3A)) #115 plots   
+length(unique(datt$SPP_CODE3A)) #114 plots   
 range(datt$Plot_Area) #  100.0037 1017.8760
 quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
 
@@ -40,7 +40,6 @@ rownames(datt2_mat)<-datt2_mat$geo_entity2
 datt2_mat<-select(datt2_mat,-geo_entity2)
 
 datt2_mat<-as.matrix(datt2_mat)
-
 
 ##################
 # Rarefy this ! ##
@@ -69,4 +68,4 @@ spp_N$Rarefy<-"all"
 SppR<-rbind.data.frame(spp_rrr,spp_N)
 SppR<-arrange(SppR, Location)
 
-write.table(SppR,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/RarefySppRichness_alldata.csv",sep=",",row.names=F)
+write.table(SppR,"Cleaned_Data/RarefySppRichness_alldata.csv",sep=",",row.names=F)

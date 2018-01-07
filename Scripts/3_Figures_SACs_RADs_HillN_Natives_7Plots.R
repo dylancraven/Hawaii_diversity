@@ -16,33 +16,33 @@ library(rms)
 # Scenario 1 #####
 ##################
 
-SACs_1<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_SACs_GAMMestimates.csv")
+SACs_1<-read.csv("Cleaned_Data/Scen1_Natives_SACs_GAMMestimates.csv")
 
-HillN_1<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_HillNumbers.csv")
+HillN_1<-read.csv("Cleaned_Data/Scen1_Natives_HillNumbers.csv")
 
-RAD_1<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv")
+RAD_1<-read.csv("Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv")
 
 
 ##################
 # Scenario 2 #####
 ##################
 
-SACs_2<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_SACs_GAMMestimates.csv")
+SACs_2<-read.csv("Cleaned_Data/Scen2_Natives_SACs_GAMMestimates.csv")
 
-HillN_2<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_HillN.csv")
+HillN_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_HillN.csv")
 
-RAD_2<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_RAD_GAMMestimates.csv")
+RAD_2<-read.csv("Cleaned_Data/Scen2_Natives_RAD_GAMMestimates.csv")
 
 
 ##################
 # Scenario 3 #####
 ##################
 
-SACs_3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_SACs_GAMMestimates.csv")
+SACs_3<-read.csv("Cleaned_Data/Scen3_Natives_SACs_GAMMestimates.csv")
 
-HillN_3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_HillN.csv")
+HillN_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_HillN.csv")
 
-RAD_3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_RAD_GAMMestimates.csv")
+RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_RAD_GAMMestimates.csv")
 
 
 ##################
@@ -262,7 +262,7 @@ togg2<-plot_grid(SACs_11,SACs_22,SACs_33,raDs_1,raDs_2,raDs_3,
                  labels=c("a)","b)","c)","d)","e)","f)"),label_size = 6,
                  ncol=3)
 
-png(filename="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Figures/SACs_RADs_Natives_7plots_Fig2.png", 
+png(filename="Figures/SACs_RADs_Natives_7plots_Fig2.png", 
     units="in", 
     width=8, 
     height=6, 
@@ -277,7 +277,6 @@ dev.off()
 # Hill N ####
 #############
 
-
 HillN_1$Scenario<-"I"
 HillN_1$iteration<-1
 
@@ -286,8 +285,6 @@ HillN_2$Scenario<-"II"
 HillN_3$Scenario<-"III"
 
 HillNN<-rbind.data.frame(HillN_1, HillN_2, HillN_3)
-
-
 
 HillNN$geo_entity2<-as.character(HillNN$geo_entity2)
 HillNN$geo_entity2<-ifelse(HillNN$geo_entity2=="O'ahu Island (incl. Mokoli'i Islet)","O'ahu",HillNN$geo_entity2)
@@ -322,7 +319,6 @@ colnames(HillNN_minus)[6]<-"qD.UCL"
 Hill_Sc1<-filter(HillNN,Scenario=="I")
 Hill_Sc1<-select(Hill_Sc1, geo_entity2, Scenario, order, qD, qD.LCL, qD.UCL)
 
-
 HillNN_f<-rbind.data.frame(HillNN_minus,Hill_Sc1)
 
 HillNN_f$geo_order<-paste(HillNN_f$geo_entity2,HillNN_f$order,sep="_")
@@ -341,7 +337,6 @@ HillNN_f<-ungroup(HillNN_f)
 # order x island x scenario  #
 ##############################
 
-
 HillNN_f$Scenario<-as.character(HillNN_f$Scenario)
 HillNN_f$Scenario<-ifelse(HillNN_f$Scenario=="I","Area+Het+Age",HillNN_f$Scenario)
 HillNN_f$Scenario<-ifelse(HillNN_f$Scenario=="II","Het+Age",HillNN_f$Scenario)
@@ -349,7 +344,6 @@ HillNN_f$Scenario<-ifelse(HillNN_f$Scenario=="III","Age",HillNN_f$Scenario)
 HillNN_f$Scenario<-as.factor(HillNN_f$Scenario)
 
 HillNN_f$Scenario<-factor(HillNN_f$Scenario,levels=c("Area+Het+Age","Het+Age","Age"))
-
 
 HillNN$Scenario<-as.character(HillNN$Scenario)
 HillNN$Scenario<-ifelse(HillNN$Scenario=="I","Area+Het+Age",HillNN$Scenario)
@@ -387,7 +381,7 @@ hill_three<-ggplot(HillNN, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_en
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 
-png(filename="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Figures/HillN_Natives_7plots_Fig3.png", 
+png(filename="Figures/HillN_Natives_7plots_Fig3.png", 
     units="in", 
     width=6, 
     height=6, 

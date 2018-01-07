@@ -16,7 +16,7 @@ require(grid)
 # data #######
 ##############
 
-sac.tog<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_curves_estimates.csv",sep=",",header=T)
+sac.tog<-read.csv("Cleaned_Data/Scen1_Natives_curves_estimates.csv",sep=",",header=T)
 
 sac_MN<-filter(sac.tog,geo_entity2=="Maui Nui")
 sac_MN$geo_entity2<-droplevels(sac_MN$geo_entity2)
@@ -64,13 +64,13 @@ sac_OA$pred<-predict(fit.oa, sac_OA,type="response")
 sac_togg1<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
 colnames(sac_togg1)[11]<-"qD_pred"
 
-write.table(sac_togg1,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_alldata_SACs_GAMMestimates.csv",sep=",",row.names=T)
+write.table(sac_togg1,"Cleaned_Data/Scen1_Natives_alldata_SACs_GAMMestimates.csv",sep=",",row.names=T)
 
 ##################
 # SACs ###########
 ##################
 
-SACs_1<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_alldata_SACs_GAMMestimates.csv",sep=",",header=T)
+SACs_1<-read.csv("Cleaned_Data/Scen1_Natives_alldata_SACs_GAMMestimates.csv",sep=",",header=T)
 
 SACs_1$m<-as.factor(SACs_1$m)
 
@@ -105,7 +105,7 @@ SACs_11<-ggplot(SACs_1,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 
-png(filename="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Figures/SACs_alldata_natives_SI.png", 
+png(filename="Figures/SACs_alldata_natives_SI.png", 
     units="in", 
     height=5, 
     width=7, 

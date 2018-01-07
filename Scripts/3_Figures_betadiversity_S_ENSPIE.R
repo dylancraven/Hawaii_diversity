@@ -15,11 +15,11 @@ require(rms)
 # Data  #####
 #############
 
-Beta_1<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_BetaPIE.csv",sep=",",header=T)
+Beta_1<-read.csv("Cleaned_Data/Scen1_Natives_BetaPIE.csv",sep=",",header=T)
 
-Beta_2<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_BetaPIE.csv",sep=",",header=T)
+Beta_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_BetaPIE.csv",sep=",",header=T)
 
-Beta_3<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_7plots_BetaPIE.csv",sep=",",header=T)
+Beta_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_BetaPIE.csv",sep=",",header=T)
 
 
 #################
@@ -171,8 +171,6 @@ Beta_Scen3<-ggplot(data=Beta_33, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_enti
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 
-
-
 #############
 # Beta S ####
 #############
@@ -315,7 +313,6 @@ Beta_Scen3s<-ggplot(data=Beta_333, aes(x=geo_entity2,y=beta_S,group=geo_entity2,
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-
 ###################
 # merge figures  #
 ##################
@@ -328,7 +325,7 @@ togg2<-plot_grid(Beta_Scen1, Beta_Scen2, Beta_Scen3,Beta_Scen1s, Beta_Scen2s, Be
                  ncol=3)
 
 
-png(filename="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Figures/Beta_ENSpie_S_FigSX_natives_7plots.png", 
+png(filename="Figures/Beta_ENSpie_S_FigSX_natives_7plots.png", 
     units="in", 
     width=8, 
     height=6, 

@@ -15,7 +15,7 @@ require(gamm4)
 # Scenario 1 #
 ##############
 
-load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_natives_BIG.RData")
+load("Cleaned_Data/Scen1_natives_BIG.RData")
 
 radd$logRelAbund<-log(radd$RelAbund)
 
@@ -71,7 +71,7 @@ colnames(rad_tog1)[6]<-"RankN_pred"
 # Scenario 2 #
 ##############
 
-load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_natives_BIG.RData")
+load("Cleaned_Data/Scen2_natives_BIG.RData")
 
 Scen2_rad.tog$iteration<-as.factor(Scen2_rad.tog$iteration)
 
@@ -129,7 +129,7 @@ colnames(rad_tog2)[7]<-"RankN_pred"
 # SCEN 3 #
 ##########
 
-load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_natives_BIG.RData")
+load("Cleaned_Data/Scen3_natives_BIG.RData")
 
 Scen3_rad.tog$iteration<-as.factor(Scen3_rad.tog$iteration)
 
@@ -185,4 +185,5 @@ colnames(rad_tog3)[7]<-"RankN_pred"
 
 ####
 
-save(rad_tog1,rad_tog2, rad_tog3, file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen123_Native_Big_RAD_GAMMestimates.RData")
+save(rad_tog1,rad_tog2, rad_tog3, 
+     file="Scen123_Native_Big_RAD_GAMMestimates.RData")

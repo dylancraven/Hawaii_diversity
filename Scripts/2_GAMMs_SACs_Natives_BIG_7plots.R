@@ -17,7 +17,7 @@ require(gamm4)
 # Scenario 1 #
 ##############
 
-load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_natives_BIG.RData")
+load("Cleaned_Data/Scen1_natives_BIG.RData")
 
 curves3$geo_entity2<-as.factor(curves3$geo_entity2)
 curves3<-filter(curves3, m %in% c(1,100,1000,2000,3000,4000,5000, 6000,7000,8000,9000,10000))
@@ -73,7 +73,7 @@ colnames(sac_togg1)[11]<-"qD_pred"
 # Scenario 2 #
 ##############
 
-load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_natives_BIG.RData")
+load("Cleaned_Data/Scen2_natives_BIG.RData")
 
 Scen2_curves.tog$geo_entity2<-as.factor(Scen2_curves.tog$geo_entity2)
 Scen2_curves.tog<-filter(Scen2_curves.tog, m %in% c(1,100,200,300,400,500, 600,700,800,900,1000))
@@ -129,7 +129,7 @@ colnames(sac_togg2)[12]<-"qD_pred"
 # SCEN 3 #
 ##########
 
-load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_natives_BIG.RData")
+load("Cleaned_Data/Scen3_natives_BIG.RData")
 
 Scen3_curves.tog$geo_entity2<-as.factor(Scen3_curves.tog$geo_entity2)
 Scen3_curves.tog<-filter(Scen3_curves.tog, m %in% c(1,100,200,300,400,500, 600,700,800,900,1000))
@@ -182,4 +182,4 @@ sac_OA$pred<-predict(fit.oa$gam, sac_OA,type="response")
 sac_togg3<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
 colnames(sac_togg3)[12]<-"qD_pred"
 
-save(sac_togg1,sac_togg2, sac_togg3, file="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen123_Native_Big_SAC_GAMMestimates.RData")
+save(sac_togg1,sac_togg2, sac_togg3, file="Cleaned_Data/Scen123_Native_Big_SAC_GAMMestimates.RData")

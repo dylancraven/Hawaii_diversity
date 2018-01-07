@@ -16,7 +16,7 @@ require(grid)
 # data #######
 ##############
 
-load("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_natives_BIG.RData")
+load("Cleaned_Data/Scen1_natives_BIG.RData")
 
 curves$geo_entity2<-as.factor(curves$geo_entity2)
 
@@ -103,7 +103,7 @@ SACs_11<-ggplot(sac_togg1,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 
-png(filename="/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Figures/SACs_alldata_natives_BIG_SI.png", 
+png(filename="Figures/SACs_alldata_natives_BIG_SI.png", 
     units="in", 
     height=5, 
     width=7, 

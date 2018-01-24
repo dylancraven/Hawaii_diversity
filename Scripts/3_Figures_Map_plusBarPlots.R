@@ -39,13 +39,13 @@ haw_allplots<-ggplot(data = HW_df) +
                  colour = "gray40", 
                  fill   = "white", 
                  size   = .5) +
-    geom_point(data = HW.dt1, 
-               aes(x      = Long_Dec, 
-                   y      = Lat_Dec, 
-                   size  = S_rare10,
-                   colour=S_rare10),
-               alpha = .6) +
-    scale_colour_gsea(name="Species diversity (Sn)", trans="log", breaks=c(1,2,4,6),labels=c("1","2","4","6"))+
+  geom_point(data = HW.dt1, 
+             aes(x      = Long_Dec, 
+                 y      = Lat_Dec, 
+                 size  = S_rare10,
+                 colour=PET),
+             alpha = .6) +
+  scale_colour_gsea(name="PET")+
     
     # Annotate (each island name) 
     
@@ -80,7 +80,8 @@ haw_allplots<-ggplot(data = HW_df) +
     #theme(legend.justification = c(1, 0),
     #     legend.title.align = 0,
     #    legend.position = c(0.97, 0.5))
-    theme(legend.position=c(0.08,0.3), axis.text=element_text(size=6),
+  
+    theme(legend.position=c(0.05,0.3), axis.text=element_text(size=6),
           axis.text.x=element_text(size=6), axis.text.y=element_text(size=6),
           title=element_text(size=6,color="black",face="bold",hjust=0.5),
           legend.title = element_text(size=6, color="black",face="bold"),
@@ -119,7 +120,7 @@ macroo2<-filter(macroo, Div!="Total Woody Spp.")
 
 
 macro_g<-ggplot(macroo2,aes(x=geo_entity2,y=Div2,colour=Div, fill=Div))+ 
-    geom_bar(stat="identity",position=position_dodge())+
+    geom_bar(stat="identity",position=position_dodge(),width=0.5)+
     scale_x_discrete(labels=c("Hawai'i Island"="Hawai'i","Maui Nui"="Maui Nui","O'ahu Island"="O'ahu","Kaua'i Island"="Kaua'i"))+
     #scale_color_d3(palette="category20c")+ scale_fill_d3(palette="category20c")+
     scale_fill_manual(values=c("#00BF9A","#008975"))+

@@ -43,9 +43,9 @@ haw_allplots<-ggplot(data = HW_df) +
                aes(x      = Long_Dec, 
                    y      = Lat_Dec, 
                    size  = S_rare10,
-                   colour=PET),
+                   colour=S_rare10),
                alpha = .6) +
-    scale_colour_gsea(name="PET")+
+    scale_colour_gsea(name="Species diversity (Sn)", trans="log", breaks=c(1,2,4,6),labels=c("1","2","4","6"))+
     
     # Annotate (each island name) 
     
@@ -80,10 +80,11 @@ haw_allplots<-ggplot(data = HW_df) +
     #theme(legend.justification = c(1, 0),
     #     legend.title.align = 0,
     #    legend.position = c(0.97, 0.5))
-    theme(legend.position=c(0.05,0.2), axis.text=element_text(size=6),
+    theme(legend.position=c(0.08,0.3), axis.text=element_text(size=6),
           axis.text.x=element_text(size=6), axis.text.y=element_text(size=6),
           title=element_text(size=6,color="black",face="bold",hjust=0.5),
           legend.title = element_text(size=6, color="black",face="bold"),
+          legend.background = element_rect(fill="transparent"),
           plot.margin =margin(t=0.01, r=0.1, b=0.01, l=0.1, unit="cm"))
 
 
@@ -241,8 +242,8 @@ comb_fig1<-plot_grid(haw_map, div_fig1, ncol=1,rel_heights = c(1.8,1.4),rel_widt
 # Save as png file
 
 ggsave(filename = file.path("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Figures", "Big_Fig1.png"), 
-       width    = 30, 
-       height   = 30, 
+       width    = 29.7, 
+       height   = 25, 
        units    = "cm")
 
 comb_fig1

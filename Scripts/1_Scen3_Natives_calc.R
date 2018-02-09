@@ -51,14 +51,15 @@ un_sel$Iteration2<-seq(from=1,to=100,by=1)
 
 dat33<-merge(un_sel, dat3,by.y="iteration")
 
-dat33<-select(dat33, Iteration2, geo_entity2, PlotIDn, SPP_CODE3A, Abundance_ha, r_PET,totPlotArea)
+dat33<-select(dat33, Iteration2, geo_entity2, PlotIDn, SPP_CODE3A, Abundance_ha, r_PET,meanPET, meanMAP,totPlotArea)
 
 ############################
 # quick data summary & QC # 
 ###########################
 
 # is there variation in PET range and Plot Area?
-summ2<-summarize(group_by(dat33,geo_entity2), r_PET=mean(r_PET),PlotArea=mean(totPlotArea), var_PlotArea=sd(totPlotArea))
+summ2<-summarize(group_by(dat33,geo_entity2), r_PET=mean(r_PET),PlotArea=mean(totPlotArea), var_PlotArea=sd(totPlotArea), 
+                 meanPET=mean(meanPET),meanMAP=mean(meanMAP))
 
 summ2
 # always 7 plots per island per iteration?
@@ -198,7 +199,7 @@ for(i in 1:100){
   # env #
   #######
   
-  rangezz<-unique(select(testt, geo_entity2, r_PET, totPlotArea))
+  rangezz<-unique(select(testt, geo_entity2, r_PET, meanPET, meanMAP,totPlotArea))
   
   rangezz$Iteration<-i
   #rangezz<-ungroup(rangezz)
@@ -244,7 +245,7 @@ write.table(orders.tog,"Cleaned_Data/Scen3_Natives_7plots_HillN.csv",sep=",",row
 
 write.table(curves.tog,"Cleaned_Data/Scen3_Natives_7plots_curves_estimates.csv",sep=",",row.names=F)
 
-envs<-summarize(group_by(rangez.tog, geo_entity2), r_PET=mean(r_PET), m_PlotArea=mean(totPlotArea))
+envs<-summarize(group_by(rangez.tog, geo_entity2), r_PET=mean(r_PET), m_PlotArea=mean(totPlotArea), mPET=mean(meanPET),mMAP=mean(meanMAP))
 
 write.table(envs,"Cleaned_Data/Scen3_Native_7plots_EnvConditions_summarized.csv",sep=",",row.names=F)
 

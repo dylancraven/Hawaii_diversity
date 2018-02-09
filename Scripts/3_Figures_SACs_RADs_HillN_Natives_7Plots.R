@@ -227,7 +227,6 @@ RAD_3$geo_entity2<-as.factor(RAD_3$geo_entity2)
 RAD_3$geo_entity2<-as.factor(RAD_3$geo_entity2)
 RAD_3$geo_entity2<-factor(RAD_3$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
-
 raDs_3<-ggplot(RAD_3,aes(y=Rank_N,x=log(RelAbund),group=geo_entity2,color=geo_entity2))+ 
   geom_point(position = position_jitter(w = 0, h = 0.02),size=0.5,alpha=0.1)+
   geom_smooth(data=RAD_3, aes(y=RankN_pred,x=log(RelAbund), group=geo_entity2, color=geo_entity2),method="gam", formula=y~s(x),size=1,se=FALSE)+

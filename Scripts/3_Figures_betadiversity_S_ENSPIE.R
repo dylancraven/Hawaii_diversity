@@ -64,14 +64,16 @@ Beta_Scen1<-ggplot(data=Beta_1, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entit
   guides(colour=guide_legend(title="Area+Het+Age",title.position = "top"))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_blank(),
+                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
-                   legend.position=c("top"),
+                   legend.position=c("none"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+write.csv(Beta_1s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen1.csv",row.names=F)
 
 ## Scenario 2
 
@@ -113,14 +115,16 @@ Beta_Scen2<-ggplot(data=Beta_22, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_enti
   guides(colour=guide_legend(title="Het+Age",title.position = "top"))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_blank(),
-                   axis.text.x=element_blank(),
+                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
-                   legend.position=c("top"),
+                   legend.position=c("none"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+write.csv(Beta_2s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen2.csv",row.names=F)
 
 ## Scenario 3
 
@@ -161,15 +165,16 @@ Beta_Scen3<-ggplot(data=Beta_33, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_enti
   guides(colour=guide_legend(title="Age",title.position = "top"))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_blank(),
-                   axis.text.x=element_blank(),
+                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
-                   legend.position=c("top"),
+                   legend.position=c("none"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
+write.csv(Beta_3s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen3.csv",row.names=F)
 
 #############
 # Beta S ####
@@ -194,7 +199,6 @@ colnames(Beta_1ss)[4]<-"h.QD"
 Beta_1ss$geo_entity2<-as.factor(Beta_1ss$geo_entity2)
 Beta_1ss$geo_entity2<-factor(Beta_1ss$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
-
 Beta_Scen1s<-ggplot(data=Beta_1, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2))+
   geom_point(data=Beta_1, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2),
              position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.1)+
@@ -208,14 +212,16 @@ Beta_Scen1s<-ggplot(data=Beta_1, aes(x=geo_entity2,y=beta_S,group=geo_entity2,co
   guides(colour=guide_legend(title="Area+Het+Age",title.position = "top"))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
+                   axis.text.x=element_blank(),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
-                   legend.position=c("none"),
+                   legend.position=c("top"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+write.csv(Beta_1ss,"Cleaned_Data/Summary_Beta_S_Scen1.csv",row.names=F)
 
 ## Scenario 2
 
@@ -257,14 +263,16 @@ Beta_Scen2s<-ggplot(data=Beta_222, aes(x=geo_entity2,y=beta_S,group=geo_entity2,
   guides(colour=guide_legend(title="Het+Age",title.position = "top"))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_blank(),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
+                   axis.text.x=element_blank(),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
-                   legend.position=c("none"),
+                   legend.position=c("top"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+write.csv(Beta_2ss,"Cleaned_Data/Summary_Beta_S_Scen2.csv",row.names=F)
 
 ## Scenario 3
 
@@ -304,14 +312,16 @@ Beta_Scen3s<-ggplot(data=Beta_333, aes(x=geo_entity2,y=beta_S,group=geo_entity2,
   guides(colour=guide_legend(title="Age",title.position = "top"))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_blank(),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
+                   axis.text.x=element_blank(),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
-                   legend.position=c("none"),
+                   legend.position=c("top"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+write.csv(Beta_3ss,"Cleaned_Data/Summary_Beta_S_Scen3.csv",row.names=F)
 
 ###################
 # merge figures  #
@@ -320,7 +330,7 @@ Beta_Scen3s<-ggplot(data=Beta_333, aes(x=geo_entity2,y=beta_S,group=geo_entity2,
 require(cowplot)
 
 
-togg2<-plot_grid(Beta_Scen1, Beta_Scen2, Beta_Scen3,Beta_Scen1s, Beta_Scen2s, Beta_Scen3s,
+togg2<-plot_grid(Beta_Scen1s, Beta_Scen2s, Beta_Scen3s,Beta_Scen1, Beta_Scen2, Beta_Scen3,
                  labels=c("a)","b)","c)","d)","e)","f)"),label_size = 6,
                  ncol=3)
 

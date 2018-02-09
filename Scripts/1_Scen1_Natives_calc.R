@@ -20,7 +20,7 @@ require(mobr)
 ## data ##############
 ######################
 
-datt<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
+datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
 
 datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass=="all")  
 datt$SizeClass<-droplevels(datt$SizeClass)

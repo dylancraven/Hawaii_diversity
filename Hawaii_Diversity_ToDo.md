@@ -17,7 +17,8 @@ __To-Do__
 - [x] 16) Natives (size class **Big**): SACs using all data (Fig. S4)
 - [x] 17) Map of plot locations across Hawaiian Islands: Fig. S1
 - [x] 18) Adjust species list (PELBAR/MELBAR)
-- [] 19) Integrate map with Fig. 1  (how to color/scale points?)  
-- [] 20) Make table summarizing data per island (N of plots, sampled area, PET, etc.)  
+- [x] 19) Integrate map with Fig. 1  (how to color/scale points?)  
+- [] 20) Make table summarizing data per island (Island age, area, total number of plots, total sampled area, env. conditions)    
+- [] 21) Table for each scenario: mean sampled area, range in PET 
 
 

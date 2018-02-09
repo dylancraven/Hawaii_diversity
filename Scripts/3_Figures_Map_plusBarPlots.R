@@ -43,10 +43,10 @@ haw_allplots<-ggplot(data = HW_df) +
              aes(x      = Long_Dec, 
                  y      = Lat_Dec, 
                  size  = S_rare10,
-                 colour=PET),
-             alpha = .6) +
+                 colour=PET,
+                 fill="white"),
+             shape="O") +
   scale_colour_gsea(name="PET")+
-    
     # Annotate (each island name) 
     
     annotate("text", x = -159.5, y = 21.8, label = "Kaua'i",fontface="bold")+
@@ -74,7 +74,7 @@ haw_allplots<-ggplot(data = HW_df) +
     # ggtitle("(a) Area + Het + Age")+
     labs(x="Longitude",y="Latitude")+
     
-    guides(size=FALSE)+
+  guides(size=FALSE, fill=FALSE)+
     
     theme_bw() +
     #theme(legend.justification = c(1, 0),
@@ -117,7 +117,6 @@ macroo2<-filter(macroo, Div!="Total Woody Spp.")
 ###########
 # figure ##
 ###########
-
 
 macro_g<-ggplot(macroo2,aes(x=geo_entity2,y=Div2,colour=Div, fill=Div))+ 
     geom_bar(stat="identity",position=position_dodge(),width=0.5)+

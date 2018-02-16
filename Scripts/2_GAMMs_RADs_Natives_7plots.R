@@ -79,10 +79,8 @@ rad.tog2$iteration<-as.factor(rad.tog2$iteration)
 
 rad.tog2$logRelAbund<-log(rad.tog2$RelAbund)
 
-
 rad_MN<-filter(rad.tog2,geo_entity2=="Maui Nui")
 rad_MN$geo_entity2<-droplevels(rad_MN$geo_entity2)
-
 
 rad_HA<-filter(rad.tog2,geo_entity2=="Hawai'i Island")
 rad_HA$geo_entity2<-droplevels(rad_HA$geo_entity2)
@@ -129,7 +127,6 @@ colnames(rad_tog2)[7]<-"RankN_pred"
 
 write.table(rad_tog2,"Cleaned_Data/Scen2_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
 
-
 ##########
 # SCEN 3 #
 ##########
@@ -151,7 +148,6 @@ rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 
 rad_OA<-filter(rad.tog3,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
-
 
 ############
 # FIT GAMM #

@@ -46,7 +46,6 @@ hcomm2<-dcast(datt2, SPP_CODE3A~geo_entity2, value.var="Abundance",sum)
 rownames(hcomm2)<-hcomm2$SPP_CODE3A
 hcomm2<-select(hcomm2,-SPP_CODE3A)
 
-
 #####################
 # SACs (Abundance)  #
 #####################
@@ -73,7 +72,7 @@ write.table(curves3,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monit
 # hill Numbers  #
 #################
 
-orders<-estimateD(hcomm2,datatype="abundance",base="coverage", level=0.98,conf=0.95 )
+orders<-estimateD(hcomm2,datatype="abundance",base="size", level=10000,conf=0.95 )
 colnames(orders)[1]<-"geo_entity2"
 
 write.table(orders,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_HillNumbers.csv",sep=",",row.names=F)

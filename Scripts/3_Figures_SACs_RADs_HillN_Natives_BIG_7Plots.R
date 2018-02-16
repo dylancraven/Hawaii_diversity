@@ -3,7 +3,7 @@
 # 7 plots #####
 # BIG #########
 ###############
-
+require(tidyr)
 require(dplyr)
 require(ggplot2)
 require(grid)
@@ -53,7 +53,6 @@ SACs_11<-ggplot(SACs_1,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-
 #Scenario 2
 
 SACs_2<-sac_togg2
@@ -87,7 +86,6 @@ SACs_22<-ggplot(SACs_2,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
                    legend.title.align = 0.5,
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 #Scenario 3
 
@@ -236,7 +234,6 @@ raDs_3<-ggplot(RAD_3,aes(y=Rank_N,x=log(RelAbund),group=geo_entity2,color=geo_en
 
 require(cowplot)
 
-
 # just SACs & RADs
 
 togg2<-plot_grid(SACs_11,SACs_22,SACs_33,raDs_1,raDs_2,raDs_3,
@@ -273,7 +270,6 @@ HillN_1<-orders
 load("Cleaned_Data/Scen2_natives_BIG.RData")
 
 HillN_2<-Scen2_orders.tog
-
 
 ##################
 # Scenario 3 #####
@@ -354,6 +350,10 @@ HillNN_f$Scenario<-as.factor(HillNN_f$Scenario)
 
 HillNN_f$Scenario<-factor(HillNN_f$Scenario,levels=c("Area+Het+Age","Het+Age","Age"))
 
+HillNN_f<- HillNN_f%>%
+  unite( "Scen_Order", c("Scenario","order"),remove=FALSE)
+
+
 HillNN$Scenario<-as.character(HillNN$Scenario)
 HillNN$Scenario<-ifelse(HillNN$Scenario=="I","Area+Het+Age",HillNN$Scenario)
 HillNN$Scenario<-ifelse(HillNN$Scenario=="II","Het+Age",HillNN$Scenario)
@@ -362,42 +362,329 @@ HillNN$Scenario<-as.factor(HillNN$Scenario)
 
 HillNN$Scenario<-factor(HillNN$Scenario,levels=c("Area+Het+Age","Het+Age","Age"))
 
+HillNN<- HillNN%>%
+  unite( "Scen_Order", c("Scenario","order"),remove=FALSE)
 
-hill_three<-ggplot(HillNN, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
-  geom_point(data=HillNN, aes(x=geo_entity2,y=qD,group=order,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
+####################
+# Scen1 + order 0  #
+####################
+
+H_Sc1_Or0<-filter(HillNN, Scen_Order=="Area+Het+Age_0")
+
+H_f_Sc1_Or0<-filter(HillNN_f, Scen_Order=="Area+Het+Age_0")
+
+Hill_Sc1_Or0<-ggplot(H_Sc1_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
+  geom_point(data=H_Sc1_Or0, aes(x=geo_entity2,y=qD,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
   
-  geom_point(data=HillNN_f, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
-  geom_errorbar(data=HillNN_f,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
+  geom_point(data=H_f_Sc1_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
+  geom_errorbar(data=H_f_Sc1_Or0,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
   
   #scale_color_d3(palette="category20c")+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+  scale_y_continuous(limits=c(0, 42),breaks=c(10,20,30,40),labels=c("10","20","30","40"))+
   # scale_shape_manual(values=c(17,15,16))+
-  facet_grid(order~Scenario,scales="free_y")+
+  #facet_grid(order~Scenario,scales="free_y")+
   labs(x="",y="Species diversity")+
-  
-  guides(colour="none",shape=guide_legend(title="Diversity orders",title.position = "top"))+
-  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
+  guides(colour=guide_legend(title="Area+Het+Age",title.position = "top", hjust=0.5))+
+  theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
+                   axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
+                   axis.text.x=element_blank(),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
                    strip.background = element_rect(fill="transparent",colour="black"),
                    strip.text=element_text(face="bold",size=6),
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
+                   legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
+                   legend.position=c("top"),
+                   #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+# Scen2 + order 0
+
+H_Sc2_Or0<-filter(HillNN, Scen_Order=="Het+Age_0")
+
+H_f_Sc2_Or0<-filter(HillNN_f, Scen_Order=="Het+Age_0")
+
+Hill_Sc2_Or0<-ggplot(H_Sc2_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
+  geom_point(data=H_Sc2_Or0, aes(x=geo_entity2,y=qD,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
+  
+  geom_point(data=H_f_Sc2_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
+  geom_errorbar(data=H_f_Sc2_Or0,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
+  
+  #scale_color_d3(palette="category20c")+
+  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+  scale_y_continuous(limits=c(0, 42),breaks=c(10,20,30,40),labels=c("10","20","30","40"))+
+  # scale_shape_manual(values=c(17,15,16))+
+  #facet_grid(order~Scenario,scales="free_y")+
+  labs(x="",y="Species diversity")+
+  guides(colour=guide_legend(title="Het+Age",title.position = "top", hjust=0.5))+
+  theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
+                   axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.y=element_blank(),
+                   axis.text.x=element_blank(),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+                   strip.background = element_rect(fill="transparent",colour="black"),
+                   strip.text=element_text(face="bold",size=6),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6),
+                   legend.title = element_text(colour=c("black"),face="bold",size=6),
+                   legend.title.align = 0.5,
+                   legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
                    legend.position=c("top"),
                    #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 
+# Scen3 + order 0
+
+H_Sc3_Or0<-filter(HillNN, Scen_Order=="Age_0")
+
+H_f_Sc3_Or0<-filter(HillNN_f, Scen_Order=="Age_0")
+
+Hill_Sc3_Or0<-ggplot(H_Sc3_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
+  geom_point(data=H_Sc3_Or0, aes(x=geo_entity2,y=qD,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
+  
+  geom_point(data=H_f_Sc3_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
+  geom_errorbar(data=H_f_Sc3_Or0,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
+  
+  #scale_color_d3(palette="category20c")+
+  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+  scale_y_continuous(limits=c(0, 42),breaks=c(10,20,30,40),labels=c("10","20","30","40"))+
+  # scale_shape_manual(values=c(17,15,16))+
+  #facet_grid(order~Scenario,scales="free_y")+
+  labs(x="",y="Species diversity")+
+  guides(colour=guide_legend(title="Age",title.position = "top", hjust=0.5))+
+  theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
+                   axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.y=element_blank(),
+                   axis.text.x=element_blank(),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+                   strip.background = element_rect(fill="transparent",colour="black"),
+                   strip.text=element_text(face="bold",size=6),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6),
+                   legend.title = element_text(colour=c("black"),face="bold",size=6),
+                   legend.title.align = 0.5,
+                   legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
+                   legend.position=c("top"),
+                   #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+# Scen1 + order 1
+
+H_Sc1_Or1<-filter(HillNN, Scen_Order=="Area+Het+Age_1")
+
+H_f_Sc1_Or1<-filter(HillNN_f, Scen_Order=="Area+Het+Age_1")
+
+Hill_Sc1_Or1<-ggplot(H_Sc1_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
+  geom_point(data=H_Sc1_Or1, aes(x=geo_entity2,y=qD,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
+  
+  geom_point(data=H_f_Sc1_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
+  geom_errorbar(data=H_f_Sc1_Or1,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
+  
+  #scale_color_d3(palette="category20c")+
+  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+  scale_y_continuous(limits=c(0, 8),breaks=c(2,4,6,8),labels=c("2","4","6","8"))+
+  # scale_shape_manual(values=c(17,15,16))+
+  #facet_grid(order~Scenario,scales="free_y")+
+  labs(x="",y="Species diversity")+
+  guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
+  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.y=element_text(colour="black",face="bold",size=6),
+                   axis.text.x=element_blank(),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+                   strip.background = element_rect(fill="transparent",colour="black"),
+                   strip.text=element_text(face="bold",size=6),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6),
+                   legend.title = element_text(colour=c("black"),face="bold",size=6),
+                   legend.title.align = 0.5,
+                   legend.margin=margin(t=0.05, r=0, b=0, l=0, unit="cm"),
+                   legend.position=c("none"),
+                   #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+# Scen2 + order 1
+
+H_Sc2_Or1<-filter(HillNN, Scen_Order=="Het+Age_1")
+
+H_f_Sc2_Or1<-filter(HillNN_f, Scen_Order=="Het+Age_1")
+
+Hill_Sc2_Or1<-ggplot(H_Sc2_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
+  geom_point(data=H_Sc2_Or1, aes(x=geo_entity2,y=qD,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
+  
+  geom_point(data=H_f_Sc2_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
+  geom_errorbar(data=H_f_Sc2_Or1,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
+  
+  #scale_color_d3(palette="category20c")+
+  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+  scale_y_continuous(limits=c(0, 8.5),breaks=c(2,4,6,8),labels=c("2","4","6","8"))+
+  # scale_shape_manual(values=c(17,15,16))+
+  #facet_grid(order~Scenario,scales="free_y")+
+  labs(x="",y="Species diversity")+
+  guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
+  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.y=element_blank(),
+                   axis.text.x=element_blank(),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+                   strip.background = element_rect(fill="transparent",colour="black"),
+                   strip.text=element_text(face="bold",size=6),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6),
+                   legend.title = element_text(colour=c("black"),face="bold",size=6),
+                   legend.title.align = 0.5,
+                   legend.margin=margin(t=0.05, r=0, b=0, l=0, unit="cm"),
+                   legend.position=c("none"),
+                   #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+# Scen3 + order 1
+
+H_Sc3_Or1<-filter(HillNN, Scen_Order=="Age_1")
+
+H_f_Sc3_Or1<-filter(HillNN_f, Scen_Order=="Age_1")
+
+Hill_Sc3_Or1<-ggplot(H_Sc3_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
+  geom_point(data=H_Sc3_Or1, aes(x=geo_entity2,y=qD,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
+  
+  geom_point(data=H_f_Sc3_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
+  geom_errorbar(data=H_f_Sc3_Or1,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
+  
+  #scale_color_d3(palette="category20c")+
+  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+  scale_y_continuous(limits=c(0, 9.7),breaks=c(2,4,6,8),labels=c("2","4","6","8"))+
+  # scale_shape_manual(values=c(17,15,16))+
+  #facet_grid(order~Scenario,scales="free_y")+
+  labs(x="",y="Species diversity")+
+  guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
+  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.y=element_blank(),
+                   axis.text.x=element_blank(),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+                   strip.background = element_rect(fill="transparent",colour="black"),
+                   strip.text=element_text(face="bold",size=6),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6),
+                   legend.title = element_text(colour=c("black"),face="bold",size=6),
+                   legend.title.align = 0.5,
+                   legend.margin=margin(t=0.05, r=0, b=0, l=0, unit="cm"),
+                   legend.position=c("none"),
+                   #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+# Scen1 + order 2
+
+H_Sc1_Or2<-filter(HillNN, Scen_Order=="Area+Het+Age_2")
+
+H_f_Sc1_Or2<-filter(HillNN_f, Scen_Order=="Area+Het+Age_2")
+
+Hill_Sc1_Or2<-ggplot(H_Sc1_Or2, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
+  geom_point(data=H_Sc1_Or2, aes(x=geo_entity2,y=qD,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
+  
+  geom_point(data=H_f_Sc1_Or2, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
+  geom_errorbar(data=H_f_Sc1_Or2,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
+  
+  #scale_color_d3(palette="category20c")+
+  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+  scale_y_continuous(limits=c(0, 5),breaks=c(1,2,3,4,5),labels=c("1","2","3","4","5"))+
+  # scale_shape_manual(values=c(17,15,16))+
+  #facet_grid(order~Scenario,scales="free_y")+
+  labs(x="",y="Species diversity")+
+  guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
+  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.y=element_text(colour="black",face="bold",size=6),
+                   axis.text.x=element_text(colour="black",face="bold",size=6),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+                   strip.background = element_rect(fill="transparent",colour="black"),
+                   strip.text=element_text(face="bold",size=6),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6),
+                   legend.title = element_text(colour=c("black"),face="bold",size=6),
+                   legend.title.align = 0.5,
+                   legend.margin=margin(t=0.05, r=0, b=0, l=0, unit="cm"),
+                   legend.position=c("none"),
+                   #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+# Scen2 + order 2
+
+H_Sc2_Or2<-filter(HillNN, Scen_Order=="Het+Age_2")
+
+H_f_Sc2_Or2<-filter(HillNN_f, Scen_Order=="Het+Age_2")
+
+Hill_Sc2_Or2<-ggplot(H_Sc2_Or2, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
+  geom_point(data=H_Sc2_Or2, aes(x=geo_entity2,y=qD,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
+  
+  geom_point(data=H_f_Sc2_Or2, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
+  geom_errorbar(data=H_f_Sc2_Or2,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
+  
+  #scale_color_d3(palette="category20c")+
+  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+  scale_y_continuous(limits=c(0, 6.3),breaks=c(1,2,3,4,5),labels=c("1","2","3","4","5"))+
+  # scale_shape_manual(values=c(17,15,16))+
+  #facet_grid(order~Scenario,scales="free_y")+
+  labs(x="",y="Species diversity")+
+  guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
+  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.y=element_blank(),
+                   axis.text.x=element_text(colour="black",face="bold",size=6),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+                   strip.background = element_rect(fill="transparent",colour="black"),
+                   strip.text=element_text(face="bold",size=6),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6),
+                   legend.title = element_text(colour=c("black"),face="bold",size=6),
+                   legend.title.align = 0.5,
+                   legend.margin=margin(t=0.05, r=0, b=0, l=0, unit="cm"),
+                   legend.position=c("none"),
+                   #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+# Scen3 + order 2
+
+H_Sc3_Or2<-filter(HillNN, Scen_Order=="Age_2")
+
+H_f_Sc3_Or2<-filter(HillNN_f, Scen_Order=="Age_2")
+
+Hill_Sc3_Or2<-ggplot(H_Sc3_Or2, aes(x=geo_entity2,y=qD,group=geo_entity2,color=geo_entity2))+
+  geom_point(data=H_Sc3_Or2, aes(x=geo_entity2,y=qD,color=geo_entity2),position = position_jitter(w = 0.02, h = 0),size=0.25,alpha=0.1)+
+  
+  geom_point(data=H_f_Sc3_Or2, aes(x=geo_entity2,y=qD,group=geo_entity2, colour=geo_entity2),size=1)+
+  geom_errorbar(data=H_f_Sc3_Or2,aes(ymin=qD.LCL,ymax=qD.UCL,group=geo_entity2, colour=geo_entity2),width=0.1)+
+  
+  #scale_color_d3(palette="category20c")+
+  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+  scale_y_continuous(limits=c(0, 6.3),breaks=c(1,2,3,4,5),labels=c("1","2","3","4","5"))+
+  # scale_shape_manual(values=c(17,15,16))+
+  #facet_grid(order~Scenario,scales="free_y")+
+  labs(x="",y="Species diversity")+
+  guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
+  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.y=element_blank(),
+                   axis.text.x=element_text(colour="black",face="bold",size=6),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+                   strip.background = element_rect(fill="transparent",colour="black"),
+                   strip.text=element_text(face="bold",size=6),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6),
+                   legend.title = element_text(colour=c("black"),face="bold",size=6),
+                   legend.title.align = 0.5,
+                   legend.margin=margin(t=0.05, r=0, b=0, l=0, unit="cm"),
+                   legend.position=c("none"),
+                   #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+#################
+# put together ##
+#################
+
+require(cowplot)
+
+hill_tog<-plot_grid(Hill_Sc1_Or0, Hill_Sc2_Or0, Hill_Sc3_Or0, Hill_Sc1_Or1, Hill_Sc2_Or1, Hill_Sc3_Or1,Hill_Sc1_Or2, Hill_Sc2_Or2, Hill_Sc3_Or2,
+                    labels=c("a)","b)","c)","d)","e)","f)","g)","h)","i)"),label_size = 6, ncol=3,rel_heights = c(1.2,1,1))
+
 png(filename="Figures/HillN_Natives_BIG_7plots_FigS3.png", 
     units="in", 
-    width=6, 
-    height=6, 
+    width=7, 
+    height=7, 
     pointsize=2, 
     res=500)
 
-hill_three
+hill_tog
 
 dev.off()
 

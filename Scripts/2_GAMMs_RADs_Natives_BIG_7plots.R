@@ -89,7 +89,6 @@ rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 rad_OA<-filter(Scen2_rad.tog,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
 
-
 ############
 # FIT GAMM #
 ############
@@ -147,7 +146,6 @@ rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 rad_OA<-filter(Scen3_rad.tog,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
 
-
 ############
 # FIT GAMM #
 ############
@@ -181,7 +179,6 @@ rad_OA$pred<-predict(fit.oa$gam, rad_OA,type="response")
 rad_tog3<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
 rad_tog3<-dplyr::select(rad_tog3,-logRelAbund)
 colnames(rad_tog3)[7]<-"RankN_pred"
-
 
 ####
 

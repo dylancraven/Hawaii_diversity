@@ -46,7 +46,7 @@ haw_allplots<-ggplot(data = HW_df) +
                  colour=PET,
                  fill="white"),
              shape="O") +
-  scale_colour_gsea(name="PET")+
+  scale_colour_gsea(name="PET",reverse=TRUE)+
     # Annotate (each island name) 
     
     annotate("text", x = -159.5, y = 21.8, label = "Kaua'i",fontface="bold")+

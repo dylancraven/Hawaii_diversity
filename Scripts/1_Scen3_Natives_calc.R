@@ -62,6 +62,7 @@ summ2<-summarize(group_by(dat33,geo_entity2), r_PET=mean(r_PET),PlotArea=mean(to
                  meanPET=mean(meanPET),meanMAP=mean(meanMAP))
 
 summ2
+
 # always 7 plots per island per iteration?
 
 summ3<-summarize(group_by(dat33,Iteration2,geo_entity2),PlotN=length(unique(PlotIDn)))
@@ -98,8 +99,7 @@ for(i in 1:100){
   #########
   # Hill N#
   #########
-  
-  orders<-estimateD(hcomm2,datatype="abundance",base="coverage", level=0.98,conf=0.95 )
+  orders<-estimateD(hcomm2,datatype="abundance",base="size", level=1000,conf=0.95 )
   colnames(orders)[1]<-"geo_entity2"
   
   orders$iteration<-i

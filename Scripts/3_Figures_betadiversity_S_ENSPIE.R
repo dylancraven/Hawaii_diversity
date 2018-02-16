@@ -38,7 +38,6 @@ Beta_1$geo_entity2<-as.factor(Beta_1$geo_entity2)
 
 Beta_1$geo_entity2<-factor(Beta_1$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
-
 Beta_1s<- Beta_1 %>%
   group_by(geo_entity2) %>%
   do(data.frame(rbind(smean.cl.boot(.$beta_ENS_PIE, B=1000))))
@@ -297,7 +296,6 @@ colnames(Beta_3ss)[4]<-"h.QD"
 
 Beta_3ss$geo_entity2<-as.factor(Beta_3ss$geo_entity2)
 Beta_3ss$geo_entity2<-factor(Beta_3ss$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
 
 Beta_Scen3s<-ggplot(data=Beta_333, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2))+
   geom_point(data=Beta_333, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2),

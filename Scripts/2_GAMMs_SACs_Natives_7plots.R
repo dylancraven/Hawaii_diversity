@@ -120,7 +120,6 @@ colnames(sac_togg)[12]<-"qD_pred"
 
 write.table(sac_togg,"Cleaned_Data/Scen2_Natives_SACs_GAMMestimates.csv",sep=",",row.names=T)
 
-
 ##########
 # SCEN 3 #
 ##########

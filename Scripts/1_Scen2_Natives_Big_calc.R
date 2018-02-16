@@ -50,7 +50,6 @@ quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
 
 datt2<-summarize(group_by(datt, geo_entity2, SPP_CODE3A),Abundance=sum(Abundance_ha))
 
-
 #########################
 # quick data summary    #
 #########################
@@ -109,7 +108,8 @@ for(i in 1:100){
   ##########
   # Hill N##
   ##########
-  orders<-estimateD(hcomm2,datatype="abundance",base="coverage", level=0.98,conf=0.95 )
+  
+  orders<-estimateD(hcomm2,datatype="abundance",base="size", level=1000,conf=0.95 )
   colnames(orders)[1]<-"geo_entity2"
   
   orders$iteration<-i

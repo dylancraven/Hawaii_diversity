@@ -73,7 +73,7 @@ curves3$geo_entity2 <- gsub("\\..*","",curves3$geo_entity2)
 # hill Numbers  #
 #################
 
-orders<-estimateD(hcomm2,datatype="abundance",base="coverage", level=0.98,conf=0.95 )
+orders<-estimateD(hcomm2,datatype="abundance",base="size", level=10000,conf=0.95 )
 colnames(orders)[1]<-"geo_entity2"
 
 #write.table(orders,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_HillNumbers.csv",sep=",",row.names=F)
@@ -165,11 +165,9 @@ h_betapie<-merge(h_help,h_betapie,by.y="PlotIDn")
 
 h_betapie<-select(h_betapie, geo_entity2, PlotIDn, beta_S, beta_ENS_PIE)
 
-
 #####################
 # Environmental data#
 #####################
-
 
 datt_unique<-distinct(select(datt, geo_entity2, PlotIDn, MAT, MAP, PET, Elev_m, Plot_Area))
 datt_unique$dupes<-duplicated(datt_unique$PlotIDn)

@@ -148,7 +148,6 @@ sac_KA$geo_entity2<-droplevels(sac_KA$geo_entity2)
 sac_OA<-filter(Scen3_curves.tog,geo_entity2=="O'ahu Island")
 sac_OA$geo_entity2<-droplevels(sac_OA$geo_entity2)
 
-
 ############
 # FIT GAMM #
 ############

@@ -384,7 +384,7 @@ Hill_Sc1_Or0<-ggplot(H_Sc1_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
   scale_y_continuous(limits=c(0, 42),breaks=c(10,20,30,40),labels=c("10","20","30","40"))+
   # scale_shape_manual(values=c(17,15,16))+
   #facet_grid(order~Scenario,scales="free_y")+
-  labs(x="",y="Species diversity")+
+  labs(x="",y="Species diversity (q=0)")+
   guides(colour=guide_legend(title="Area+Het+Age",title.position = "top", hjust=0.5))+
   theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
                    axis.title.x=element_text(colour="black",face="bold",size=6),
@@ -487,7 +487,7 @@ Hill_Sc1_Or1<-ggplot(H_Sc1_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
   scale_y_continuous(limits=c(0, 8),breaks=c(2,4,6,8),labels=c("2","4","6","8"))+
   # scale_shape_manual(values=c(17,15,16))+
   #facet_grid(order~Scenario,scales="free_y")+
-  labs(x="",y="Species diversity")+
+  labs(x="",y="Species diversity (q=1)")+
   guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_text(colour="black",face="bold",size=6),
@@ -586,7 +586,7 @@ Hill_Sc1_Or2<-ggplot(H_Sc1_Or2, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
   scale_y_continuous(limits=c(0, 5),breaks=c(1,2,3,4,5),labels=c("1","2","3","4","5"))+
   # scale_shape_manual(values=c(17,15,16))+
   #facet_grid(order~Scenario,scales="free_y")+
-  labs(x="",y="Species diversity")+
+  labs(x="",y="Species diversity (q=2)")+
   guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_text(colour="black",face="bold",size=6),

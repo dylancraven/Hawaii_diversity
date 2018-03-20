@@ -1,230 +1,230 @@
-"Family","SPP_CODE3","SPP_CODE3A","Accepted_name_species","Genus","Species","Native_Status_USDA","Native_Status_HawFlora","Native_Status_HawFlora_simple","Is_Angio"
-"Amaranthaceae","NOTSAN","NOTSAN","Nototrichium sandwicense","Nototrichium","sandwicense",NA,"Endemic","native",1
-"Amaranthaceae","CHEOAH","CHEOAH","Chenopodium oahuense","Chenopodium","oahuense",NA,"Endemic","native",1
-"Anacardiaceae","M50","MANSPP","Mangifera spp1","Mangifera","spp1",NA,NA,"alien",1
-"Anacardiaceae","SCHTER","SCHTER","Schinus terebinthifolia","Schinus","terebinthifolia","L48 (I), HI (I), PR (I), VI (I)","Naturalized","alien",1
-"Angiosperm","M91","M91","Unknown",NA,"na",NA,NA,"uncertain",1
-"Angiosperm","M12","M12","Unknown Tree",NA,"na",NA,NA,"uncertain",1
-"Angiosperm","M29","M29","Tree unknown",NA,"na",NA,NA,"uncertain",1
-"Angiosperm","M92","M92","Unknown with black fruits",NA,"na",NA,NA,"uncertain",1
-"Apocynaceae","ALYSTE","ALYSTE","Alyxia stellata","Alyxia","stellata",NA,"Indigenous","native",1
-"Apocynaceae","RAUSAN","RAUSAN","Rauvolfia sandwicensis","Rauvolfia","sandwicensis",NA,"Endemic","native",1
-"Aquifoliaceae","ILEANO","ILEANO","Ilex anomala","Ilex","anomala",NA,"Indigenous","native",1
-"Aquifoliaceae","ILEPAR","ILEPAR","Ilex paraguariensis","Ilex","paraguariensis",NA,"Naturalized","alien",1
-"Araliaceae","REYSAN","REYSAN","Polyscias sandwicensis","Polyscias","sandwicensis",NA,"Endemic","native",1
-"Araliaceae","CHETRI","CHETRI","Cheirodendron trigynum","Cheirodendron","trigynum",NA,"Endemic","native",1
-"Araliaceae","CHEPLA","CHEPLA","Cheirodendron platyphyllum","Cheirodendron","platyphyllum",NA,"Endemic","native",1
-"Araliaceae","CHEFOR","CHEFOR","Cheirodendron forbesii","Cheirodendron","forbesii",NA,"Endemic","native",1
-"Araliaceae","SCHACT","SCHACT","Schefflera actinophylla","Schefflera","actinophylla",NA,"Naturalized","alien",1
-"Araliaceae","M51","POLSPP","Polyscias spp1","Polyscias","spp1",NA,NA,"native",1
-"Araliaceae","POLOAH","POLOAH","Polyscias oahuensis","Polyscias","oahuensis",NA,"Endemic","native",1
-"Araliaceae","TETHAW","TETHAW","Polyscias hawaiensis","Polyscias","hawaiensis",NA,"Endemic","native",1
-"Arecaceae","COCNUC","COCNUC","Cocos nucifera","Cocos","nucifera","L48 (I), HI (I), PR (I), VI (I)","Polynesian_Intro","alien",1
-"Arecaceae","PRIMUN","PRIMUN","Pritchardia munroi","Pritchardia","munroi","HI (N)","Endemic","native",1
-"Arecaceae","ARCALE","ARCALE","Archontophoenix alexandrae","Archontophoenix","alexandrae",NA,"Naturalized","alien",1
-"Arecaceae","M19","PRITSPP","Pritchardia spp1","Pritchardia","spp1",NA,NA,"native",1
-"Asparagaceae","PLEAUW","PLEAUW","Dracaena rockii","Dracaena","rockii",NA,"Endemic","native",1
-"Asparagaceae","PLEHAW","PLEHAW","Dracaena konaensis","Dracaena","konaensis",NA,"Endemic","native",1
-"Asparagaceae","CORFRU","CORFRU","Cordyline fruticosa","Cordyline","fruticosa","HI (I), PR (I)","Polynesian_Intro","alien",1
-"Asparagaceae","PLEAUR","PLEAUR","Dracaena aurea","Dracaena","aurea",NA,"Endemic","native",1
-"Bignoniaceae","SPACAM","SPACAM","Spathodea campanulata","Spathodea","campanulata",NA,"Naturalized","alien",1
-"Blechnaceae","M8","SADSPP","Sadleria spp2","Sadleria","spp2",NA,NA,"native",0
-"Blechnaceae","SADSOU","SADSOU","Sadleria souleytiana","Sadleria","souleytiana",NA,"Endemic","native",0
-"Blechnaceae","SADPAL","SADPAL","Sadleria pallida","Sadleria","pallida",NA,"Endemic","native",0
-"Blechnaceae","M49","SADSPP","Sadleria spp1","Sadleria","spp1",NA,NA,"native",0
-"Blechnaceae","SADCYA","SADCYA","Sadleria cyatheoides","Sadleria","cyatheoides",NA,"Endemic","native",0
-"Campanulaceae","CLEPAR","CLEPAR","Clermontia parviflora","Clermontia","parviflora",NA,"Endemic","native",1
-"Campanulaceae","CYAHIR","CYAHIR","Cyanea hirtella","Cyanea","hirtella",NA,"Endemic","native",1
-"Campanulaceae","M89","CYASPP","Cyanea spp1","Cyanea","spp1",NA,NA,"native",1
-"Campanulaceae","TREGRA","TREGRA","Trematolobelia grandifolia","Trematolobelia","grandifolia",NA,"Endemic","native",1
-"Campanulaceae","CLEARB","CLEARB","Clermontia arborescens","Clermontia","arborescens",NA,"Endemic","native",1
-"Campanulaceae","CLEKAK","CLEKAK","Clermontia kakeana","Clermontia","kakeana",NA,"Endemic","native",1
-"Cannabaceae","TREORI","TREORI","Trema orientalis","Trema","orientalis",NA,"Naturalized","alien",1
-"Casuarinaceae","CASEQU","CASEQU","Casuarina equisetifolia","Casuarina","equisetifolia","L48 (I), HI (I), PR (I), VI (I)","Naturalized","alien",1
-"Casuarinaceae","CASGLA","CASGLA","Casuarina glauca","Casuarina","glauca","L48 (I), HI (I)","Naturalized","alien",1
-"Casuarinaceae","CASCUN","CASCUN","Casuarina cunninghamiana","Casuarina","cunninghamiana","L48 (I), PR (I)","Naturalized","alien",1
-"Cibotiaceae","CIBGLA","CIBGLA","Cibotium glaucum","Cibotium","glaucum","HI (N)","Endemic","native",0
-"Cibotiaceae","CIBMEN","CIBMEN","Cibotium menziesii","Cibotium","menziesii",NA,"Endemic","native",0
-"Cibotiaceae","M6","CIBSPP","Cibotium spp2","Cibotium","spp2",NA,NA,"native",0
-"Cibotiaceae","M25","CIBSPP","Cibotium spp1","Cibotium","spp1",NA,NA,"native",0
-"Cibotiaceae","CIBCHA","CIBCHA","Cibotium chamissoi","Cibotium","chamissoi","HI (N)","Endemic","native",0
-"Clusiaceae","CLUROS","CLUROS","Clusia rosea","Clusia","rosea",NA,"Naturalized","alien",1
-"Compositae","AGEADE","AGEADE","Ageratina adenophora","Ageratina","adenophora",NA,"Naturalized","alien",1
-"Compositae","DUBPLA","DUBPLA","Dubautia plantaginea","Dubautia","plantaginea",NA,"Endemic","native",1
-"Cupressaceae","SEQSEM","SEQSEM","Sequoia sempervirens","Sequoia","sempervirens","L48 (N)","Naturalized","alien",0
-"Cupressaceae","M45","CRYSPP","Cryptomeria spp1","Cryptomeria","spp1",NA,NA,"alien",0
-"Cyatheaceae","SPHCOO","SPHCOO","Sphaeropteris cooperi","Sphaeropteris","cooperi",NA,"Naturalized","alien",0
-"Dilleniaceae","DILSUF","DILSUF","Dillenia suffruticosa","Dillenia","suffruticosa",NA,"Naturalized","alien",1
-"Dipentodontaceae","PERSAN","PERSAN","Perrottetia sandwicensis","Perrottetia","sandwicensis",NA,"Endemic","native",1
-"Ebenaceae","DIOHIL","DIOHIL","Diospyros hillebrandii","Diospyros","hillebrandii",NA,"Endemic","native",1
-"Ebenaceae","DIOSAN","DIOSAN","Diospyros sandwicensis","Diospyros","sandwicensis",NA,"Endemic","native",1
-"Ericaceae","STYTAM","STYTAM","Styphelia tameiameiae","Styphelia","tameiameiae",NA,"Indigenous","native",1
-"Ericaceae","VACCAL","VACCAL","Vaccinium calycinum","Vaccinium","calycinum",NA,"Endemic","native",1
-"Ericaceae","VACDEN","VACDEN","Vaccinium dentatum","Vaccinium","dentatum",NA,"Endemic","native",1
-"Ericaceae","VACRET","VACRET","Vaccinium reticulatum","Vaccinium","reticulatum",NA,"Endemic","native",1
-"Euphorbiaceae","CHACEL","CHACEL","Euphorbia celastroides","Euphorbia","celastroides",NA,"Endemic","native",1
-"Euphorbiaceae","MACMAP","MACMAP","Macaranga mappa","Macaranga","mappa",NA,"Naturalized","alien",1
-"Euphorbiaceae","ALEMOL","ALEMOL","Aleurites moluccanus","Aleurites","moluccanus",NA,"Polynesian_Intro","alien",1
-"Euphorbiaceae","CLASAN","CLASAN","Claoxylon sandwicense","Claoxylon","sandwicense",NA,"Endemic","native",1
-"Euphorbiaceae","CHAOLO","CHAOLO","Euphorbia olowaluana","Euphorbia","olowaluana",NA,"Endemic","native",1
-"Euphorbiaceae","CHAMUL","CHAMUL","Euphorbia multiformis","Euphorbia","multiformis",NA,"Endemic","native",1
-"Gesneriaceae","CYRPLA","CYRPLA","Cyrtandra platyphylla","Cyrtandra","platyphylla",NA,"Endemic","native",1
-"Gesneriaceae","CYRLON","CYRLON","Cyrtandra longifolia","Cyrtandra","longifolia",NA,"Endemic","native",1
-"Goodeniaceae","SCAGAU","SCAGAU","Scaevola gaudichaudiana","Scaevola","gaudichaudiana",NA,"Endemic","native",1
-"Hydrangeaceae","BROARG","BROARG","Broussaisia arguta","Broussaisia","arguta",NA,"Endemic","native",1
-"Lauraceae","PERAME","PERAME","Persea americana","Persea","americana",NA,"Naturalized","alien",1
-"Lauraceae","CINVER","CINVER","Cinnamomum verum","Cinnamomum","verum",NA,"Naturalized","alien",1
-"Lauraceae","CINBUR","CINBUR","Cinnamomum burmanni","Cinnamomum","burmanni",NA,"Naturalized","alien",1
-"Leguminosae","ACAKO2","ACAKO2","Acacia koaia","Acacia","koaia","HI (N)","Endemic","native",1
-"Leguminosae","ACACON","ACACON","Acacia confusa","Acacia","confusa",NA,"Naturalized","alien",1
-"Leguminosae","PROPAL","PROPAL","Prosopis pallida","Prosopis","pallida",NA,"Naturalized","alien",1
-"Leguminosae","FALMOL","FALMOL","Falcataria moluccana","Falcataria","moluccana",NA,"Naturalized","alien",1
-"Leguminosae","M1","ACASPP","Acacia spp1","Acacia","spp1",NA,NA,"uncertain",1
-"Leguminosae","LYSWAT","LYSWAT","Lysiloma watsonii","Lysiloma","watsonii",NA,"Naturalized","alien",1
-"Leguminosae","ERYSAN","ERYSAN","Erythrina sandwicensis","Erythrina","sandwicensis","HI (N)","Endemic","native",1
-"Leguminosae","LEULEU","LEULEU","Leucaena leucocephala","Leucaena","leucocephala","L48 (I), VI (I)","Naturalized","alien",1
-"Leguminosae","SOPCHR","SOPCHR","Sophora chrysophylla","Sophora","chrysophylla","HI (N)","Endemic","native",1
-"Leguminosae","SAMSAM","SAMSAM","Albizia saman","Albizia","saman",NA,"Naturalized","alien",1
-"Leguminosae","SENGAU","SENGAU","Senna gaudichaudii","Senna","gaudichaudii","HI (N)","Indigenous","native",1
-"Leguminosae","ACAKOA","ACAKOA","Acacia koa","Acacia","koa","HI (N)","Endemic","native",1
-"Leguminosae","PITDUL","PITDUL","Pithecellobium dulce","Pithecellobium","dulce",NA,"Naturalized","alien",1
-"Loganiaceae","LABTIN","LABTIN","Labordia tinifolia","Labordia","tinifolia",NA,"Endemic","native",1
-"Malvaceae","HELPOP","HELPOP","Heliocarpus popayanensis","Heliocarpus","popayanensis",NA,"Naturalized","alien",1
-"Malvaceae","MELUMB","MELUMB","Melochia umbellata","Melochia","umbellata",NA,"Naturalized","alien",1
-"Malvaceae","HIBTIL","HIBTIL","Hibiscus tilliaceus","Hibiscus","tilliaceus",NA,"Indigenous","native",1
-"Malvaceae","M7","ME2SPP","Melochia spp1","Melochia","spp1",NA,NA,"alien",1
-"Malvaceae","SIDFAL","SIDFAL","Sida fallax","Sida","fallax",NA,"Indigenous","native",1
-"Melastomataceae","MELCAN","MELCAN","Melastoma malabathricum","Melastoma","malabathricum",NA,"Naturalized","alien",1
-"Melastomataceae","CLIHIR","CLIHIR","Clidemia hirta","Clidemia","hirta",NA,"Naturalized","alien",1
-"Melastomataceae","M2","M2","melestome",NA,"na",NA,NA,"uncertain",1
-"Melastomataceae","TIBHER","TIBHER","Tibouchina herbacea","Tibouchina","herbacea",NA,"Naturalized","alien",1
-"Melastomataceae","MELSEP","MELSEP","Melastoma septemnervium","Melastoma","septemnervium",NA,"Naturalized","alien",1
-"Melastomataceae","TETBIC","TETBIC","Tetrazygia bicolor","Tetrazygia","bicolor",NA,"Naturalized","alien",1
-"Meliaceae","SWIMAC","SWIMAC","Swietenia macrophylla","Swietenia","macrophylla","HI (I)","Naturalized","alien",1
-"Meliaceae","MELAZE","MELAZE","Melia azedarach","Melia","azedarach","L48 (I), HI (I), PR (I), VI (I)","Naturalized","alien",1
-"Meliaceae","TOOCIL","TOOCIL","Toona ciliata","Toona","ciliata",NA,"Naturalized","alien",1
-"Moraceae","STRPEN","STRPEN","Streblus sandwicensis","Streblus","sandwicensis",NA,"Indigenous","native",1
-"Moraceae","M24","M24","fig unknown",NA,"na",NA,NA,"uncertain",1
-"Moraceae","FICMIC","FICMIC","Ficus microcarpa","Ficus","microcarpa",NA,"Naturalized","alien",1
-"Myricaceae","MYRFAY","MYRFAY","Myrica faya","Myrica","faya",NA,"Naturalized","alien",1
-"Myrtaceae","PSIGUA","PSIGUA","Psidium guajava","Psidium","guajava","L48 (I), HI (I), PR (I), VI (I)","Naturalized","alien",1
-"Myrtaceae","PSICAT","PSICAT","Psidium cattleianum","Psidium","cattleianum",NA,"Naturalized","alien",1
-"Myrtaceae","SYZJAM","SYZJAM","Syzygium jambos","Syzygium","jambos",NA,"Naturalized","alien",1
-"Myrtaceae","M23","EUCSPP","Eucalyptus spp1","Eucalyptus","spp1",NA,NA,"alien",1
-"Myrtaceae","M65","SYZSPP","Syzygium spp1","Syzygium","spp1",NA,NA,"uncertain",1
-"Myrtaceae","EUCDEG","EUCDEG","Eucalyptus deglupta","Eucalyptus","deglupta",NA,"Naturalized","alien",1
-"Myrtaceae","LEPSCO","LEPSCO","Leptospermum scoparium","Leptospermum","scoparium",NA,"Naturalized","alien",1
-"Myrtaceae","RHOTOM","RHOTOM","Rhodomyrtus tomentosa","Rhodomyrtus","tomentosa",NA,"Naturalized","alien",1
-"Myrtaceae","EUCSAL","EUCSAL","Eucalyptus saligna","Eucalyptus","saligna","HI (I)","Naturalized","alien",1
-"Myrtaceae","SYZMAL","SYZMAL","Syzygium malaccense","Syzygium","malaccense",NA,"Polynesian_Intro","alien",1
-"Myrtaceae","M54","ME3SPP","Melaleuca spp1","Melaleuca","spp1",NA,NA,"alien",1
-"Myrtaceae","EUCROB","EUCROB","Eucalyptus robusta","Eucalyptus","robusta","L48 (I), HI (I)","Naturalized","alien",1
-"Myrtaceae","SYZCUM","SYZCUM","Syzygium cumini","Syzygium","cumini","L48 (I), HI (I)","Naturalized","alien",1
-"Myrtaceae","EUCGRA","EUCGRA","Eucalyptus grandis","Eucalyptus","grandis","L48 (I)","Naturalized","alien",1
-"Myrtaceae","SYZSAN","SYZSAN","Syzygium sandwicense","Syzygium","sandwicense",NA,"Endemic","native",1
-"Myrtaceae","METPOL","METPOL","Metrosideros polymorpha","Metrosideros","polymorpha","HI (N)","Endemic","native",1
-"Myrtaceae","MELQUI","MELQUI","Melaleuca quinquenervia","Melaleuca","quinquenervia",NA,"Naturalized","alien",1
-"Nyctaginaceae","PISSAN","PISSAN","Pisonia sandwicensis","Pisonia","sandwicensis",NA,"Endemic","native",1
-"Nyctaginaceae","PISBRU","PISBRU","Pisonia brunoniana","Pisonia","brunoniana",NA,"Indigenous","native",1
-"Oleaceae","NESSAN","NESSAN","Nestegis sandwicensis","Nestegis","sandwicensis",NA,"Endemic","native",1
-"Oleaceae","FRAUHD","FRAUHD","Fraxinus uhdei","Fraxinus","uhdei",NA,"Naturalized","alien",1
-"Pandanaceae","FREARB","FREARB","Freycinetia arborea","Freycinetia","arborea",NA,"Indigenous","native",1
-"Pandanaceae","PANTEC","PANTEC","Pandanus tectorius","Pandanus","tectorius","HI (I), PR (I)","Indigenous","native",1
-"Papaveraceae","BOCFRU","BOCFRU","Bocconia frutescens","Bocconia","frutescens",NA,"Naturalized","alien",1
-"Passifloraceae","PASEDU","PASEDU","Passiflora edulis","Passiflora","edulis",NA,"Naturalized","alien",1
-"Phyllanthaceae","ANTPLA","ANTPLA","Antidesma platyphyllum","Antidesma","platyphyllum",NA,"Endemic","native",1
-"Phyllanthaceae","ANTPUL","ANTPUL","Antidesma pulvinatum","Antidesma","pulvinatum",NA,"Endemic","native",1
-"Pinaceae","PINPIN","PINPIN","Pinus pinaster","Pinus","pinaster",NA,"Naturalized","alien",0
-"Pinaceae","PINRAD","PINRAD","Pinus radiata","Pinus","radiata","L48 (N)","Naturalized","alien",0
-"Pinaceae","PINPAT","PINPAT","Pinus patula","Pinus","patula",NA,"Naturalized","alien",0
-"Pinaceae","PINELL","PINELL","Pinus elliottii","Pinus","elliottii","L48 (N)","Naturalized","alien",0
-"Pittosporaceae","PITGLA","PITGLA","Pittosporum glabrum","Pittosporum","glabrum",NA,"Endemic","native",1
-"Pittosporaceae","PITTER","PITTER","Pittosporum terminalioides","Pittosporum","terminalioides",NA,"Endemic","native",1
-"Pittosporaceae","M15","PITTSPP","Pittosporum spp1","Pittosporum","spp1",NA,NA,"uncertain",1
-"Pittosporaceae","PITHOS","PITHOS","Pittosporum hosmeri","Pittosporum","hosmeri",NA,"Endemic","native",1
-"Poaceae","M35","BAMSPP","Bambusa spp1","Bambusa","spp1",NA,NA,"alien",1
-"Primulaceae","MYRLAN","MYRLAN","Myrsine lanaiensis","Myrsine","lanaiensis",NA,"Endemic","native",1
-"Primulaceae","M11","MYRSPP","Myrsine spp1","Myrsine","spp1",NA,NA,"native",1
-"Primulaceae","M34","MYRSPP","Myrsine spp2","Myrsine","spp2",NA,NA,"native",1
-"Primulaceae","MYRSAN","MYRSAN","Myrsine sandwicensis","Myrsine","sandwicensis",NA,"Endemic","native",1
-"Primulaceae","ARDELL","ARDELL","Ardisia elliptica","Ardisia","elliptica",NA,"Naturalized","alien",1
-"Primulaceae","MYRLES","MYRLES","Myrsine lessertiana","Myrsine","lessertiana",NA,"Endemic","native",1
-"Proteaceae","GREBAN","GREBAN","Grevillea banksii","Grevillea","banksii",NA,"Naturalized","alien",1
-"Proteaceae","GREROB","GREROB","Grevillea robusta","Grevillea","robusta","L48 (I), HI (I), PR (I)","Naturalized","alien",1
-"Rhamnaceae","ALPPON","ALPPON","Alphitonia ponderosa","Alphitonia","ponderosa",NA,"Endemic","native",1
-"Rhamnaceae","COLOPP","COLOPP","Colubrina oppositifolia","Colubrina","oppositifolia",NA,"Endemic","native",1
-"Rosaceae","M55","PRUSPP","Prunus spp1","Prunus","spp1",NA,NA,"alien",1
-"Rosaceae","RUBMAC","RUBMAC","Rubus macraei","Rubus","macraei",NA,"Endemic","native",1
-"Rosaceae","OSTANT","OSTANT","Osteomeles anthyllidifolia","Osteomeles","anthyllidifolia","HI (N)","Indigenous","native",1
-"Rosaceae","RUBROS","RUBROS","Rubus rosifolius","Rubus","rosifolius",NA,"Naturalized","alien",1
-"Rosaceae","RUBNIV","RUBNIV","Rubus niveus","Rubus","niveus",NA,"Naturalized","alien",1
-"Rubiaceae","M30","COPSPP","Coprosma spp1","Coprosma","spp1",NA,NA,"native",1
-"Rubiaceae","COPWAI","COPWAI","Coprosma waimeae","Coprosma","waimeae",NA,"Endemic","native",1
-"Rubiaceae","BOBBRE","BOBBRE","Bobea brevipes","Bobea","brevipes",NA,"Endemic","native",1
-"Rubiaceae","M52","COPSPP","Coprosma spp4","Coprosma","spp4",NA,NA,"native",1
-"Rubiaceae","M66","KADSPP","Kadua spp1","Kadua","spp1",NA,NA,"native",1
-"Rubiaceae","BOBSAN","BOBSAN","Bobea sandwicensis","Bobea","sandwicensis",NA,"Endemic","native",1
-"Rubiaceae","COPRHY","COPRHY","Coprosma rhynchocarpa","Coprosma","rhynchocarpa",NA,"Endemic","native",1
-"Rubiaceae","MORCIT","MORCIT","Morinda citrifolia","Morinda","citrifolia","L48 (I), HI (I), PR (I), VI (I)","Polynesian_Intro","alien",1
-"Rubiaceae","M31","COPSPP","Coprosma spp2","Coprosma","spp2",NA,NA,"native",1
-"Rubiaceae","COPMON","COPMON","Coprosma montana","Coprosma","montana",NA,"Endemic","native",1
-"Rubiaceae","KADACU","KADACU","Kadua acuminata","Kadua","acuminata",NA,"Endemic","native",1
-"Rubiaceae","PSYFAU","PSYFAU","Psychotria fauriei","Psychotria","fauriei",NA,"Endemic","native",1
-"Rubiaceae","PSYMA2","PSYMA2","Psychotria mariniana","Psychotria","mariniana",NA,"Endemic","native",1
-"Rubiaceae","PSYHEX","PSYHEX","Psychotria hexandra","Psychotria","hexandra",NA,"Endemic","native",1
-"Rubiaceae","PSYHAW","PSYHAW","Psychotria hawaiiensis","Psychotria","hawaiiensis",NA,"Endemic","native",1
-"Rubiaceae","KADAFF","KADAFF","Kadua affinis","Kadua","affinis",NA,"Endemic","native",1
-"Rubiaceae","COPLON","COPLON","Coprosma longifolia","Coprosma","longifolia",NA,"Endemic","native",1
-"Rubiaceae","PSYKAD","PSYKAD","Psychotria kaduana","Psychotria","kaduana",NA,"Endemic","native",1
-"Rubiaceae","M28","PSYSPP","Psychotria spp1","Psychotria","spp1",NA,NA,"native",1
-"Rubiaceae","PSYODO","PSYODO","Psydrax odorata","Psydrax","odorata",NA,"Indigenous","native",1
-"Rubiaceae","HEDHIL","HEDHIL","Kadua axillaris","Kadua","axillaris",NA,"Endemic","native",1
-"Rubiaceae","PSYGRA","PSYGRA","Psychotria grandiflora","Psychotria","grandiflora",NA,"Endemic","native",1
-"Rubiaceae","M40","COPSPP","Coprosma spp3","Coprosma","spp3",NA,NA,"native",1
-"Rubiaceae","PSYGRE","PSYGRE","Psychotria greenwelliae","Psychotria","greenwelliae",NA,"Endemic","native",1
-"Rubiaceae","M59","PSYSPP","Psychotria spp2","Psychotria","spp2",NA,NA,"native",1
-"Rubiaceae","COPFOL","COPFOL","Coprosma foliosa","Coprosma","foliosa",NA,"Endemic","native",1
-"Rubiaceae","COPOCH","COPOCH","Coprosma ochracea","Coprosma","ochracea",NA,"Endemic","native",1
-"Rubiaceae","M39","HEYSPP","Hedyotis spp1","Hedyotis","spp1",NA,NA,"uncertain",1
-"Rutaceae","M58","MELSPP","Melicope spp2","Melicope","spp2",NA,NA,"uncertain",1
-"Rutaceae","FLIBRA","FLIBRA","Flindersia brayleyana","Flindersia","brayleyana",NA,"Naturalized","alien",1
-"Rutaceae","PLASPA","PLASPA","Platydesma spathulatum","Platydesma","spathulatum",NA,"Endemic","native",1
-"Rutaceae","MELHAL","MELHAL","Melicope haleakalae","Melicope","haleakalae",NA,"Endemic","native",1
-"Rutaceae","M74","MELSPP","Melicope spp3","Melicope","spp3",NA,NA,"uncertain",1
-"Rutaceae","MELANI","MELANI","Melicope anisata","Melicope","anisata",NA,"Endemic","native",1
-"Rutaceae","MELOAH","MELOAH","Melicope oahuensis","Melicope","oahuensis",NA,"Endemic","native",1
-"Rutaceae","MELVOL","MELVOL","Melicope volcanica","Melicope","volcanica",NA,"Endemic","native",1
-"Rutaceae","M90","MELSPP","Melicope spp6","Melicope","spp6",NA,NA,"uncertain",1
-"Rutaceae","MELKAA","MELKAA","Melicope kaalaensis","Melicope","kaalaensis",NA,"Endemic","native",1
-"Rutaceae","M62","PSYSPP","Psychotria spp3","Psychotria","spp3",NA,NA,"native",1
-"Rutaceae","M76","MELSPP","Melicope spp5","Melicope","spp5",NA,NA,"uncertain",1
-"Rutaceae","M75","MELSPP","Melicope spp4","Melicope","spp4",NA,NA,"uncertain",1
-"Rutaceae","M46","MELSPP","Melicope spp1","Melicope","spp1",NA,NA,"uncertain",1
-"Rutaceae","MELBAR","MELBAR","Melicope barbigera","Melicope","barbigera",NA,"Endemic","native",1
-"Rutaceae","MELORB","MELORB","Melicope orbicularis","Melicope","orbicularis",NA,"Endemic","native",1
-"Rutaceae","MELPSE","MELPSE","Melicope pseudoanisata","Melicope","pseudoanisata",NA,"Endemic","native",1
-"Rutaceae","MELCLU","MELCLU","Melicope clusiifolia","Melicope","clusiifolia",NA,"Endemic","native",1
-"Salicaceae","XYLHAW","XYLHAW","Xylosma hawaiensis","Xylosma","hawaiensis",NA,"Endemic","native",1
-"Santalaceae","SANPAN","SANPAN","Santalum paniculatum","Santalum","paniculatum",NA,"Endemic","native",1
-"Santalaceae","SANELL","SANELL","Santalum ellipticum","Santalum","ellipticum",NA,"Endemic","native",1
-"Santalaceae","SANFRE","SANFRE","Santalum freycinetianum","Santalum","freycinetianum",NA,"Endemic","native",1
-"Sapindaceae","SAPOAH","SAPOAH","Sapindus oahuensis","Sapindus","oahuensis",NA,"Endemic","native",1
-"Sapindaceae","ALEMAC","ALEMAC","Alectryon macrococcum","Alectryon","macrococcum",NA,"Endemic","native",1
-"Sapindaceae","DODVIS","DODVIS","Dodonaea viscosa","Dodonaea","viscosa","L48 (N), HI (I), PR (N), VI (N)","Indigenous","native",1
-"Sapotaceae","CHROLI","CHROLI","Chrysophyllum oliviforme","Chrysophyllum","oliviforme",NA,"Naturalized","alien",1
-"Sapotaceae","POUSAN","POUSAN","Planchonella sandwicensis","Planchonella","sandwicensis","HI (N)","Endemic","native",1
-"Scrophulariaceae","MYOSAN","MYOSAN","Myoporum sandwicense","Myoporum","sandwicense","HI (N)","Indigenous","native",1
-"Smilacaceae","SMIMEL","SMIMEL","Smilax melastomifolia","Smilax","melastomifolia",NA,"Endemic","native",1
-"Thymelaeaceae","WIKPHI","WIKPHI","Wikstroemia phillyreifolia","Wikstroemia","phillyreifolia",NA,"Endemic","native",1
-"Thymelaeaceae","WIKFUR","WIKFUR","Wikstroemia furcata","Wikstroemia","furcata",NA,"Endemic","native",1
-"Thymelaeaceae","M44","WIKSPP","Wikstroemia spp1","Wikstroemia","spp1",NA,NA,"native",1
-"Thymelaeaceae","WIKMON","WIKMON","Wikstroemia monticola","Wikstroemia","monticola",NA,"Endemic","native",1
-"Thymelaeaceae","M68","WIKSPP","Wikstroemia spp2","Wikstroemia","spp2",NA,NA,"native",1
-"Thymelaeaceae","WIKOAH","WIKOAH","Wikstroemia oahuensis","Wikstroemia","oahuensis",NA,"Endemic","native",1
-"Thymelaeaceae","WIKSAN","WIKSAN","Wikstroemia sandwicensis","Wikstroemia","sandwicensis",NA,"Endemic","native",1
-"Urticaceae","PIPALB","PIPALB","Pipturus albidus","Pipturus","albidus","HI (N)","Endemic","native",1
-"Urticaceae","TOULAT","TOULAT","Touchardia latifolia","Touchardia","latifolia",NA,"Endemic","native",1
-"Urticaceae","CECOBT","CECOBT","Cecropia obtusifolia","Cecropia","obtusifolia",NA,"Naturalized","alien",1
-"Verbenaceae","CITCAU","CITCAU","Citharexylum caudatum","Citharexylum","caudatum",NA,"Naturalized","alien",1
-"Verbenaceae","STADIC","STADIC","Stachytarpheta fallax","Stachytarpheta","fallax",NA,"Naturalized","alien",1
-"Verbenaceae","LANCAM","LANCAM","Lantana camara","Lantana","camara",NA,"Naturalized","alien",1
+Family,SPP_CODE3,SPP_CODE3A,Accepted_name_species,Genus,Species,Native_Status_USDA,Native_Status_HawFlora,Native_Status_HawFlora_simple,Is_Angio,Order,Monocot
+Amaranthaceae,NOTSAN,NOTSAN,Nototrichium sandwicense,Nototrichium,sandwicense,NA,Endemic,native,1,Caryophyllales,0
+Amaranthaceae,CHEOAH,CHEOAH,Chenopodium oahuense,Chenopodium,oahuense,NA,Endemic,native,1,Caryophyllales,0
+Anacardiaceae,SCHTER,SCHTER,Schinus terebinthifolia,Schinus,terebinthifolia,"L48 (I), HI (I), PR (I), VI (I)",Naturalized,alien,1,Sapindales,0
+Anacardiaceae,M50,MANSPP,Mangifera spp1,Mangifera,spp1,NA,NA,alien,1,Sapindales,0
+Angiosperm,M91,M91,Unknown,NA,na,NA,NA,uncertain,1,NA,0
+Angiosperm,M12,M12,Unknown Tree,NA,na,NA,NA,uncertain,1,NA,0
+Angiosperm,M29,M29,Tree unknown,NA,na,NA,NA,uncertain,1,NA,0
+Angiosperm,M92,M92,Unknown with black fruits,NA,na,NA,NA,uncertain,1,NA,0
+Apocynaceae,RAUSAN,RAUSAN,Rauvolfia sandwicensis,Rauvolfia,sandwicensis,NA,Endemic,native,1,Gentianales,0
+Apocynaceae,ALYSTE,ALYSTE,Alyxia stellata,Alyxia,stellata,NA,Indigenous,native,1,Gentianales,0
+Aquifoliaceae,ILEPAR,ILEPAR,Ilex paraguariensis,Ilex,paraguariensis,NA,Naturalized,alien,1,Aquifoliales,0
+Aquifoliaceae,ILEANO,ILEANO,Ilex anomala,Ilex,anomala,NA,Indigenous,native,1,Aquifoliales,0
+Araliaceae,CHETRI,CHETRI,Cheirodendron trigynum,Cheirodendron,trigynum,NA,Endemic,native,1,Apiales,0
+Araliaceae,CHEPLA,CHEPLA,Cheirodendron platyphyllum,Cheirodendron,platyphyllum,NA,Endemic,native,1,Apiales,0
+Araliaceae,CHEFOR,CHEFOR,Cheirodendron forbesii,Cheirodendron,forbesii,NA,Endemic,native,1,Apiales,0
+Araliaceae,M51,POLSPP,Polyscias spp1,Polyscias,spp1,NA,NA,native,1,Apiales,0
+Araliaceae,POLOAH,POLOAH,Polyscias oahuensis,Polyscias,oahuensis,NA,Endemic,native,1,Apiales,0
+Araliaceae,TETHAW,TETHAW,Polyscias hawaiensis,Polyscias,hawaiensis,NA,Endemic,native,1,Apiales,0
+Araliaceae,SCHACT,SCHACT,Schefflera actinophylla,Schefflera,actinophylla,NA,Naturalized,alien,1,Apiales,0
+Araliaceae,REYSAN,REYSAN,Polyscias sandwicensis,Polyscias,sandwicensis,NA,Endemic,native,1,Apiales,0
+Arecaceae,ARCALE,ARCALE,Archontophoenix alexandrae,Archontophoenix,alexandrae,NA,Naturalized,alien,1,Arecales,1
+Arecaceae,M19,PRITSPP,Pritchardia spp1,Pritchardia,spp1,NA,NA,native,1,Arecales,1
+Arecaceae,COCNUC,COCNUC,Cocos nucifera,Cocos,nucifera,"L48 (I), HI (I), PR (I), VI (I)",Polynesian_Intro,alien,1,Arecales,1
+Arecaceae,PRIMUN,PRIMUN,Pritchardia munroi,Pritchardia,munroi,HI (N),Endemic,native,1,Arecales,1
+Asparagaceae,CORFRU,CORFRU,Cordyline fruticosa,Cordyline,fruticosa,"HI (I), PR (I)",Polynesian_Intro,alien,1,Asparagales,1
+Asparagaceae,PLEAUR,PLEAUR,Dracaena aurea,Dracaena,aurea,NA,Endemic,native,1,Asparagales,1
+Asparagaceae,PLEAUW,PLEAUW,Dracaena rockii,Dracaena,rockii,NA,Endemic,native,1,Asparagales,1
+Asparagaceae,PLEHAW,PLEHAW,Dracaena konaensis,Dracaena,konaensis,NA,Endemic,native,1,Asparagales,1
+Bignoniaceae,SPACAM,SPACAM,Spathodea campanulata,Spathodea,campanulata,NA,Naturalized,alien,1,Lamiales,0
+Blechnaceae,SADPAL,SADPAL,Sadleria pallida,Sadleria,pallida,NA,Endemic,native,0,Polypodiales,0
+Blechnaceae,M49,SADSPP,Sadleria spp1,Sadleria,spp1,NA,NA,native,0,Polypodiales,0
+Blechnaceae,M8,SADSPP,Sadleria spp2,Sadleria,spp2,NA,NA,native,0,Polypodiales,0
+Blechnaceae,SADSOU,SADSOU,Sadleria souleytiana,Sadleria,souleytiana,NA,Endemic,native,0,Polypodiales,0
+Blechnaceae,SADCYA,SADCYA,Sadleria cyatheoides,Sadleria,cyatheoides,NA,Endemic,native,0,Polypodiales,0
+Campanulaceae,CYAHIR,CYAHIR,Cyanea hirtella,Cyanea,hirtella,NA,Endemic,native,1,Asterales,0
+Campanulaceae,CLEKAK,CLEKAK,Clermontia kakeana,Clermontia,kakeana,NA,Endemic,native,1,Asterales,0
+Campanulaceae,CLEPAR,CLEPAR,Clermontia parviflora,Clermontia,parviflora,NA,Endemic,native,1,Asterales,0
+Campanulaceae,CLEARB,CLEARB,Clermontia arborescens,Clermontia,arborescens,NA,Endemic,native,1,Asterales,0
+Campanulaceae,M89,CYASPP,Cyanea spp1,Cyanea,spp1,NA,NA,native,1,Asterales,0
+Campanulaceae,TREGRA,TREGRA,Trematolobelia grandifolia,Trematolobelia,grandifolia,NA,Endemic,native,1,Asterales,0
+Cannabaceae,TREORI,TREORI,Trema orientalis,Trema,orientalis,NA,Naturalized,alien,1,Rosales,0
+Casuarinaceae,CASCUN,CASCUN,Casuarina cunninghamiana,Casuarina,cunninghamiana,"L48 (I), PR (I)",Naturalized,alien,1,Fagales,0
+Casuarinaceae,CASEQU,CASEQU,Casuarina equisetifolia,Casuarina,equisetifolia,"L48 (I), HI (I), PR (I), VI (I)",Naturalized,alien,1,Fagales,0
+Casuarinaceae,CASGLA,CASGLA,Casuarina glauca,Casuarina,glauca,"L48 (I), HI (I)",Naturalized,alien,1,Fagales,0
+Cibotiaceae,CIBCHA,CIBCHA,Cibotium chamissoi,Cibotium,chamissoi,HI (N),Endemic,native,0,Cyatheales,0
+Cibotiaceae,CIBGLA,CIBGLA,Cibotium glaucum,Cibotium,glaucum,HI (N),Endemic,native,0,Cyatheales,0
+Cibotiaceae,M25,CIBSPP,Cibotium spp1,Cibotium,spp1,NA,NA,native,0,Cyatheales,0
+Cibotiaceae,CIBMEN,CIBMEN,Cibotium menziesii,Cibotium,menziesii,NA,Endemic,native,0,Cyatheales,0
+Cibotiaceae,M6,CIBSPP,Cibotium spp2,Cibotium,spp2,NA,NA,native,0,Cyatheales,0
+Clusiaceae,CLUROS,CLUROS,Clusia rosea,Clusia,rosea,NA,Naturalized,alien,1,Malpighiales,0
+Compositae,AGEADE,AGEADE,Ageratina adenophora,Ageratina,adenophora,NA,Naturalized,alien,1,NA,0
+Compositae,DUBPLA,DUBPLA,Dubautia plantaginea,Dubautia,plantaginea,NA,Endemic,native,1,NA,0
+Cupressaceae,SEQSEM,SEQSEM,Sequoia sempervirens,Sequoia,sempervirens,L48 (N),Naturalized,alien,0,Pinales,0
+Cupressaceae,M45,CRYSPP,Cryptomeria spp1,Cryptomeria,spp1,NA,NA,alien,0,Pinales,0
+Cyatheaceae,SPHCOO,SPHCOO,Sphaeropteris cooperi,Sphaeropteris,cooperi,NA,Naturalized,alien,0,Cyatheales,0
+Dilleniaceae,DILSUF,DILSUF,Dillenia suffruticosa,Dillenia,suffruticosa,NA,Naturalized,alien,1,Dilleniales,0
+Dipentodontaceae,PERSAN,PERSAN,Perrottetia sandwicensis,Perrottetia,sandwicensis,NA,Endemic,native,1,Huerteales,0
+Ebenaceae,DIOHIL,DIOHIL,Diospyros hillebrandii,Diospyros,hillebrandii,NA,Endemic,native,1,Ericales,0
+Ebenaceae,DIOSAN,DIOSAN,Diospyros sandwicensis,Diospyros,sandwicensis,NA,Endemic,native,1,Ericales,0
+Ericaceae,STYTAM,STYTAM,Styphelia tameiameiae,Styphelia,tameiameiae,NA,Indigenous,native,1,Ericales,0
+Ericaceae,VACCAL,VACCAL,Vaccinium calycinum,Vaccinium,calycinum,NA,Endemic,native,1,Ericales,0
+Ericaceae,VACDEN,VACDEN,Vaccinium dentatum,Vaccinium,dentatum,NA,Endemic,native,1,Ericales,0
+Ericaceae,VACRET,VACRET,Vaccinium reticulatum,Vaccinium,reticulatum,NA,Endemic,native,1,Ericales,0
+Euphorbiaceae,CHACEL,CHACEL,Euphorbia celastroides,Euphorbia,celastroides,NA,Endemic,native,1,Malpighiales,0
+Euphorbiaceae,MACMAP,MACMAP,Macaranga mappa,Macaranga,mappa,NA,Naturalized,alien,1,Malpighiales,0
+Euphorbiaceae,ALEMOL,ALEMOL,Aleurites moluccanus,Aleurites,moluccanus,NA,Polynesian_Intro,alien,1,Malpighiales,0
+Euphorbiaceae,CLASAN,CLASAN,Claoxylon sandwicense,Claoxylon,sandwicense,NA,Endemic,native,1,Malpighiales,0
+Euphorbiaceae,CHAOLO,CHAOLO,Euphorbia olowaluana,Euphorbia,olowaluana,NA,Endemic,native,1,Malpighiales,0
+Euphorbiaceae,CHAMUL,CHAMUL,Euphorbia multiformis,Euphorbia,multiformis,NA,Endemic,native,1,Malpighiales,0
+Gesneriaceae,CYRPLA,CYRPLA,Cyrtandra platyphylla,Cyrtandra,platyphylla,NA,Endemic,native,1,Lamiales,0
+Gesneriaceae,CYRLON,CYRLON,Cyrtandra longifolia,Cyrtandra,longifolia,NA,Endemic,native,1,Lamiales,0
+Goodeniaceae,SCAGAU,SCAGAU,Scaevola gaudichaudiana,Scaevola,gaudichaudiana,NA,Endemic,native,1,Asterales,0
+Hydrangeaceae,BROARG,BROARG,Broussaisia arguta,Broussaisia,arguta,NA,Endemic,native,1,Cornales,0
+Lauraceae,PERAME,PERAME,Persea americana,Persea,americana,NA,Naturalized,alien,1,Laurales,0
+Lauraceae,CINVER,CINVER,Cinnamomum verum,Cinnamomum,verum,NA,Naturalized,alien,1,Laurales,0
+Lauraceae,CINBUR,CINBUR,Cinnamomum burmanni,Cinnamomum,burmanni,NA,Naturalized,alien,1,Laurales,0
+Leguminosae,M1,ACASPP,Acacia spp1,Acacia,spp1,NA,NA,uncertain,1,NA,0
+Leguminosae,LYSWAT,LYSWAT,Lysiloma watsonii,Lysiloma,watsonii,NA,Naturalized,alien,1,NA,0
+Leguminosae,ERYSAN,ERYSAN,Erythrina sandwicensis,Erythrina,sandwicensis,HI (N),Endemic,native,1,NA,0
+Leguminosae,LEULEU,LEULEU,Leucaena leucocephala,Leucaena,leucocephala,"L48 (I), VI (I)",Naturalized,alien,1,NA,0
+Leguminosae,PITDUL,PITDUL,Pithecellobium dulce,Pithecellobium,dulce,NA,Naturalized,alien,1,NA,0
+Leguminosae,FALMOL,FALMOL,Falcataria moluccana,Falcataria,moluccana,NA,Naturalized,alien,1,NA,0
+Leguminosae,PROPAL,PROPAL,Prosopis pallida,Prosopis,pallida,NA,Naturalized,alien,1,NA,0
+Leguminosae,ACAKOA,ACAKOA,Acacia koa,Acacia,koa,HI (N),Endemic,native,1,NA,0
+Leguminosae,SOPCHR,SOPCHR,Sophora chrysophylla,Sophora,chrysophylla,HI (N),Endemic,native,1,NA,0
+Leguminosae,SAMSAM,SAMSAM,Albizia saman,Albizia,saman,NA,Naturalized,alien,1,NA,0
+Leguminosae,SENGAU,SENGAU,Senna gaudichaudii,Senna,gaudichaudii,HI (N),Indigenous,native,1,NA,0
+Leguminosae,ACAKO2,ACAKO2,Acacia koaia,Acacia,koaia,HI (N),Endemic,native,1,NA,0
+Leguminosae,ACACON,ACACON,Acacia confusa,Acacia,confusa,NA,Naturalized,alien,1,NA,0
+Loganiaceae,LABTIN,LABTIN,Labordia tinifolia,Labordia,tinifolia,NA,Endemic,native,1,Gentianales,0
+Malvaceae,HELPOP,HELPOP,Heliocarpus popayanensis,Heliocarpus,popayanensis,NA,Naturalized,alien,1,Malvales,0
+Malvaceae,MELUMB,MELUMB,Melochia umbellata,Melochia,umbellata,NA,Naturalized,alien,1,Malvales,0
+Malvaceae,HIBTIL,HIBTIL,Hibiscus tilliaceus,Hibiscus,tilliaceus,NA,Indigenous,native,1,Malvales,0
+Malvaceae,M7,ME2SPP,Melochia spp1,Melochia,spp1,NA,NA,alien,1,Malvales,0
+Malvaceae,SIDFAL,SIDFAL,Sida fallax,Sida,fallax,NA,Indigenous,native,1,Malvales,0
+Melastomataceae,MELCAN,MELCAN,Melastoma malabathricum,Melastoma,malabathricum,NA,Naturalized,alien,1,Myrtales,0
+Melastomataceae,CLIHIR,CLIHIR,Clidemia hirta,Clidemia,hirta,NA,Naturalized,alien,1,Myrtales,0
+Melastomataceae,M2,M2,melestome,NA,na,NA,NA,uncertain,1,Myrtales,0
+Melastomataceae,TIBHER,TIBHER,Tibouchina herbacea,Tibouchina,herbacea,NA,Naturalized,alien,1,Myrtales,0
+Melastomataceae,MELSEP,MELSEP,Melastoma septemnervium,Melastoma,septemnervium,NA,Naturalized,alien,1,Myrtales,0
+Melastomataceae,TETBIC,TETBIC,Tetrazygia bicolor,Tetrazygia,bicolor,NA,Naturalized,alien,1,Myrtales,0
+Meliaceae,SWIMAC,SWIMAC,Swietenia macrophylla,Swietenia,macrophylla,HI (I),Naturalized,alien,1,Sapindales,0
+Meliaceae,MELAZE,MELAZE,Melia azedarach,Melia,azedarach,"L48 (I), HI (I), PR (I), VI (I)",Naturalized,alien,1,Sapindales,0
+Meliaceae,TOOCIL,TOOCIL,Toona ciliata,Toona,ciliata,NA,Naturalized,alien,1,Sapindales,0
+Moraceae,STRPEN,STRPEN,Streblus sandwicensis,Streblus,sandwicensis,NA,Indigenous,native,1,Rosales,0
+Moraceae,M24,M24,fig unknown,NA,na,NA,NA,uncertain,1,Rosales,0
+Moraceae,FICMIC,FICMIC,Ficus microcarpa,Ficus,microcarpa,NA,Naturalized,alien,1,Rosales,0
+Myricaceae,MYRFAY,MYRFAY,Myrica faya,Myrica,faya,NA,Naturalized,alien,1,Fagales,0
+Myrtaceae,PSIGUA,PSIGUA,Psidium guajava,Psidium,guajava,"L48 (I), HI (I), PR (I), VI (I)",Naturalized,alien,1,Myrtales,0
+Myrtaceae,PSICAT,PSICAT,Psidium cattleianum,Psidium,cattleianum,NA,Naturalized,alien,1,Myrtales,0
+Myrtaceae,SYZJAM,SYZJAM,Syzygium jambos,Syzygium,jambos,NA,Naturalized,alien,1,Myrtales,0
+Myrtaceae,M23,EUCSPP,Eucalyptus spp1,Eucalyptus,spp1,NA,NA,alien,1,Myrtales,0
+Myrtaceae,M65,SYZSPP,Syzygium spp1,Syzygium,spp1,NA,NA,uncertain,1,Myrtales,0
+Myrtaceae,EUCDEG,EUCDEG,Eucalyptus deglupta,Eucalyptus,deglupta,NA,Naturalized,alien,1,Myrtales,0
+Myrtaceae,LEPSCO,LEPSCO,Leptospermum scoparium,Leptospermum,scoparium,NA,Naturalized,alien,1,Myrtales,0
+Myrtaceae,RHOTOM,RHOTOM,Rhodomyrtus tomentosa,Rhodomyrtus,tomentosa,NA,Naturalized,alien,1,Myrtales,0
+Myrtaceae,EUCSAL,EUCSAL,Eucalyptus saligna,Eucalyptus,saligna,HI (I),Naturalized,alien,1,Myrtales,0
+Myrtaceae,SYZMAL,SYZMAL,Syzygium malaccense,Syzygium,malaccense,NA,Polynesian_Intro,alien,1,Myrtales,0
+Myrtaceae,M54,ME3SPP,Melaleuca spp1,Melaleuca,spp1,NA,NA,alien,1,Myrtales,0
+Myrtaceae,EUCROB,EUCROB,Eucalyptus robusta,Eucalyptus,robusta,"L48 (I), HI (I)",Naturalized,alien,1,Myrtales,0
+Myrtaceae,SYZCUM,SYZCUM,Syzygium cumini,Syzygium,cumini,"L48 (I), HI (I)",Naturalized,alien,1,Myrtales,0
+Myrtaceae,EUCGRA,EUCGRA,Eucalyptus grandis,Eucalyptus,grandis,L48 (I),Naturalized,alien,1,Myrtales,0
+Myrtaceae,SYZSAN,SYZSAN,Syzygium sandwicense,Syzygium,sandwicense,NA,Endemic,native,1,Myrtales,0
+Myrtaceae,METPOL,METPOL,Metrosideros polymorpha,Metrosideros,polymorpha,HI (N),Endemic,native,1,Myrtales,0
+Myrtaceae,MELQUI,MELQUI,Melaleuca quinquenervia,Melaleuca,quinquenervia,NA,Naturalized,alien,1,Myrtales,0
+Nyctaginaceae,PISSAN,PISSAN,Pisonia sandwicensis,Pisonia,sandwicensis,NA,Endemic,native,1,Caryophyllales,0
+Nyctaginaceae,PISBRU,PISBRU,Pisonia brunoniana,Pisonia,brunoniana,NA,Indigenous,native,1,Caryophyllales,0
+Oleaceae,NESSAN,NESSAN,Nestegis sandwicensis,Nestegis,sandwicensis,NA,Endemic,native,1,Lamiales,0
+Oleaceae,FRAUHD,FRAUHD,Fraxinus uhdei,Fraxinus,uhdei,NA,Naturalized,alien,1,Lamiales,0
+Pandanaceae,FREARB,FREARB,Freycinetia arborea,Freycinetia,arborea,NA,Indigenous,native,1,Pandanales,1
+Pandanaceae,PANTEC,PANTEC,Pandanus tectorius,Pandanus,tectorius,"HI (I), PR (I)",Indigenous,native,1,Pandanales,1
+Papaveraceae,BOCFRU,BOCFRU,Bocconia frutescens,Bocconia,frutescens,NA,Naturalized,alien,1,Ranunculales,0
+Passifloraceae,PASEDU,PASEDU,Passiflora edulis,Passiflora,edulis,NA,Naturalized,alien,1,Malpighiales,0
+Phyllanthaceae,ANTPLA,ANTPLA,Antidesma platyphyllum,Antidesma,platyphyllum,NA,Endemic,native,1,Malpighiales,0
+Phyllanthaceae,ANTPUL,ANTPUL,Antidesma pulvinatum,Antidesma,pulvinatum,NA,Endemic,native,1,Malpighiales,0
+Pinaceae,PINPIN,PINPIN,Pinus pinaster,Pinus,pinaster,NA,Naturalized,alien,0,Pinales,0
+Pinaceae,PINRAD,PINRAD,Pinus radiata,Pinus,radiata,L48 (N),Naturalized,alien,0,Pinales,0
+Pinaceae,PINPAT,PINPAT,Pinus patula,Pinus,patula,NA,Naturalized,alien,0,Pinales,0
+Pinaceae,PINELL,PINELL,Pinus elliottii,Pinus,elliottii,L48 (N),Naturalized,alien,0,Pinales,0
+Pittosporaceae,PITGLA,PITGLA,Pittosporum glabrum,Pittosporum,glabrum,NA,Endemic,native,1,Apiales,0
+Pittosporaceae,PITTER,PITTER,Pittosporum terminalioides,Pittosporum,terminalioides,NA,Endemic,native,1,Apiales,0
+Pittosporaceae,M15,PITTSPP,Pittosporum spp1,Pittosporum,spp1,NA,NA,uncertain,1,Apiales,0
+Pittosporaceae,PITHOS,PITHOS,Pittosporum hosmeri,Pittosporum,hosmeri,NA,Endemic,native,1,Apiales,0
+Poaceae,M35,BAMSPP,Bambusa spp1,Bambusa,spp1,NA,NA,alien,1,Poales,1
+Primulaceae,MYRLAN,MYRLAN,Myrsine lanaiensis,Myrsine,lanaiensis,NA,Endemic,native,1,Ericales,0
+Primulaceae,M11,MYRSPP,Myrsine spp1,Myrsine,spp1,NA,NA,native,1,Ericales,0
+Primulaceae,M34,MYRSPP,Myrsine spp2,Myrsine,spp2,NA,NA,native,1,Ericales,0
+Primulaceae,MYRSAN,MYRSAN,Myrsine sandwicensis,Myrsine,sandwicensis,NA,Endemic,native,1,Ericales,0
+Primulaceae,ARDELL,ARDELL,Ardisia elliptica,Ardisia,elliptica,NA,Naturalized,alien,1,Ericales,0
+Primulaceae,MYRLES,MYRLES,Myrsine lessertiana,Myrsine,lessertiana,NA,Endemic,native,1,Ericales,0
+Proteaceae,GREBAN,GREBAN,Grevillea banksii,Grevillea,banksii,NA,Naturalized,alien,1,Proteales,0
+Proteaceae,GREROB,GREROB,Grevillea robusta,Grevillea,robusta,"L48 (I), HI (I), PR (I)",Naturalized,alien,1,Proteales,0
+Rhamnaceae,ALPPON,ALPPON,Alphitonia ponderosa,Alphitonia,ponderosa,NA,Endemic,native,1,Rosales,0
+Rhamnaceae,COLOPP,COLOPP,Colubrina oppositifolia,Colubrina,oppositifolia,NA,Endemic,native,1,Rosales,0
+Rosaceae,M55,PRUSPP,Prunus spp1,Prunus,spp1,NA,NA,alien,1,Rosales,0
+Rosaceae,RUBMAC,RUBMAC,Rubus macraei,Rubus,macraei,NA,Endemic,native,1,Rosales,0
+Rosaceae,OSTANT,OSTANT,Osteomeles anthyllidifolia,Osteomeles,anthyllidifolia,HI (N),Indigenous,native,1,Rosales,0
+Rosaceae,RUBROS,RUBROS,Rubus rosifolius,Rubus,rosifolius,NA,Naturalized,alien,1,Rosales,0
+Rosaceae,RUBNIV,RUBNIV,Rubus niveus,Rubus,niveus,NA,Naturalized,alien,1,Rosales,0
+Rubiaceae,M30,COPSPP,Coprosma spp1,Coprosma,spp1,NA,NA,native,1,Gentianales,0
+Rubiaceae,COPWAI,COPWAI,Coprosma waimeae,Coprosma,waimeae,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,BOBBRE,BOBBRE,Bobea brevipes,Bobea,brevipes,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,M52,COPSPP,Coprosma spp4,Coprosma,spp4,NA,NA,native,1,Gentianales,0
+Rubiaceae,M66,KADSPP,Kadua spp1,Kadua,spp1,NA,NA,native,1,Gentianales,0
+Rubiaceae,BOBSAN,BOBSAN,Bobea sandwicensis,Bobea,sandwicensis,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,COPRHY,COPRHY,Coprosma rhynchocarpa,Coprosma,rhynchocarpa,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,MORCIT,MORCIT,Morinda citrifolia,Morinda,citrifolia,"L48 (I), HI (I), PR (I), VI (I)",Polynesian_Intro,alien,1,Gentianales,0
+Rubiaceae,M31,COPSPP,Coprosma spp2,Coprosma,spp2,NA,NA,native,1,Gentianales,0
+Rubiaceae,COPMON,COPMON,Coprosma montana,Coprosma,montana,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,KADACU,KADACU,Kadua acuminata,Kadua,acuminata,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,PSYFAU,PSYFAU,Psychotria fauriei,Psychotria,fauriei,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,PSYMA2,PSYMA2,Psychotria mariniana,Psychotria,mariniana,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,PSYHEX,PSYHEX,Psychotria hexandra,Psychotria,hexandra,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,PSYHAW,PSYHAW,Psychotria hawaiiensis,Psychotria,hawaiiensis,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,KADAFF,KADAFF,Kadua affinis,Kadua,affinis,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,COPLON,COPLON,Coprosma longifolia,Coprosma,longifolia,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,PSYKAD,PSYKAD,Psychotria kaduana,Psychotria,kaduana,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,M28,PSYSPP,Psychotria spp1,Psychotria,spp1,NA,NA,native,1,Gentianales,0
+Rubiaceae,PSYODO,PSYODO,Psydrax odorata,Psydrax,odorata,NA,Indigenous,native,1,Gentianales,0
+Rubiaceae,HEDHIL,HEDHIL,Kadua axillaris,Kadua,axillaris,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,PSYGRA,PSYGRA,Psychotria grandiflora,Psychotria,grandiflora,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,M40,COPSPP,Coprosma spp3,Coprosma,spp3,NA,NA,native,1,Gentianales,0
+Rubiaceae,PSYGRE,PSYGRE,Psychotria greenwelliae,Psychotria,greenwelliae,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,M59,PSYSPP,Psychotria spp2,Psychotria,spp2,NA,NA,native,1,Gentianales,0
+Rubiaceae,COPFOL,COPFOL,Coprosma foliosa,Coprosma,foliosa,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,COPOCH,COPOCH,Coprosma ochracea,Coprosma,ochracea,NA,Endemic,native,1,Gentianales,0
+Rubiaceae,M39,HEYSPP,Hedyotis spp1,Hedyotis,spp1,NA,NA,uncertain,1,Gentianales,0
+Rutaceae,M58,MELSPP,Melicope spp2,Melicope,spp2,NA,NA,uncertain,1,Sapindales,0
+Rutaceae,FLIBRA,FLIBRA,Flindersia brayleyana,Flindersia,brayleyana,NA,Naturalized,alien,1,Sapindales,0
+Rutaceae,PLASPA,PLASPA,Platydesma spathulatum,Platydesma,spathulatum,NA,Endemic,native,1,Sapindales,0
+Rutaceae,MELHAL,MELHAL,Melicope haleakalae,Melicope,haleakalae,NA,Endemic,native,1,Sapindales,0
+Rutaceae,M74,MELSPP,Melicope spp3,Melicope,spp3,NA,NA,uncertain,1,Sapindales,0
+Rutaceae,MELANI,MELANI,Melicope anisata,Melicope,anisata,NA,Endemic,native,1,Sapindales,0
+Rutaceae,MELOAH,MELOAH,Melicope oahuensis,Melicope,oahuensis,NA,Endemic,native,1,Sapindales,0
+Rutaceae,MELVOL,MELVOL,Melicope volcanica,Melicope,volcanica,NA,Endemic,native,1,Sapindales,0
+Rutaceae,M90,MELSPP,Melicope spp6,Melicope,spp6,NA,NA,uncertain,1,Sapindales,0
+Rutaceae,MELKAA,MELKAA,Melicope kaalaensis,Melicope,kaalaensis,NA,Endemic,native,1,Sapindales,0
+Rubiaceae,M62,PSYSPP,Psychotria spp3,Psychotria,spp3,NA,NA,native,1,Gentianales,0
+Rutaceae,M76,MELSPP,Melicope spp5,Melicope,spp5,NA,NA,uncertain,1,Sapindales,0
+Rutaceae,M75,MELSPP,Melicope spp4,Melicope,spp4,NA,NA,uncertain,1,Sapindales,0
+Rutaceae,M46,MELSPP,Melicope spp1,Melicope,spp1,NA,NA,uncertain,1,Sapindales,0
+Rutaceae,MELBAR,MELBAR,Melicope barbigera,Melicope,barbigera,NA,Endemic,native,1,Sapindales,0
+Rutaceae,MELORB,MELORB,Melicope orbicularis,Melicope,orbicularis,NA,Endemic,native,1,Sapindales,0
+Rutaceae,MELPSE,MELPSE,Melicope pseudoanisata,Melicope,pseudoanisata,NA,Endemic,native,1,Sapindales,0
+Rutaceae,MELCLU,MELCLU,Melicope clusiifolia,Melicope,clusiifolia,NA,Endemic,native,1,Sapindales,0
+Salicaceae,XYLHAW,XYLHAW,Xylosma hawaiensis,Xylosma,hawaiensis,NA,Endemic,native,1,Malpighiales,0
+Santalaceae,SANPAN,SANPAN,Santalum paniculatum,Santalum,paniculatum,NA,Endemic,native,1,Santalales,0
+Santalaceae,SANELL,SANELL,Santalum ellipticum,Santalum,ellipticum,NA,Endemic,native,1,Santalales,0
+Santalaceae,SANFRE,SANFRE,Santalum freycinetianum,Santalum,freycinetianum,NA,Endemic,native,1,Santalales,0
+Sapindaceae,SAPOAH,SAPOAH,Sapindus oahuensis,Sapindus,oahuensis,NA,Endemic,native,1,Sapindales,0
+Sapindaceae,ALEMAC,ALEMAC,Alectryon macrococcum,Alectryon,macrococcum,NA,Endemic,native,1,Sapindales,0
+Sapindaceae,DODVIS,DODVIS,Dodonaea viscosa,Dodonaea,viscosa,"L48 (N), HI (I), PR (N), VI (N)",Indigenous,native,1,Sapindales,0
+Sapotaceae,CHROLI,CHROLI,Chrysophyllum oliviforme,Chrysophyllum,oliviforme,NA,Naturalized,alien,1,Ericales,0
+Sapotaceae,POUSAN,POUSAN,Planchonella sandwicensis,Planchonella,sandwicensis,HI (N),Endemic,native,1,Ericales,0
+Scrophulariaceae,MYOSAN,MYOSAN,Myoporum sandwicense,Myoporum,sandwicense,HI (N),Indigenous,native,1,Lamiales,0
+Smilacaceae,SMIMEL,SMIMEL,Smilax melastomifolia,Smilax,melastomifolia,NA,Endemic,native,1,Liliales,1
+Thymelaeaceae,WIKPHI,WIKPHI,Wikstroemia phillyreifolia,Wikstroemia,phillyreifolia,NA,Endemic,native,1,Malvales,0
+Thymelaeaceae,WIKFUR,WIKFUR,Wikstroemia furcata,Wikstroemia,furcata,NA,Endemic,native,1,Malvales,0
+Thymelaeaceae,M44,WIKSPP,Wikstroemia spp1,Wikstroemia,spp1,NA,NA,native,1,Malvales,0
+Thymelaeaceae,WIKMON,WIKMON,Wikstroemia monticola,Wikstroemia,monticola,NA,Endemic,native,1,Malvales,0
+Thymelaeaceae,M68,WIKSPP,Wikstroemia spp2,Wikstroemia,spp2,NA,NA,native,1,Malvales,0
+Thymelaeaceae,WIKOAH,WIKOAH,Wikstroemia oahuensis,Wikstroemia,oahuensis,NA,Endemic,native,1,Malvales,0
+Thymelaeaceae,WIKSAN,WIKSAN,Wikstroemia sandwicensis,Wikstroemia,sandwicensis,NA,Endemic,native,1,Malvales,0
+Urticaceae,PIPALB,PIPALB,Pipturus albidus,Pipturus,albidus,HI (N),Endemic,native,1,Rosales,0
+Urticaceae,TOULAT,TOULAT,Touchardia latifolia,Touchardia,latifolia,NA,Endemic,native,1,Rosales,0
+Urticaceae,CECOBT,CECOBT,Cecropia obtusifolia,Cecropia,obtusifolia,NA,Naturalized,alien,1,Rosales,0
+Verbenaceae,CITCAU,CITCAU,Citharexylum caudatum,Citharexylum,caudatum,NA,Naturalized,alien,1,Lamiales,0
+Verbenaceae,STADIC,STADIC,Stachytarpheta fallax,Stachytarpheta,fallax,NA,Naturalized,alien,1,Lamiales,0
+Verbenaceae,LANCAM,LANCAM,Lantana camara,Lantana,camara,NA,Naturalized,alien,1,Lamiales,0

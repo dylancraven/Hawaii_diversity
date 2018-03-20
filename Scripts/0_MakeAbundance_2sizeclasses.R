@@ -22,6 +22,7 @@ require(reshape2)
 
 spp<-read.delim("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Data/Hawaii_fullSPP_clean.csv",sep=",",header=T)
 spp<-select(spp, SPP_CODE3A,Native_Status_HawFlora_simple)
+spp<-unique(spp)
 
 tog<-read.delim("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Data/HawaiiOnly_TreeData_122017.csv",sep=",",header=T)
 
@@ -51,9 +52,9 @@ all$SizeClass<-"all"
 ## qc ###
 #########
 
-min(all$DBH_cm,na.rm=T) # 2.6
+min(all$DBH_cm,na.rm=T) # 2.54
 
-max(all$DBH_cm,na.rm=T) # 396
+max(all$DBH_cm,na.rm=T) # 250
 
 ######
 
@@ -69,9 +70,10 @@ big$SizeClass<-"big"
 #########
 ## qc ###
 #########
+
 min(big$DBH_cm,na.rm=T) # 12.7
 
-max(big$DBH_cm,na.rm=T) # 396
+max(big$DBH_cm,na.rm=T) # 250
 
 
 ####

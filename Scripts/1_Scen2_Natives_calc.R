@@ -37,8 +37,8 @@ datt<-filter(datt, Native_Status_HawFlora_simple=="native")
 #qc #
 #####
 
-length(unique(datt$PlotIDn)) # 420 plots
-length(unique(datt$SPP_CODE3A)) #114 spp   
+length(unique(datt$PlotIDn)) # 421 plots
+length(unique(datt$SPP_CODE3A)) #113 spp   
 range(datt$Plot_Area) #  100.0037 1017.8760
 quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
 

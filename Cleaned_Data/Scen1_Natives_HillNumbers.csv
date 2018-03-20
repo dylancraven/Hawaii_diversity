@@ -1,13 +1,13 @@
 "geo_entity2","m","method","order","SC","qD","qD.LCL","qD.UCL"
-"Hawai'i Island",10000,"interpolated",0,0.999,52.589,52.179,52.999
-"Hawai'i Island",10000,"interpolated",1,0.999,7.76,7.729,7.792
-"Hawai'i Island",10000,"interpolated",2,0.999,3.643,3.628,3.659
-"Kaua'i Island",10000,"interpolated",0,1,45.999,45.952,46.046
-"Kaua'i Island",10000,"interpolated",1,1,12.172,11.943,12.402
-"Kaua'i Island",10000,"interpolated",2,1,7.434,7.304,7.564
-"Maui Nui",10000,"interpolated",0,0.999,52.328,51.632,53.025
-"Maui Nui",10000,"interpolated",1,0.999,6.585,6.544,6.627
-"Maui Nui",10000,"interpolated",2,0.999,3.857,3.836,3.878
-"O'ahu Island",10000,"interpolated",0,1,36,35.96,36.04
-"O'ahu Island",10000,"interpolated",1,1,10.812,10.592,11.033
-"O'ahu Island",10000,"interpolated",2,1,6.868,6.705,7.03
+"Hawai'i Island",10000,"interpolated",0,1,48.798,48.531,49.064
+"Hawai'i Island",10000,"interpolated",1,1,6.073,6.055,6.091
+"Hawai'i Island",10000,"interpolated",2,1,2.748,2.741,2.755
+"Kaua'i Island",10000,"interpolated",0,1,45.869,45.607,46.131
+"Kaua'i Island",10000,"interpolated",1,1,9.474,9.334,9.615
+"Kaua'i Island",10000,"interpolated",2,1,6.158,6.085,6.231
+"Maui Nui",10000,"interpolated",0,0.999,51.205,50.596,51.813
+"Maui Nui",10000,"interpolated",1,0.999,7.292,7.247,7.337
+"Maui Nui",10000,"interpolated",2,0.999,4.025,4.003,4.047
+"O'ahu Island",10000,"interpolated",0,1,35.719,35.392,36.045
+"O'ahu Island",10000,"interpolated",1,1,8.504,8.393,8.615
+"O'ahu Island",10000,"interpolated",2,1,5.284,5.188,5.381

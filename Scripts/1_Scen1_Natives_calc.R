@@ -126,7 +126,6 @@ radd$geo_entity2<-factor(radd$geo_entity2,levels=c("Hawai'i Island","Maui Nui","
 
 write.table(radd,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_RAD.csv",sep=",",row.names=F)
 
-
 ############
 # BetaPIE  #
 ############
@@ -189,7 +188,6 @@ rangezz$r_PET<-rangezz$max_PET-rangezz$min_PET
 rangezz$r_Elev<-rangezz$max_Elev-rangezz$min_Elev
 
 rangezz<-select(rangezz,geo_entity2, totPlotArea, PlotN, mean_MAT, r_MAT, mean_MAP,r_MAP, mean_PET, r_PET, max_Elev,r_Elev)
-
 
 write.table(rangezz,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_EnvConditions.csv",sep=",",row.names=F)
 

@@ -245,7 +245,8 @@ write.table(orders.tog,"Cleaned_Data/Scen3_Natives_7plots_HillN.csv",sep=",",row
 
 write.table(curves.tog,"Cleaned_Data/Scen3_Natives_7plots_curves_estimates.csv",sep=",",row.names=F)
 
-envs<-summarize(group_by(rangez.tog, geo_entity2), r_PET=mean(r_PET), m_PlotArea=mean(totPlotArea), mPET=mean(meanPET),mMAP=mean(meanMAP))
+envs<-summarize(group_by(rangez.tog, geo_entity2), mean_MAP=mean(meanMAP),
+                mean_PET=mean(meanPET),r_PET=mean(r_PET),  m_PlotArea=mean(totPlotArea))
 
 write.table(envs,"Cleaned_Data/Scen3_Native_7plots_EnvConditions_summarized.csv",sep=",",row.names=F)
 

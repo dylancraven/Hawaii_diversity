@@ -67,7 +67,6 @@ mn<-filter(datt,geo_entity2=="Maui Nui")
 oh<-filter(datt,geo_entity2=="O'ahu Island")
 big<-filter(datt,geo_entity2=="Hawai'i Island")
 
-
 ###########
 
 set.seed(27)
@@ -210,14 +209,16 @@ for(i in 1:100){
   ##############################
   
   rangez<-unique(select(togg, geo_entity2, PlotIDn, MAT, MAP, PET, Elev_m,Plot_Area))
-  rangezz<-summarize(group_by(rangez,geo_entity2),min_MAT=min(MAT),max_MAT=max(MAT),min_MAP=min(MAP),max_MAP=max(MAP),min_PET=min(PET),max_PET=max(PET),
+  rangezz<-summarize(group_by(rangez,geo_entity2),mean_MAT=mean(MAT),min_MAT=min(MAT),max_MAT=max(MAT),
+                     mean_MAP=mean(MAP),min_MAP=min(MAP),max_MAP=max(MAP),
+                     mean_PET=mean(PET),min_PET=min(PET),max_PET=max(PET),
                      min_Elev=min(Elev_m),max_Elev=max(Elev_m), totPlotArea=sum(Plot_Area))
   
   rangezz$r_MAP<-rangezz$max_MAP-rangezz$min_MAP
   rangezz$r_MAT<-rangezz$max_MAT-rangezz$min_MAT
   rangezz$r_PET<-rangezz$max_PET-rangezz$min_PET
   rangezz$r_Elev<-rangezz$max_Elev-rangezz$min_Elev
-  rangezz<-select(rangezz,geo_entity2, r_MAP, r_MAT, r_PET, r_Elev,totPlotArea)
+  rangezz<-select(rangezz,geo_entity2, mean_MAP,r_MAP, mean_MAT, r_MAT, mean_PET, r_PET, r_Elev,totPlotArea)
   
   rangezz$Iteration<-i
   rangezz<-ungroup(rangezz)
@@ -258,7 +259,10 @@ write.table(orders.tog,"Cleaned_Data/Scen2_Natives_7plots_HillN.csv",sep=",",row
 
 write.table(curves.tog,"Cleaned_Data/Scen2_Natives_7plots_curves_estimates.csv",sep=",",row.names=F)
 
-envs<-summarize(group_by(rangez.tog, geo_entity2), r_MAP=mean(r_MAP),r_MAT=mean(r_MAT),r_PET=mean(r_PET),r_Elev=mean(r_Elev),  m_PlotArea=mean(totPlotArea))
+envs<-summarize(group_by(rangez.tog, geo_entity2), mean_MAP=mean(mean_MAP),r_MAP=mean(r_MAP),
+                mean_MAT=mean(mean_MAT),r_MAT=mean(r_MAT),
+                mean_PET=mean(mean_PET),r_PET=mean(r_PET),r_Elev=mean(r_Elev),  m_PlotArea=mean(totPlotArea))
+
 
 write.table(envs,"Cleaned_Data/Scen2_Natives_7plots_Envconditions_summarized.csv",sep=",",row.names=F)
 

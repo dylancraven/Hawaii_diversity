@@ -30,7 +30,6 @@ macroo2<-filter(macroo, Div!="Total Woody Spp.")
 # figure ##
 ###########
 
-
 macro_g<-ggplot(macroo2,aes(x=geo_entity2,y=Div2,colour=Div, fill=Div))+ 
   geom_bar(stat="identity",position=position_dodge())+
   scale_x_discrete(labels=c("Hawai'i Island"="Hawai'i","Maui Nui"="Maui Nui","O'ahu Island"="O'ahu","Kaua'i Island"="Kaua'i"))+

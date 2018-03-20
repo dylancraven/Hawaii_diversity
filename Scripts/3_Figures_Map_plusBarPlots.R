@@ -29,7 +29,6 @@ HW_shp <- rgdal::readOGR(dsn   = file.path("/homes/dc78cahe/Dropbox (iDiv)/Resea
 # Need to use data.frame with coordinates because ggplot can't understand raw sp objects
 HW_df <- ggplot2::fortify(HW_shp) # same as broom::tidy(HW_shp)
 
-
 # Plot
 
 haw_allplots<-ggplot(data = HW_df) + 
@@ -42,7 +41,7 @@ haw_allplots<-ggplot(data = HW_df) +
   geom_point(data = HW.dt1, 
              aes(x      = Long_Dec, 
                  y      = Lat_Dec, 
-                 size  = S_rare10,
+                 size  = S_asymp,
                  colour=PET,
                  fill="white"),
              shape="O") +
@@ -51,8 +50,8 @@ haw_allplots<-ggplot(data = HW_df) +
     
     annotate("text", x = -159.5, y = 21.8, label = "Kaua'i",fontface="bold")+
     annotate("text", x = -158, y = 21.8, label = "O'ahu", fontface="bold")+
-    annotate("text", x = -156.1, y = 21.1, label = "Maui Nui", fontface="bold")+
-    annotate("text", x = -155.2, y = 20.2, label = "Hawai'i", fontface="bold")+
+    annotate("text", x = -156.1, y = 21.0, label = "Maui Nui", fontface="bold")+
+    annotate("text", x = -155.2, y = 20.1, label = "Hawai'i", fontface="bold")+
     
     
     # Add north arrow

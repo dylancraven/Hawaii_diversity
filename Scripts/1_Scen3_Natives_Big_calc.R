@@ -33,7 +33,7 @@ dat3<-Scen3_tog_het
 
 dat3$Abundance_ha<-round(dat3$Abundance_ha)
 
-length(unique(dat3$iteration)) # 5720
+length(unique(dat3$iteration)) # 3139
 
 ######################
 # select  100 ########

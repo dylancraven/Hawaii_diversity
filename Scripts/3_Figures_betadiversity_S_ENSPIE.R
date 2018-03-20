@@ -21,7 +21,6 @@ Beta_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_BetaPIE.csv",sep=",",header=
 
 Beta_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_BetaPIE.csv",sep=",",header=T)
 
-
 #################
 # Beta ENS_PIE  #
 #################

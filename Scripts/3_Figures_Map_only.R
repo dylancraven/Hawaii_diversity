@@ -48,8 +48,8 @@ haw_allplots<-ggplot(data = HW_df) +
     
     annotate("text", x = -159.5, y = 21.8, label = "Kaua'i",fontface="bold")+
     annotate("text", x = -158, y = 21.8, label = "O'ahu", fontface="bold")+
-    annotate("text", x = -156.1, y = 21.1, label = "Maui Nui", fontface="bold")+
-    annotate("text", x = -155.2, y = 20.2, label = "Hawai'i", fontface="bold")+
+    annotate("text", x = -156.1, y = 21.0, label = "Maui Nui", fontface="bold")+
+    annotate("text", x = -155.2, y = 20.1, label = "Hawai'i", fontface="bold")+
     
     
         

@@ -524,7 +524,6 @@ Hill_Sc2_Or1<-ggplot(H_Sc2_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
                    #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-
 # Scen3 + order 1
 
 H_Sc3_Or1<-filter(HillNN, Scen_Order=="Age_1")

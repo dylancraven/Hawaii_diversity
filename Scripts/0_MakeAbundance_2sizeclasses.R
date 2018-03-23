@@ -58,7 +58,7 @@ max(all$DBH_cm,na.rm=T) # 250
 
 ######
 
-all2<-summarize(group_by(all, geo_entity_ref,geo_entity,Study, PlotIDn,Plot_Area, SizeClass,SPP_CODE3A), 
+all2<-summarize(group_by(all, geo_entity_ref,geo_entity,Study, PlotIDn,Plot_Area, SizeClass,SPP_CODE3A), Abundance=sum(Abundance),
                 Abundance_ha=sum(Abundance_ha))
 
 ########
@@ -78,7 +78,7 @@ max(big$DBH_cm,na.rm=T) # 250
 
 ####
 
-big2<-summarize(group_by(big, geo_entity_ref,geo_entity,Study, PlotIDn,Plot_Area, SizeClass,SPP_CODE3A), 
+big2<-summarize(group_by(big, geo_entity_ref,geo_entity,Study, PlotIDn,Plot_Area, SizeClass,SPP_CODE3A), Abundance=sum(Abundance),
                 Abundance_ha=sum(Abundance_ha))
 
 togg2<-rbind.data.frame(all2, big2) # all size classes
@@ -89,7 +89,7 @@ togg2<-rbind.data.frame(all2, big2) # all size classes
 
 togg3<-merge(togg2, spp, by.y="SPP_CODE3A")
 
-togg33<-select(togg3, geo_entity_ref, geo_entity, Study, PlotIDn, Plot_Area,SPP_CODE3A, Native_Status_HawFlora_simple, SizeClass,Abundance_ha)
+togg33<-select(togg3, geo_entity_ref, geo_entity, Study, PlotIDn, Plot_Area,SPP_CODE3A, Native_Status_HawFlora_simple, SizeClass,Abundance, Abundance_ha)
 
 togg33<-filter(togg33, Study!="HIPPNET") # b/c plot is too big
 
@@ -125,8 +125,7 @@ togg34<-merge(togg33, tog_tog,by.y=c("PlotIDn", "SizeClass"))
 # add in climate data ##
 ########################
 
-env<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Data/Hawaiian_EnvData_1km.csv",sep=",",header=T)
-env<-select(env,-CellID)
+env<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Data/Hawaiian_Env_Soil_1km.csv",sep=",",header=T)
 
 
 togg35<-merge(togg34, env,by.y=c("PlotIDn"))
@@ -136,7 +135,7 @@ togg35<-merge(togg34, env,by.y=c("PlotIDn"))
 ########################
 
 togg36<-select(togg35,geo_entity_ref, geo_entity, geo_entity2, Study, PlotIDn, Plot_Area, Lat_Dec, Long_Dec, Elev_m,MAT, MAP, PrecipSeasonality, TempSeasonality, PET,
-                HFP, HII, Plot_Prop_Invaded=PropInvaded, SizeClass, SPP_CODE3A, Native_Status_HawFlora_simple, Abundance_ha)
+                HFP, HII, Plot_Prop_Invaded=PropInvaded, SizeClass, SPP_CODE3A, Native_Status_HawFlora_simple, Abundance, Abundance_ha)
 
 
 write.table(togg36,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",sep=",",row.names=F)

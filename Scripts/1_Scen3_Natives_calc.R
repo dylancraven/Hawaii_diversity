@@ -29,7 +29,7 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 dat3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_SimComms.csv")
 dat3$Abundance_ha<-round(dat3$Abundance_ha)
 
-length(unique(dat3$iteration)) # 5080
+length(unique(dat3$iteration)) # 6972
 
 ######################
 # select  100 ########

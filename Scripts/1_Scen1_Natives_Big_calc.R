@@ -46,7 +46,6 @@ hcomm2<-dcast(datt2, SPP_CODE3A~geo_entity2, value.var="Abundance",sum)
 rownames(hcomm2)<-hcomm2$SPP_CODE3A
 hcomm2<-select(hcomm2,-SPP_CODE3A)
 
-
 #####################
 # SACs (Abundance)  #
 #####################

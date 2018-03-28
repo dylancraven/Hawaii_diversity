@@ -47,15 +47,15 @@ h_attr$group<-as.factor(h_attr$group)
 # make mob structure
 h_mob_in <- make_mob_in(h_comm3, h_attr)
 
-h_stats <- get_mob_stats(h_mob_in, group_var = "group",nperm=10)
+h_stats <- get_mob_stats(h_mob_in, group_var = "group",nperm=10, n_min=100)
 
 h_plot_div<-data.frame(h_stats$samples)
 h_plot_div$PlotIDn<-rownames(h_plot_div)
-h_plot_div<-select(h_plot_div, PlotIDn, S_asymp, S_rare10=S_rare.n...10)
+h_plot_div<-select(h_plot_div, PlotIDn, S_asymp, S_rare100=S_rare.n...100)
 h_plot_div$PlotIDn<-as.integer(h_plot_div$PlotIDn)
 
 h_map_data<-distinct(select(datt, geo_entity2, PlotIDn, Lat_Dec, Long_Dec, Elev_m, MAT, MAP, PrecipSeasonality, TempSeasonality, PET, HII, Plot_Prop_Invaded))
 
-h_map_data<-left_join(h_map_data, h_plot_div, by="PlotIDn")
+h_map_data<-left_join(h_map_data, h_plot_div, by="PlotIDn",all.x=TRUE)
 
 write.table(h_map_data,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Hawaii_mapdata.csv",sep=",",row.names=F)

@@ -36,6 +36,7 @@ length(unique(datt$SPP_CODE3A)) #113 plots
 range(datt$Plot_Area) #  100.0037 1017.8760
 quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
        
+
 ##########################
 # prepare data for iNExt #
 ##########################

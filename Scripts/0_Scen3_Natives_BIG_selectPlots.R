@@ -22,7 +22,7 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 
 ######################
 # JUST NATIVE ########
-# all trees> 12.7 ####
+# all trees> 10cm ####
 ######################
 
 ######################
@@ -31,17 +31,15 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 
 datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
 
-datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass=="big")  
-datt$SizeClass<-droplevels(datt$SizeClass)
-
-datt<-filter(datt, Native_Status_HawFlora_simple=="native") 
+datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass==10) %>%
+  filter(., Native_Status=="native")
 
 #####
 #qc #
 #####
 
-length(unique(datt$PlotIDn)) # 440 plots
-length(unique(datt$SPP_CODE3A)) #77 spp   
+length(unique(datt$PlotID)) # 440 plots
+length(unique(datt$SPP_CODE3A)) # 88 spp   
 range(datt$Plot_Area) #  100.0037 1017.8760
 quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
 
@@ -49,9 +47,9 @@ quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
 # quick data summary    #
 #########################
 
-summ<-unique(select(datt, geo_entity2, PlotIDn,Plot_Area))
+summ<-unique(select(datt, geo_entity2, PlotID,Plot_Area))
 
-summ2<-summarize(group_by(summ, geo_entity2), Plots=length(unique(PlotIDn)), PlotArea=sum(Plot_Area))
+summ2<-summarize(group_by(summ, geo_entity2), Plots=length(unique(PlotID)), PlotArea=sum(Plot_Area))
 
 summ2
 
@@ -82,16 +80,16 @@ set.seed(27)
 togg_out<-list();
 for(i in 1:100000){
   
-  a<- mn %>% group_by(geo_entity2,PlotIDn) %>% sample_n_groups(7,replace=F)
-  b<- oh %>% group_by(geo_entity2,PlotIDn) %>% sample_n_groups(7,replace=F)
-  c<- big %>% group_by(geo_entity2,PlotIDn) %>% sample_n_groups(7,replace=F)
-  d<- kauai %>% group_by(geo_entity2,PlotIDn) %>% sample_n_groups(7,replace=F)
+  a<- mn %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(7,replace=F)
+  b<- oh %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(7,replace=F)
+  c<- big %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(7,replace=F)
+  d<- kauai %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(7,replace=F)
   
   togg<-rbind.data.frame(a,b,c,d)
   
   togg2<-ungroup(togg)
   
-  rangez<-unique(select(togg2, geo_entity2, PlotIDn, PET, Plot_Area))
+  rangez<-unique(select(togg2, geo_entity2, PlotID, PET, Plot_Area))
   rangezz<-summarize(group_by(rangez,geo_entity2),min_PET=min(PET),max_PET=max(PET), totPlotArea=sum(Plot_Area))
   
   rangezz$r_PET<-rangezz$max_PET-rangezz$min_PET
@@ -104,7 +102,7 @@ for(i in 1:100000){
   if(Keep<4) next
   
   togg<-ungroup(togg)
-  togg1<-select(togg, geo_entity2,PlotIDn, SPP_CODE3A,Abundance_ha)
+  togg1<-select(togg, geo_entity2,PlotID, SPP_CODE3A,Abundance_ha)
   togg1<-merge(togg1, rangezz,by.y="geo_entity2")
   togg1$iteration<-i
   togg_out[[i]]<-rbind.data.frame(togg1)  

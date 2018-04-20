@@ -29,7 +29,7 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 dat3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_SimComms.csv")
 dat3$Abundance_ha<-round(dat3$Abundance_ha)
 
-length(unique(dat3$iteration)) # 6972
+length(unique(dat3$iteration)) # 4940
 
 ######################
 # select  100 ########
@@ -51,7 +51,7 @@ un_sel$Iteration2<-seq(from=1,to=100,by=1)
 
 dat33<-merge(un_sel, dat3,by.y="iteration")
 
-dat33<-select(dat33, Iteration2, geo_entity2, PlotIDn, SPP_CODE3A, Abundance_ha, r_PET,meanPET, meanMAP,totPlotArea)
+dat33<-select(dat33, Iteration2, geo_entity2, PlotID, SPP_CODE3A, Abundance_ha, r_PET,meanPET, meanMAP,totPlotArea)
 
 ############################
 # quick data summary & QC # 
@@ -65,7 +65,7 @@ summ2
 
 # always 7 plots per island per iteration?
 
-summ3<-summarize(group_by(dat33,Iteration2,geo_entity2),PlotN=length(unique(PlotIDn)))
+summ3<-summarize(group_by(dat33,Iteration2,geo_entity2),PlotN=length(unique(PlotID)))
 summ33<-summarize(group_by(summ3,geo_entity2), meanPlotN=mean(PlotN), minP=min(PlotN),maxP=max(PlotN))
 
 summ33
@@ -160,19 +160,19 @@ for(i in 1:100){
   # betaPIE #
   ###########
   
-  h_comm3<-dcast(testt, PlotIDn~SPP_CODE3A, value.var="Abundance_ha",sum)
-  rownames(h_comm3)<-h_comm3$PlotIDn
-  h_comm3<-select(h_comm3,-PlotIDn)
+  h_comm3<-dcast(testt, PlotID~SPP_CODE3A, value.var="Abundance_ha",sum)
+  rownames(h_comm3)<-h_comm3$PlotID
+  h_comm3<-select(h_comm3,-PlotID)
   
   # group information
   
-  h_attr<-unique(select(testt,PlotIDn, geo_entity2))
+  h_attr<-unique(select(testt,PlotID, geo_entity2))
   
-  h_attr<-arrange(h_attr,PlotIDn)
+  h_attr<-arrange(h_attr,PlotID)
   
   h_attr<-data.frame(h_attr)
-  rownames(h_attr)<-h_attr$PlotIDn
-  h_attr<-select(h_attr,-PlotIDn)
+  rownames(h_attr)<-h_attr$PlotID
+  h_attr<-select(h_attr,-PlotID)
   colnames(h_attr)<-"group"
   h_attr$group<-as.factor(h_attr$group)
   
@@ -182,15 +182,15 @@ for(i in 1:100){
   h_stats <- get_mob_stats(h_mob_in, group_var = "group",nperm=10)
   
   h_betapie<-data.frame(h_stats$samples$beta_ENS_PIE, h_stats$samples$beta_S)
-  h_betapie$PlotIDn<-rownames(h_betapie)
+  h_betapie$PlotID<-rownames(h_betapie)
   colnames(h_betapie)[1]<-"beta_ENS_PIE"
   colnames(h_betapie)[2]<-"beta_S"
   
-  h_help<-unique(select(testt, geo_entity2, PlotIDn))
+  h_help<-unique(select(testt, geo_entity2, PlotID))
   
-  h_betapie<-merge(h_help,h_betapie,by.y="PlotIDn")
+  h_betapie<-merge(h_help,h_betapie,by.y="PlotID")
   
-  h_betapie<-select(h_betapie, geo_entity2, PlotIDn, beta_S, beta_ENS_PIE)
+  h_betapie<-select(h_betapie, geo_entity2, PlotID, beta_S, beta_ENS_PIE)
   
   h_betapie$Iteration<-i
   

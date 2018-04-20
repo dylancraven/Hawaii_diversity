@@ -240,7 +240,7 @@ comb_fig1<-plot_grid(haw_map, div_fig1, ncol=1,rel_heights = c(1.8,1.4),rel_widt
 
 # Save as png file
 
-ggsave(filename = file.path("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Figures", "Big_Fig1.png"), 
+ggsave(filename = file.path("Figures", "Big_Fig1.png"), 
        width    = 29.7, 
        height   = 25, 
        units    = "cm")

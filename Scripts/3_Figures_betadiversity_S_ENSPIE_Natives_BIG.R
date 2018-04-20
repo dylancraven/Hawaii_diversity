@@ -21,7 +21,6 @@ load("Cleaned_Data/Scen2_natives_BIG.RData")
 
 load("Cleaned_Data/Scen3_natives_BIG.RData")
 
-
 #################
 # Beta ENS_PIE  #
 #################
@@ -339,4 +338,3 @@ png(filename="Figures/Beta_ENSpie_S_FigSX_natives_BIG_7plots.png",
 togg2
 
 dev.off()
-

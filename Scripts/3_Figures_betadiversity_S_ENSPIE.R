@@ -182,7 +182,6 @@ write.csv(Beta_3s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen3.csv",row.names=F)
 # Scenario 1 #
 ##############
 
-
 Beta_1$geo_entity2<-as.factor(Beta_1$geo_entity2)
 Beta_1$geo_entity2<-factor(Beta_1$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
@@ -325,7 +324,6 @@ write.csv(Beta_3ss,"Cleaned_Data/Summary_Beta_S_Scen3.csv",row.names=F)
 ##################
 
 require(cowplot)
-
 
 togg2<-plot_grid(Beta_Scen1s, Beta_Scen2s, Beta_Scen3s,Beta_Scen1, Beta_Scen2, Beta_Scen3,
                  labels=c("a)","b)","c)","d)","e)","f)"),label_size = 6,

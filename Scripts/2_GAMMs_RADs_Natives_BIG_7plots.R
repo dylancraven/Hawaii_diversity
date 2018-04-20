@@ -183,4 +183,4 @@ colnames(rad_tog3)[7]<-"RankN_pred"
 ####
 
 save(rad_tog1,rad_tog2, rad_tog3, 
-     file="Scen123_Native_Big_RAD_GAMMestimates.RData")
+     file="Cleaned_Data/Scen123_Native_Big_RAD_GAMMestimates.RData")

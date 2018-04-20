@@ -1,8 +1,6 @@
 ######################################################
 # convert tree-level data to abundance data   ########
 ######################################################
-# 1) calculate abundance data for two size classes  ##
-# 2) add in SPP information                         ##
 ######################################################
 
 len_un <- function (x){length(unique(x))}
@@ -14,129 +12,118 @@ replace_na_with_last<-function(x,a=!is.na(x)){
 require(here)
 require(dplyr)
 require(tidyr)
+require(stringr)
 require(reshape2)
 
 ########################
 # load data ############
 ########################
 
-spp<-read.delim("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Data/Hawaii_fullSPP_clean.csv",sep=",",header=T)
-spp<-select(spp, SPP_CODE3A,Native_Status_HawFlora_simple)
+spp<-read.delim("Data/Hawaii_fullSPP_clean.csv",sep=",",header=T)
+spp<-select(spp, Scientific_name=Accepted_name_species, SPP_CODE3A)
+spp$Scientific_name<-str_replace_all(spp$Scientific_name, "spp1", "spp.")
+spp$Scientific_name<-str_replace_all(spp$Scientific_name, "spp2", "spp.")
+spp$Scientific_name<-str_replace_all(spp$Scientific_name, "spp3", "spp.")
+spp$Scientific_name<-str_replace_all(spp$Scientific_name, "spp4", "spp.")
+spp$Scientific_name<-str_replace_all(spp$Scientific_name, "spp5", "spp.")
+spp$Scientific_name<-str_replace_all(spp$Scientific_name, "spp6", "spp.")
+
 spp<-unique(spp)
 
-tog<-read.delim("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Data/HawaiiOnly_TreeData_122017.csv",sep=",",header=T)
 
-togg<-select(tog, geo_entity_ref, geo_entity, Study, PlotIDn, Plot_Area,SPP_CODE3A,ID, DBH_cm,Abundance, Abundance_ha)
+tog<-read.delim("Data/oHawFor_Tree_Data.csv",sep=",",header=T)
+
+togg<-select(tog, Island, Study, PlotID, Plot_Area,Scientific_name, Native_Status, Tree_ID, DBH_cm,Abundance, Abundance_ha)
+
+togg$geo_entity2<-togg$Island
+togg$geo_entity2<-as.character(togg$geo_entity2)
+togg$geo_entity2<-ifelse(togg$geo_entity2=="Maui Island"|togg$geo_entity2=="Lana'i Island"|togg$geo_entity2=="Moloka'i Island","Maui Nui",togg$geo_entity2)
+
+togg$geo_entity2<-ifelse(togg$geo_entity2=="O'ahu Island (incl. Mokoli'i Islet)","O'ahu Island",togg$geo_entity2)
+
+togg$Scientific_name<-as.character(togg$Scientific_name)
+
+togg<-left_join(togg, spp, by="Scientific_name")
+
+togg<-select(togg, PlotID, Study, Island, geo_entity2, Plot_Area, Tree_ID, Scientific_name, SPP_CODE3A, Native_Status, DBH_cm, Abundance,  Abundance_ha)
 
 ##############################
-# Part I: Make size classes  #
+# Part I: Filter data        #
 ##############################
 
-## All individuals greater than 2.54
+# Criteria: plot size > 100 m2 & eliminate HIPPNET (too big) 
 
-togg$SizeClass_All<-ifelse(togg$DBH_cm>=2.54,1,NA)
-
-togg$SizeClass_All<-ifelse(togg$Study=="PACN" & is.na(togg$DBH_cm)==TRUE, 1,togg$SizeClass_All) # Add in saplings from PACN
-
-## All individuals greater than 12.7  (FIA cut-off)
-
-togg$SizeClass_Big<-ifelse(togg$DBH_cm>=12.7,1,NA)
-
-### separate into size classes: all, big (>10)
-
-all<-filter(togg, SizeClass_All==1)
-all<-select(all,-SizeClass_All)
-all$SizeClass<-"all"
+togg1<- filter(togg, Plot_Area>=100)%>%
+        filter(., Study!="HIPPNET")
 
 #########
 ## qc ###
 #########
 
-min(all$DBH_cm,na.rm=T) # 2.54
+min(togg1$DBH_cm,na.rm=T) # 5
 
-max(all$DBH_cm,na.rm=T) # 250
+max(togg1$DBH_cm,na.rm=T) # 214
 
-######
+#################
+# trees > 5 cm  #
+#################
 
-all2<-summarize(group_by(all, geo_entity_ref,geo_entity,Study, PlotIDn,Plot_Area, SizeClass,SPP_CODE3A), Abundance=sum(Abundance),
+all<-summarize(group_by(togg1, Study, Island, geo_entity2, PlotID,Plot_Area, Scientific_name,SPP_CODE3A, Native_Status), Abundance=sum(Abundance),
                 Abundance_ha=sum(Abundance_ha))
 
-########
+all$Abundance_ha<-round(all$Abundance_ha)
 
-big<-filter(togg,SizeClass_Big==1)
-big<-select(big,-SizeClass_Big)
-big$SizeClass<-"big"
+all$SizeClass<-"5"
 
-#########
-## qc ###
-#########
+#################
+# trees > 10 cm  #
+#################
 
-min(big$DBH_cm,na.rm=T) # 12.7
+big<- filter(togg1, DBH_cm>=10 & is.na(DBH_cm)==FALSE )
 
-max(big$DBH_cm,na.rm=T) # 250
+bigg<-summarize(group_by(big, Study, Island, geo_entity2, PlotID,Plot_Area, Scientific_name,SPP_CODE3A, Native_Status), Abundance=sum(Abundance),
+               Abundance_ha=sum(Abundance_ha))
 
+bigg$Abundance_ha<-round(bigg$Abundance_ha)
 
-####
-
-big2<-summarize(group_by(big, geo_entity_ref,geo_entity,Study, PlotIDn,Plot_Area, SizeClass,SPP_CODE3A), Abundance=sum(Abundance),
-                Abundance_ha=sum(Abundance_ha))
-
-togg2<-rbind.data.frame(all2, big2) # all size classes
-
-####################################
-# Part II: add in SPP information  #
-####################################
-
-togg3<-merge(togg2, spp, by.y="SPP_CODE3A")
-
-togg33<-select(togg3, geo_entity_ref, geo_entity, Study, PlotIDn, Plot_Area,SPP_CODE3A, Native_Status_HawFlora_simple, SizeClass,Abundance, Abundance_ha)
-
-togg33<-filter(togg33, Study!="HIPPNET") # b/c plot is too big
-
-togg33<-filter(togg33, Plot_Area>=100)
-
-togg33$geo_entity2<-togg33$geo_entity
-togg33$geo_entity2<-as.character(togg33$geo_entity2)
-togg33$geo_entity2<-ifelse(togg33$geo_entity2=="Maui Island"|togg33$geo_entity2=="Lana'i Island"|togg33$geo_entity2=="Moloka'i Island","Maui Nui",togg33$geo_entity2)
-
-togg33$geo_entity2<-ifelse(togg33$geo_entity2=="O'ahu Island (incl. Mokoli'i Islet)","O'ahu Island",togg33$geo_entity2)
-
-togg33$Abundance_ha<-round(togg33$Abundance_ha)
+bigg$SizeClass<-"10"
 
 
-########################
-# Proportion Invaded ###
-########################
+all_big<-rbind.data.frame(all, bigg) # both size classes together
 
-tog_tog<- dcast(togg33, geo_entity+ PlotIDn + SizeClass~Native_Status_HawFlora_simple,value.var="Abundance_ha",sum)
+#########################################
+# Part II: Identify highly invaded plots  #
+#########################################
+
+tog_tog<- dcast(all_big, PlotID +SizeClass~Native_Status,value.var="Abundance_ha",sum)
 tog_tog<-tog_tog %>%
   mutate(Tot_Abund= alien+native+uncertain) 
-
 
 tog_tog<-tog_tog %>%
   mutate(PropInvaded= alien/Tot_Abund) 
 
-tog_tog<-select(tog_tog, PlotIDn, SizeClass,PropInvaded)
+tog_tog<-select(tog_tog, PlotID, SizeClass,PropInvaded)
 
-
-togg34<-merge(togg33, tog_tog,by.y=c("PlotIDn", "SizeClass"))
+all_bigg<-merge(all_big, tog_tog,by.y=c("PlotID", "SizeClass"))
 
 ########################
 # add in climate data ##
 ########################
 
-env<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Data/Hawaiian_Env_Soil_1km.csv",sep=",",header=T)
+env<-read.csv("Data/Hawaiian_Env_Soil_1km.csv",sep=",",header=T)
+colnames(env)[1]<-"PlotID"
 
-
-togg35<-merge(togg34, env,by.y=c("PlotIDn"))
+all_bigg<-left_join(all_bigg, env,by.y=c("PlotID"))
 
 ########################
 # arrange ##############
 ########################
 
-togg36<-select(togg35,geo_entity_ref, geo_entity, geo_entity2, Study, PlotIDn, Plot_Area, Lat_Dec, Long_Dec, Elev_m,MAT, MAP, PrecipSeasonality, TempSeasonality, PET,
-                HFP, HII, Plot_Prop_Invaded=PropInvaded, SizeClass, SPP_CODE3A, Native_Status_HawFlora_simple, Abundance, Abundance_ha)
+all_bigg2<-select(all_bigg, PlotID, Study, Island, geo_entity2, Plot_Area, Lat_Dec, Long_Dec, Elev_m,MAT, MAP, PrecipSeasonality, TempSeasonality, PET,
+                HFP, HII, Plot_Prop_Invaded=PropInvaded, SizeClass, Scientific_name, SPP_CODE3A, Native_Status, Abundance, Abundance_ha)
 
 
-write.table(togg36,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",sep=",",row.names=F)
+all_bigg2<-arrange(all_bigg2, PlotID, SizeClass)
+
+write.table(all_bigg2,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",sep=",",row.names=F)
 

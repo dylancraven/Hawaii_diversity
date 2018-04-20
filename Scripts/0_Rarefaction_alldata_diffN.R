@@ -15,17 +15,15 @@ require(stringr)
 
 datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
 
-datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass=="all")  
-datt$SizeClass<-droplevels(datt$SizeClass)
-
-datt<-filter(datt, Native_Status_HawFlora_simple=="native") 
+datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass==5) %>%
+  filter(., Native_Status=="native")
 
 #####
 #qc #
 #####
 
-length(unique(datt$PlotIDn)) # 421 plots
-length(unique(datt$SPP_CODE3A)) #113 species   
+length(unique(datt$PlotID)) # 429 plots
+length(unique(datt$SPP_CODE3A)) #104 species   
 range(datt$Plot_Area) #  100.0037 1017.8760
 quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
 

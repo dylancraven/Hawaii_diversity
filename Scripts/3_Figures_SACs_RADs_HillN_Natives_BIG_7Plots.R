@@ -39,7 +39,7 @@ SACs_11<-ggplot(SACs_1,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
   geom_point(size=0.5)+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   scale_x_discrete(breaks=c(1,100,1000,2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,10000))+
-  scale_y_continuous(limits=c(0,42),breaks=c(0,10, 20,30, 40))+
+  scale_y_continuous(limits=c(0,44),breaks=c(0,10, 20,30, 40))+
   geom_line(size=1)+
   ylab("Species diversity")+xlab("Number of individuals")+
   #scale_color_npg()+
@@ -73,7 +73,7 @@ SACs_22<-ggplot(SACs_2,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
   geom_point(position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.2)+
   geom_line(data=SACs_2,aes(x=m,y=qD_pred,group=geo_entity2,color=geo_entity2),size=1)+
   #geom_smooth(data=SACs_2,aes(x=m,y=qD_pred,group=geo_entity2,color=geo_entity2),size=1,se=FALSE,method="gam",formula=y~s(x))+
-  scale_y_continuous(limits=c(0,42),breaks=c(0,10, 20,30, 40))+
+  scale_y_continuous(limits=c(0,44),breaks=c(0,10, 20,30, 40))+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   ylab("Species diversity")+xlab("Number of individuals")+
   #scale_color_npg()+
@@ -108,7 +108,7 @@ SACs_33<-ggplot(SACs_3,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
   geom_point(position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.2)+
   geom_line(data=SACs_3,aes(x=m,y=qD_pred,group=geo_entity2,color=geo_entity2),size=1)+
   #geom_smooth(data=SACs_2,aes(x=m,y=qD_pred,group=geo_entity2,color=geo_entity2),size=1,se=FALSE,method="gam",formula=y~s(x))+
-  scale_y_continuous(limits=c(0,42),breaks=c(0,10, 20,30,40))+
+  scale_y_continuous(limits=c(0,44),breaks=c(0,10, 20,30,40))+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   ylab("Species diversity")+xlab("Number of individuals")+
   #scale_color_npg()+
@@ -382,7 +382,7 @@ Hill_Sc1_Or0<-ggplot(H_Sc1_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
   
   #scale_color_d3(palette="category20c")+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  scale_y_continuous(limits=c(0, 42),breaks=c(10,20,30,40),labels=c("10","20","30","40"))+
+  scale_y_continuous(limits=c(0, 43.5),breaks=c(10,20,30,40),labels=c("10","20","30","40"))+
   # scale_shape_manual(values=c(17,15,16))+
   #facet_grid(order~Scenario,scales="free_y")+
   labs(x="",y="Species diversity (q=0)")+

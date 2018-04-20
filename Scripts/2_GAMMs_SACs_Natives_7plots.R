@@ -170,7 +170,7 @@ sac_OA$pred<-predict(fit.oa$gam, sac_OA,type="response")
 
 # merge
 
-sac_togg<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
-colnames(sac_togg)[12]<-"qD_pred"
+sac_togg2<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
+colnames(sac_togg2)[12]<-"qD_pred"
 
-write.table(sac_togg,"Cleaned_Data/Scen3_Natives_SACs_GAMMestimates.csv",sep=",",row.names=T)
+write.table(sac_togg2,"Cleaned_Data/Scen3_Natives_SACs_GAMMestimates.csv",sep=",",row.names=T)

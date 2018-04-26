@@ -1,0 +1,69 @@
+---
+title: "Tables for MS"
+author: "D. Craven et al."
+date: "April 26, 2018"
+output: 
+  word_document: 
+    fig_caption: yes
+    fig_height: 6
+    highlight: monochrome
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(knitr,quietly = TRUE)
+require(dplyr,quietly = TRUE)
+require(tidyr, quietly=TRUE)
+
+```
+
+**Table 1.** Basic description of forest plot data for each data source in oHawFor.  
+
+```{r, echo=FALSE}
+
+haw_study<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Hawaii_datapaper/Cleaned_Data/HawIslands_study_summary.csv")
+haw_study$min_Plot_Area<-round(haw_study$min_Plot_Area, digits=1)
+haw_study$max_Plot_Area<-round(haw_study$max_Plot_Area, digits=1)
+haw_study<-haw_study%>%
+           unite("Plot_size", c("min_Plot_Area","max_Plot_Area"),sep="-",remove=FALSE)
+
+haw_study$Study<-as.character(haw_study$Study)
+haw_study$Plot_size<-ifelse(haw_study$Study=="Gillespie"|haw_study$Study=="Knight_Barton"|haw_study$Study=="PACN_Hawaii",1000,haw_study$Plot_size)
+haw_study$Plot_size<-ifelse(haw_study$Study=="HIPPNET",40000,haw_study$Plot_size)
+
+
+haw_study$Study<-as.character(haw_study$Study)
+haw_study$minDBH<-ifelse(haw_study$Study=="HIPPNET"|haw_study$Study=="Knight_Barton", 1, NA)
+haw_study$minDBH<-ifelse(haw_study$Study=="Gillespie", 2.5, haw_study$minDBH)
+haw_study$minDBH<-ifelse(haw_study$Study=="PACN_Hawaii", "1/10", haw_study$minDBH)
+haw_study$minDBH<-ifelse(haw_study$Study=="Zimmerman", "2/30", haw_study$minDBH)
+haw_study$minDBH<-ifelse(haw_study$Study=="USFS_FIA_Hawaii", "2.54/12.7", haw_study$minDBH)
+
+haw_study$Study<-ifelse(haw_study$Study=="USFS_FIA_Hawaii", "FIA Hawaii", haw_study$Study)
+haw_study$Study<-ifelse(haw_study$Study=="Zimmerman", "Zimmerman et al. 2007", haw_study$Study)
+haw_study$Study<-ifelse(haw_study$Study=="Knight_Barton", "Knight & Barton", haw_study$Study)
+haw_study$Study<-ifelse(haw_study$Study=="Gillespie", "Gillespie et al. 2013", haw_study$Study)
+haw_study$Study<-ifelse(haw_study$Study=="PACN_Hawaii", "NPS PACN", haw_study$Study)
+haw_study$Study<-ifelse(haw_study$Study=="HIPPNET", "Ostertag et al. 2014", haw_study$Study)
+
+haw_study<-select(haw_study, "Data Source"=Study, "Islands (#)"=Islands,"Plots (#)"=Plots, "Plot size (m2)"=Plot_size, "Min. DBH (cm)"=minDBH,  
+                  "Individuals (#)"= Individuals, "Species (#)"=Species)
+haw_study<-kable(haw_study,format="markdown",align="c",digits=1, caption="Table 1. Basic description of forest plot data for each data source in oHawFor.")
+haw_study
+
+```
+
+
+**Table 2.** Sampled area, number of plots, and number of individuals and species per island across the Hawaiian archipelago.      
+```{r, echo=FALSE}
+
+haw_summ<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Hawaii_datapaper/Cleaned_Data/HawIslands_island_summary.csv")
+
+haw_summ$Island<-as.character(haw_summ$Island)
+haw_summ$Island<-ifelse(haw_summ$Island=="O'ahu Island (incl. Mokoli'i Islet)","O'ahu Island",haw_summ$Island)
+
+haw_summ<-select(haw_summ, "Island"=Island, "Sampled area (m2)"=PlotArea, "Plots (#)"=Plots, "Individuals (#)"=Individuals, "Species(#)"=Species)
+haw_summ2<-kable(haw_summ,format="markdown",align="c",digits=0)
+haw_summ2
+
+```

@@ -2,6 +2,7 @@
 # Island - SAC ######
 #####################
 # Scenario 2 ########
+# Plots: 5   ########
 #####################
 
 require(dplyr)
@@ -10,6 +11,7 @@ require(iNEXT)
 require(vegan)
 require(BBmisc)
 require(ggplot2)
+#install_github('MoBiodiv/mobr')
 require(mobr)
 
 sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
@@ -72,10 +74,10 @@ curveZ<-list(); orderZ<-list();rangeZ<-list();alphaZ<-list();betaZ<-list(); radZ
 
 for(i in 1:100){
   
-  a<- mn %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(7,replace=F)
-  b<- oh %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(7,replace=F)
-  c<- big %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(7,replace=F)
-  d<- kauai %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(7,replace=F)
+  a<- mn %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(5,replace=F)
+  b<- oh %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(5,replace=F)
+  c<- big %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(5,replace=F)
+  d<- kauai %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(5,replace=F)
   
   togg<-rbind.data.frame(a,b,c,d)
   
@@ -104,6 +106,7 @@ for(i in 1:100){
   ##########
   # Hill N##
   ##########
+  
   orders<-estimateD(hcomm2,datatype="abundance",base="size", level=1000,conf=0.95 )
   colnames(orders)[1]<-"geo_entity2"
   
@@ -120,7 +123,6 @@ for(i in 1:100){
   datt3$geo_entity2<-rownames(datt3)
   oo<-dim(datt3)[2]-1
   datt3<-melt(datt3,id.vars="geo_entity2",measure.vars=1:oo,variable.name="SPP_CODE3A",value.name="RelAbund")
-  
   
   radHaw<-filter(datt3, geo_entity2=="Hawai'i Island")
   radHaw<-arrange(radHaw,RelAbund)
@@ -155,7 +157,6 @@ for(i in 1:100){
   
   radd<-rbind.data.frame(radHaw,radKa,radMN,radOah)
   
-  
   radd$geo_entity2<-as.factor(radd$geo_entity2)
   radd$geo_entity2<-factor(radd$geo_entity2,levels=c("Hawai'i Island","Maui Nui","O'ahu Island","Kaua'i Island"))
   
@@ -170,6 +171,7 @@ for(i in 1:100){
   h_comm3<-dcast(togg, PlotID~SPP_CODE3A, value.var="Abundance_ha",sum)
   rownames(h_comm3)<-h_comm3$PlotID
   h_comm3<-select(h_comm3,-PlotID)
+  h_comm3<-as.matrix(h_comm3)
   
   # group information
   
@@ -181,10 +183,13 @@ for(i in 1:100){
   rownames(h_attr)<-h_attr$PlotID
   h_attr<-select(h_attr,-PlotID)
   colnames(h_attr)<-"group"
+  
   h_attr$group<-as.factor(h_attr$group)
   
+  h_attr<-as.matrix(h_attr)
+  
   # make mob structure
-  h_mob_in <- make_mob_in(h_comm3, h_attr)
+  h_mob_in <- make_mob_in(h_comm3, h_attr,binary=FALSE, latlong=FALSE)
   
   h_stats <- get_mob_stats(h_mob_in, group_var = "group",nperm=10)
   
@@ -220,7 +225,7 @@ for(i in 1:100){
   rangezz$Iteration<-i
   rangezz<-ungroup(rangezz)
   
-
+  
   # output
   cat("progress", i, sep=' ','\n')
   
@@ -245,25 +250,8 @@ rad.tog<-do.call(rbind.data.frame,radZ)
 
 beta.tog<-do.call(rbind.data.frame,betaZ)
 
-##################
-# aggregate ######
-# across samples #
-##################
-
-# All
-
-write.table(orders.tog,"Cleaned_Data/Scen2_Natives_7plots_HillN.csv",sep=",",row.names=F)
-
-write.table(curves.tog,"Cleaned_Data/Scen2_Natives_7plots_curves_estimates.csv",sep=",",row.names=F)
-
 envs<-summarize(group_by(rangez.tog, geo_entity2), mean_MAP=mean(mean_MAP),r_MAP=mean(r_MAP),
                 mean_MAT=mean(mean_MAT),r_MAT=mean(r_MAT),
                 mean_PET=mean(mean_PET),r_PET=mean(r_PET),r_Elev=mean(r_Elev),  m_PlotArea=mean(totPlotArea))
 
-
-write.table(envs,"Cleaned_Data/Scen2_Natives_7plots_Envconditions_summarized.csv",sep=",",row.names=F)
-
-write.table(beta.tog,"Cleaned_Data/Scen2_Natives_7plots_BetaPIE.csv",sep=",",row.names=F)
-
-write.table(rad.tog,"Cleaned_Data/Scen2_Natives_7plots_RADs.csv",sep=",",row.names=F)
-
+save(curves.tog, orders.tog, rangez.tog, rad.tog, beta.tog, envs, file="Cleaned_Data/Scen2_natives_5plots.RData")

@@ -17,38 +17,25 @@ require(tidyr, quietly=TRUE)
 
 ```
 
-**Table 1.** Basic description of forest plot data for each data source in oHawFor.  
-
+**Table 1.**  Summary of number of plots, sampled area, and environmental conditions across forest plots in the Hawaiian archipelago.   
 ```{r, echo=FALSE}
 
-haw_study<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Hawaii_datapaper/Cleaned_Data/HawIslands_study_summary.csv")
-haw_study$min_Plot_Area<-round(haw_study$min_Plot_Area, digits=1)
-haw_study$max_Plot_Area<-round(haw_study$max_Plot_Area, digits=1)
-haw_study<-haw_study%>%
-           unite("Plot_size", c("min_Plot_Area","max_Plot_Area"),sep="-",remove=FALSE)
+haw_study<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_EnvConditions.csv")
 
-haw_study$Study<-as.character(haw_study$Study)
-haw_study$Plot_size<-ifelse(haw_study$Study=="Gillespie"|haw_study$Study=="Knight_Barton"|haw_study$Study=="PACN_Hawaii",1000,haw_study$Plot_size)
-haw_study$Plot_size<-ifelse(haw_study$Study=="HIPPNET",40000,haw_study$Plot_size)
+haw_study$geo_entity2<-factor(haw_study$geo_entity2, levels=c("Hawai'i Island","Maui Nui", "O'ahu Island", "Kaua'i Island"))
+
+haw_study$totPlotArea<-round(haw_study$totPlotArea, digits=0)
+haw_study$mean_MAT<-round(haw_study$mean_MAT, digits=1)
+haw_study$mean_MAP<-round(haw_study$mean_MAP, digits=0)
+haw_study$mean_PET<-round(haw_study$mean_PET, digits=0)
+haw_study$r_PET<-round(haw_study$r_PET, digits=0)
+haw_study$max_Elev<-round(haw_study$max_Elev, digits=0)
 
 
-haw_study$Study<-as.character(haw_study$Study)
-haw_study$minDBH<-ifelse(haw_study$Study=="HIPPNET"|haw_study$Study=="Knight_Barton", 1, NA)
-haw_study$minDBH<-ifelse(haw_study$Study=="Gillespie", 2.5, haw_study$minDBH)
-haw_study$minDBH<-ifelse(haw_study$Study=="PACN_Hawaii", "1/10", haw_study$minDBH)
-haw_study$minDBH<-ifelse(haw_study$Study=="Zimmerman", "2/30", haw_study$minDBH)
-haw_study$minDBH<-ifelse(haw_study$Study=="USFS_FIA_Hawaii", "2.54/12.7", haw_study$minDBH)
+haw_study<-select(haw_study, "Islands"=geo_entity2,"Plots (#)"=PlotN, "Sampled area (m2)"=totPlotArea, "Individuals (#)"= Abundance_tot_raw, 
+                  "MAT (C)"=mean_MAT, "MAP (mm yr-1)"=mean_MAP, "PET (mm yr-1)"=mean_PET, "PET range"=r_PET,"Max. elevation (m)"=max_Elev)
 
-haw_study$Study<-ifelse(haw_study$Study=="USFS_FIA_Hawaii", "FIA Hawaii", haw_study$Study)
-haw_study$Study<-ifelse(haw_study$Study=="Zimmerman", "Zimmerman et al. 2007", haw_study$Study)
-haw_study$Study<-ifelse(haw_study$Study=="Knight_Barton", "Knight & Barton", haw_study$Study)
-haw_study$Study<-ifelse(haw_study$Study=="Gillespie", "Gillespie et al. 2013", haw_study$Study)
-haw_study$Study<-ifelse(haw_study$Study=="PACN_Hawaii", "NPS PACN", haw_study$Study)
-haw_study$Study<-ifelse(haw_study$Study=="HIPPNET", "Ostertag et al. 2014", haw_study$Study)
-
-haw_study<-select(haw_study, "Data Source"=Study, "Islands (#)"=Islands,"Plots (#)"=Plots, "Plot size (m2)"=Plot_size, "Min. DBH (cm)"=minDBH,  
-                  "Individuals (#)"= Individuals, "Species (#)"=Species)
-haw_study<-kable(haw_study,format="markdown",align="c",digits=1, caption="Table 1. Basic description of forest plot data for each data source in oHawFor.")
+haw_study<-kable(haw_study,format="markdown",align="c",digits=1, caption="Table 1.  Summary of number of plots, sampled area, and environmental conditions across forest plots in the Hawaiian archipelago.")
 haw_study
 
 ```
@@ -56,14 +43,35 @@ haw_study
 
 **Table 2.** Sampled area, number of plots, and number of individuals and species per island across the Hawaiian archipelago.      
 ```{r, echo=FALSE}
+haw_scen1<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_EnvConditions.csv")
+haw_scen1<-select(haw_scen1, geo_entity2, "PlotArea_Scen1"=totPlotArea,"meanPET_scen1"=mean_PET, "rangePET_scen1"=r_PET)
 
-haw_summ<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Hawaii_datapaper/Cleaned_Data/HawIslands_island_summary.csv")
+haw_scen2<-read.table("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_7plots_Envconditions_summarized.csv",sep=",",header=T)
+haw_scen2<-select(haw_scen2, geo_entity2, "PlotArea_Scen2"=m_PlotArea,"meanPET_scen2"=mean_PET, "rangePET_scen2"=r_PET)
 
-haw_summ$Island<-as.character(haw_summ$Island)
-haw_summ$Island<-ifelse(haw_summ$Island=="O'ahu Island (incl. Mokoli'i Islet)","O'ahu Island",haw_summ$Island)
+haw_scen3<-read.table("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Native_7plots_EnvConditions_summarized.csv",sep=",",header=T)
+haw_scen3<-select(haw_scen3, geo_entity2, "PlotArea_Scen3"=m_PlotArea,"meanPET_scen3"=mean_PET, "rangePET_scen3"=r_PET)
 
-haw_summ<-select(haw_summ, "Island"=Island, "Sampled area (m2)"=PlotArea, "Plots (#)"=Plots, "Individuals (#)"=Individuals, "Species(#)"=Species)
-haw_summ2<-kable(haw_summ,format="markdown",align="c",digits=0)
-haw_summ2
+haw_scenn<-left_join(haw_scen1,haw_scen2,by="geo_entity2")%>%
+            left_join(.,haw_scen3, by="geo_entity2")
+
+haw_scenn$geo_entity2<-factor(haw_scenn$geo_entity2, levels=c("Hawai'i Island","Maui Nui", "O'ahu Island", "Kaua'i Island"))
+
+haw_scenn$PlotArea_Scen1<-round(haw_scenn$PlotArea_Scen1, digits=0)
+haw_scenn$meanPET_scen1<-round(haw_scenn$meanPET_scen1, digits=0)
+haw_scenn$rangePET_scen1<-round(haw_scenn$rangePET_scen1, digits=0)
+
+haw_scenn$PlotArea_Scen2<-round(haw_scenn$PlotArea_Scen2, digits=0)
+haw_scenn$meanPET_scen2<-round(haw_scenn$meanPET_scen2, digits=0)
+haw_scenn$rangePET_scen2<-round(haw_scenn$rangePET_scen2, digits=0)
+
+haw_scenn$PlotArea_Scen3<-round(haw_scenn$PlotArea_Scen3, digits=0)
+haw_scenn$meanPET_scen3<-round(haw_scenn$meanPET_scen3, digits=0)
+haw_scenn$rangePET_scen3<-round(haw_scenn$rangePET_scen3, digits=0)
+
+
+haw_scenn<-kable(haw_scenn,format="markdown",align="c",digits=1, caption="Table 2. Summary of sampled area and the range and mean of PET for each sampling scenario across forest plots in the Hawaiian archipelago.")
+haw_scenn
+
 
 ```

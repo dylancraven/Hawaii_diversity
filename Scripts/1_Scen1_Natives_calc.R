@@ -73,7 +73,7 @@ write.table(curves3,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monit
 orders<-estimateD(hcomm2,datatype="abundance",base="size", level=10000,conf=0.95 )
 colnames(orders)[1]<-"geo_entity2"
 
-write.table(orders,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_HillNumbers.csv",sep=",",row.names=F)
+write.table(orders,"Cleaned_Data/Scen1_Natives_HillNumbers.csv",sep=",",row.names=F)
 
 #############
 ## RADs #####
@@ -122,7 +122,7 @@ radd<-rbind.data.frame(radHaw,radKa,radMN,radOah)
 radd$geo_entity2<-as.factor(radd$geo_entity2)
 radd$geo_entity2<-factor(radd$geo_entity2,levels=c("Hawai'i Island","Maui Nui","O'ahu Island","Kaua'i Island"))
 
-write.table(radd,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_RAD.csv",sep=",",row.names=F)
+write.table(radd,"Cleaned_Data/Scen1_Natives_RAD.csv",sep=",",row.names=F)
 
 ############
 # BetaPIE  #
@@ -146,23 +146,21 @@ h_attr<-select(h_attr,-PlotID)
 colnames(h_attr)<-"group"
 h_attr$group<-as.factor(h_attr$group)
 
+h_attr$x<-NA  
+h_attr$x<-as.numeric(h_attr$x)
+
+h_attr$y<-NA  
+h_attr$y<-as.numeric(h_attr$y)
+
 # make mob structure
 h_mob_in <- make_mob_in(h_comm3, h_attr)
 
-h_stats <- get_mob_stats(h_mob_in, group_var = "group",nperm=10)
+h_stats <- get_mob_stats(h_mob_in, group_var = "group", index = c("N", "S", "S_n", "S_PIE"),nperm=10)
 
-h_betapie<-data.frame(h_stats$samples$beta_ENS_PIE, h_stats$samples$beta_S)
-h_betapie$PlotID<-rownames(h_betapie)
-colnames(h_betapie)[1]<-"beta_ENS_PIE"
-colnames(h_betapie)[2]<-"beta_S"
+h_betapie<-filter(h_stats$samples_stats, index=="beta_S"|index=="beta_S_PIE") %>%
+           select(., geo_entity2=group, index, value) 
 
-h_help<-unique(select(datt, geo_entity2, PlotID))
-
-h_betapie<-merge(h_help,h_betapie,by.y="PlotID")
-
-h_betapie<-select(h_betapie, geo_entity2, PlotID, beta_S, beta_ENS_PIE)
-
-write.table(h_betapie,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_BetaPIE.csv",sep=",",row.names=F)
+write.table(h_betapie,"Cleaned_Data/Scen1_Natives_BetaPIE.csv",sep=",",row.names=F)
 
 
 #####################

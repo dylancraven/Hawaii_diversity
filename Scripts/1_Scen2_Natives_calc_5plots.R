@@ -91,8 +91,7 @@ for(i in 1:100){
   rownames(hcomm2)<-hcomm2$SPP_CODE3A
   hcomm2<-select(hcomm2,-SPP_CODE3A)
   
-  togg<-ungroup(togg)
-  
+
   ##########
   # SACs   #
   ##########
@@ -115,6 +114,8 @@ for(i in 1:100){
   ########
   # RADs #
   ########
+  
+  togg<-ungroup(togg)
   
   datt2<-dcast(togg, geo_entity2~SPP_CODE3A,value.var="Abundance_ha",sum)
   rownames(datt2)<-datt2$geo_entity2
@@ -168,8 +169,9 @@ for(i in 1:100){
   
   # community matrix
   
+  togg$Abundance_ha<-as.numeric(togg$Abundance_ha)
   h_comm3<-dcast(togg, PlotID~SPP_CODE3A, value.var="Abundance_ha",sum)
-  rownames(h_comm3)<-h_comm3$PlotID
+ # rownames(h_comm3)<-as.numeric(h_comm3$PlotID)
   h_comm3<-select(h_comm3,-PlotID)
   h_comm3<-as.matrix(h_comm3)
   
@@ -185,13 +187,21 @@ for(i in 1:100){
   colnames(h_attr)<-"group"
   
   h_attr$group<-as.factor(h_attr$group)
+
+  h_attr$x<-NA  
+  h_attr$x<-as.numeric(h_attr$x)
   
-  h_attr<-as.matrix(h_attr)
+  h_attr$y<-NA  
+  h_attr$y<-as.numeric(h_attr$y)
   
   # make mob structure
   h_mob_in <- make_mob_in(h_comm3, h_attr,binary=FALSE, latlong=FALSE)
   
-  h_stats <- get_mob_stats(h_mob_in, group_var = "group",nperm=10)
+  h_stats <- get_mob_stats(h_mob_in, group_var = "group")
+  
+  ### stop here]]
+  
+  calc_biodiv(abund_mat, groups, index, effort, rare_thres)
   
   h_betapie<-data.frame(h_stats$samples$beta_ENS_PIE, h_stats$samples$beta_S)
   h_betapie$PlotID<-rownames(h_betapie)

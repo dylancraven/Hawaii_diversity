@@ -1,8 +1,7 @@
 #####################
-# Island - SAC ######
-#####################
-# Scenario 2 ########
-# Plots: 9   ########
+# Island - Scen. 3 ##
+# 1. natives       ##
+##2. 7 plots      ### 
 #####################
 
 require(dplyr)
@@ -11,7 +10,6 @@ require(iNEXT)
 require(vegan)
 require(BBmisc)
 require(ggplot2)
-#install_github('MoBiodiv/mobr')
 require(mobr)
 
 sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
@@ -28,73 +26,70 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 ## data ##############
 ######################
 
-datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
+dat3<-read.csv("Cleaned_Data/Scen3_Natives_9plots_SimComms.csv")
+dat3$Abundance_ha<-round(dat3$Abundance_ha)
 
-datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass==5) %>%
-  filter(., Native_Status=="native")
+length(unique(dat3$iteration)) # 4940
 
-#####
-#qc #
-#####
+######################
+# select  100 ########
+######################
 
-length(unique(datt$PlotID)) # 429 plots
-length(unique(datt$SPP_CODE3A)) # 104 spp   
-range(datt$Plot_Area) #  100.0037 1017.8760
-quantile(datt$Plot_Area, probs=c(0.5)) # median = 1000
+set.seed(27)
+un<-data.frame(unique(dat3$iteration))
+nn<-dim(un)[1]
+un$Iteration2<-seq(from=1,to=nn,by=1)
+colnames(un)[1]<-"iteration"
 
-##########################
-# prepare data for iNExt #
-##########################
+un_sel<-data.frame(Iteration2=sample(un$Iteration2, 100, replace = FALSE))
 
-datt2<-summarize(group_by(datt, geo_entity2, SPP_CODE3A),Abundance=sum(Abundance_ha))
+un_sel<-merge(un_sel,un,by.y="Iteration2")
 
-#########################
-# quick data summary    #
-#########################
+un_sel$Iteration2<-seq(from=1,to=100,by=1)
 
-summ<-unique(select(datt, geo_entity2, PlotID,Plot_Area))
+#un_sel<-filter(un, Iteration2<101)  # only 100
 
-summ2<-summarize(group_by(summ, geo_entity2), Plots=length(unique(PlotID)), PlotArea=sum(Plot_Area))
+dat33<-merge(un_sel, dat3,by.y="iteration")
+
+dat33<-select(dat33, Iteration2, geo_entity2, PlotID, SPP_CODE3A, Abundance_ha, r_PET,meanPET, meanMAP,totPlotArea)
+
+############################
+# quick data summary & QC # 
+###########################
+
+# is there variation in PET range and Plot Area?
+summ2<-summarize(group_by(dat33,geo_entity2), r_PET=mean(r_PET),PlotArea=mean(totPlotArea), var_PlotArea=sd(totPlotArea), 
+                 meanPET=mean(meanPET),meanMAP=mean(meanMAP))
 
 summ2
 
-####################
-# separate islands #
-####################
+# always 7 plots per island per iteration?
 
-kauai<-filter(datt,geo_entity2=="Kaua'i Island")
-mn<-filter(datt,geo_entity2=="Maui Nui")
-oh<-filter(datt,geo_entity2=="O'ahu Island")
-big<-filter(datt,geo_entity2=="Hawai'i Island")
+summ3<-summarize(group_by(dat33,Iteration2,geo_entity2),PlotN=length(unique(PlotID)))
+summ33<-summarize(group_by(summ3,geo_entity2), meanPlotN=mean(PlotN), minP=min(PlotN),maxP=max(PlotN))
 
-###########
+summ33
+######################
+
 
 set.seed(27)
 curveZ<-list(); orderZ<-list();rangeZ<-list();alphaZ<-list();betaZ<-list(); radZ<-list();
 
 for(i in 1:100){
   
-  a<- mn %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(9,replace=F)
-  b<- oh %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(9,replace=F)
-  c<- big %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(9,replace=F)
-  d<- kauai %>% group_by(geo_entity2,PlotID) %>% sample_n_groups(9,replace=F)
+  testt<-subset(dat33, dat33$Iteration2==(unique(dat33$Iteration2))[i])  
   
-  togg<-rbind.data.frame(a,b,c,d)
-  
-  #####################
-  # prepare for iNEXT #
-  #####################
-  
-  togg2<-summarize(group_by(togg, geo_entity2, SPP_CODE3A),Abundance=sum(Abundance_ha))
+  togg2<-summarize(group_by(testt, geo_entity2, SPP_CODE3A),Abundance=sum(Abundance_ha))
   
   hcomm2<-dcast(togg2, SPP_CODE3A~geo_entity2, value.var="Abundance",sum)
   rownames(hcomm2)<-hcomm2$SPP_CODE3A
   hcomm2<-select(hcomm2,-SPP_CODE3A)
   
+  #togg<-ungroup(togg)
   
-  ##########
-  # SACs   #
-  ##########
+  ########
+  # SACs #
+  ########
   
   h<-iNEXT(hcomm2,q=c(0),size=c(1,100,200,300,400,500,600,700,800,900,1000),datatype="abundance")
   curves<-do.call(rbind.data.frame,h$iNextEst)
@@ -102,28 +97,26 @@ for(i in 1:100){
   curves$geo_entity2 <- gsub("\\..*","",curves$geo_entity2)
   curves$iteration<-i   
   
-  ##########
-  # Hill N##
-  ##########
-  
+  #########
+  # Hill N#
+  #########
   orders<-estimateD(hcomm2,datatype="abundance",base="size", level=1000,conf=0.95 )
   colnames(orders)[1]<-"geo_entity2"
   
   orders$iteration<-i
   
-  ########
-  # RADs #
-  ########
+  ###########
+  # RAD fun #
+  ###########
   
-  togg<-ungroup(togg)
-  
-  datt2<-dcast(togg, geo_entity2~SPP_CODE3A,value.var="Abundance_ha",sum)
+  datt2<-dcast(testt, geo_entity2~SPP_CODE3A,value.var="Abundance_ha",sum)
   rownames(datt2)<-datt2$geo_entity2
   nn<-dim(datt2)[2]
   datt3 <- decostand(datt2[,2:nn], method = "total")
   datt3$geo_entity2<-rownames(datt3)
   oo<-dim(datt3)[2]-1
   datt3<-melt(datt3,id.vars="geo_entity2",measure.vars=1:oo,variable.name="SPP_CODE3A",value.name="RelAbund")
+  
   
   radHaw<-filter(datt3, geo_entity2=="Hawai'i Island")
   radHaw<-arrange(radHaw,RelAbund)
@@ -155,29 +148,26 @@ for(i in 1:100){
   radMN$Rank<-seq(from=1,to=q,by=1)
   radMN$Rank_N<-radMN$Rank/q
   
-  
   radd<-rbind.data.frame(radHaw,radKa,radMN,radOah)
+  
   
   radd$geo_entity2<-as.factor(radd$geo_entity2)
   radd$geo_entity2<-factor(radd$geo_entity2,levels=c("Hawai'i Island","Maui Nui","O'ahu Island","Kaua'i Island"))
   
   radd$iteration<-i
   
-  ############
-  # BetaPIE  #
-  ############
   
-  # community matrix
+  ###########
+  # betaPIE #
+  ###########
   
-  togg$Abundance_ha<-as.numeric(togg$Abundance_ha)
-  h_comm3<-dcast(togg, PlotID~SPP_CODE3A, value.var="Abundance_ha",sum)
-  # rownames(h_comm3)<-as.numeric(h_comm3$PlotID)
+  h_comm3<-dcast(testt, PlotID~SPP_CODE3A, value.var="Abundance_ha",sum)
+  rownames(h_comm3)<-h_comm3$PlotID
   h_comm3<-select(h_comm3,-PlotID)
-  h_comm3<-as.matrix(h_comm3)
   
   # group information
   
-  h_attr<-unique(select(togg,PlotID, geo_entity2))
+  h_attr<-unique(select(testt,PlotID, geo_entity2))
   
   h_attr<-arrange(h_attr,PlotID)
   
@@ -201,27 +191,17 @@ for(i in 1:100){
   h_betapie<-filter(h_stats$samples_stats, index=="beta_S"|index=="beta_S_PIE") %>%
     select(., geo_entity2=group, index, value) 
   
-  
   h_betapie$Iteration<-i
   
-  ##############################
-  # Environmental variables  ###
-  ##############################
   
-  rangez<-unique(select(togg, geo_entity2, PlotID, MAT, MAP, PET, Elev_m,Plot_Area))
-  rangezz<-summarize(group_by(rangez,geo_entity2),mean_MAT=mean(MAT),min_MAT=min(MAT),max_MAT=max(MAT),
-                     mean_MAP=mean(MAP),min_MAP=min(MAP),max_MAP=max(MAP),
-                     mean_PET=mean(PET),min_PET=min(PET),max_PET=max(PET),
-                     min_Elev=min(Elev_m),max_Elev=max(Elev_m), totPlotArea=sum(Plot_Area))
+  #######
+  # env #
+  #######
   
-  rangezz$r_MAP<-rangezz$max_MAP-rangezz$min_MAP
-  rangezz$r_MAT<-rangezz$max_MAT-rangezz$min_MAT
-  rangezz$r_PET<-rangezz$max_PET-rangezz$min_PET
-  rangezz$r_Elev<-rangezz$max_Elev-rangezz$min_Elev
-  rangezz<-select(rangezz,geo_entity2, mean_MAP,r_MAP, mean_MAT, r_MAT, mean_PET, r_PET, r_Elev,totPlotArea)
+  rangezz<-unique(select(testt, geo_entity2, r_PET, meanPET, meanMAP,totPlotArea))
   
   rangezz$Iteration<-i
-  rangezz<-ungroup(rangezz)
+  #rangezz<-ungroup(rangezz)
   
   
   # output
@@ -232,6 +212,8 @@ for(i in 1:100){
   orderZ[[i]]<-rbind.data.frame(orders)
   
   rangeZ[[i]]<-rbind.data.frame(rangezz)
+  
+  # alphaZ[[i]]<-rbind.data.frame(alpha_all)  
   
   betaZ[[i]]<-rbind.data.frame(h_betapie)
   
@@ -244,12 +226,29 @@ orders.tog<-do.call(rbind.data.frame,orderZ)
 
 rangez.tog<-do.call(rbind.data.frame,rangeZ)
 
-rad.tog<-do.call(rbind.data.frame,radZ)
+#alpha.tog<-do.call(rbind.data.frame,alphaZ)
 
 beta.tog<-do.call(rbind.data.frame,betaZ)
 
-envs<-summarize(group_by(rangez.tog, geo_entity2), mean_MAP=mean(mean_MAP),r_MAP=mean(r_MAP),
-                mean_MAT=mean(mean_MAT),r_MAT=mean(r_MAT),
-                mean_PET=mean(mean_PET),r_PET=mean(r_PET),r_Elev=mean(r_Elev),  m_PlotArea=mean(totPlotArea))
+rad.tog<-do.call(rbind.data.frame,radZ)
 
-save(curves.tog, orders.tog, rangez.tog, rad.tog, beta.tog, envs, file="Cleaned_Data/Scen2_natives_9plots.RData")
+##################
+# aggregate ######
+# across samples #
+##################
+
+# All
+
+write.table(orders.tog,"Cleaned_Data/Scen3_Natives_9plots_HillN.csv",sep=",",row.names=F)
+
+write.table(curves.tog,"Cleaned_Data/Scen3_Natives_9plots_curves_estimates.csv",sep=",",row.names=F)
+
+envs<-summarize(group_by(rangez.tog, geo_entity2), mean_MAP=mean(meanMAP),
+                mean_PET=mean(meanPET),r_PET=mean(r_PET),  m_PlotArea=mean(totPlotArea))
+
+write.table(envs,"Cleaned_Data/Scen3_Native_9plots_EnvConditions_summarized.csv",sep=",",row.names=F)
+
+write.table(beta.tog,"Cleaned_Data/Scen3_Natives_9plots_BetaPIE.csv",sep=",",row.names=F)
+
+write.table(rad.tog,"Cleaned_Data//Scen3_Natives_9plots_RAD.csv",sep=",",row.names=F)
+

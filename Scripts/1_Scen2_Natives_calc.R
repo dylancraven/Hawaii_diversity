@@ -183,21 +183,20 @@ for(i in 1:100){
   colnames(h_attr)<-"group"
   h_attr$group<-as.factor(h_attr$group)
   
+  h_attr$x<-NA  
+  h_attr$x<-as.numeric(h_attr$x)
+  
+  h_attr$y<-NA  
+  h_attr$y<-as.numeric(h_attr$y)
+  
   # make mob structure
   h_mob_in <- make_mob_in(h_comm3, h_attr)
   
-  h_stats <- get_mob_stats(h_mob_in, group_var = "group",nperm=10)
+  h_stats <- get_mob_stats(h_mob_in, group_var = "group", index = c("N", "S", "S_n", "S_PIE"),nperm=2)
   
-  h_betapie<-data.frame(h_stats$samples$beta_ENS_PIE, h_stats$samples$beta_S)
-  h_betapie$PlotID<-rownames(h_betapie)
-  colnames(h_betapie)[1]<-"beta_ENS_PIE"
-  colnames(h_betapie)[2]<-"beta_S"
+  h_betapie<-filter(h_stats$samples_stats, index=="beta_S"|index=="beta_S_PIE") %>%
+    select(., geo_entity2=group, index, value) 
   
-  h_help<-unique(select(togg, geo_entity2, PlotID))
-  
-  h_betapie<-merge(h_help,h_betapie,by.y="PlotID")
-  
-  h_betapie<-select(h_betapie, geo_entity2, PlotID, beta_S, beta_ENS_PIE)
   
   h_betapie$Iteration<-i
   

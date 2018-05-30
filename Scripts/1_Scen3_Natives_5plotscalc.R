@@ -63,7 +63,7 @@ summ2<-summarize(group_by(dat33,geo_entity2), r_PET=mean(r_PET),PlotArea=mean(to
 
 summ2
 
-# always 7 plots per island per iteration?
+# always 5 plots per island per iteration?
 
 summ3<-summarize(group_by(dat33,Iteration2,geo_entity2),PlotN=length(unique(PlotID)))
 summ33<-summarize(group_by(summ3,geo_entity2), meanPlotN=mean(PlotN), minP=min(PlotN),maxP=max(PlotN))
@@ -239,16 +239,16 @@ rad.tog<-do.call(rbind.data.frame,radZ)
 
 # All
 
-write.table(orders.tog,"Cleaned_Data/Scen3_Natives_7plots_HillN.csv",sep=",",row.names=F)
+write.table(orders.tog,"Cleaned_Data/Scen3_Natives_5plots_HillN.csv",sep=",",row.names=F)
 
-write.table(curves.tog,"Cleaned_Data/Scen3_Natives_7plots_curves_estimates.csv",sep=",",row.names=F)
+write.table(curves.tog,"Cleaned_Data/Scen3_Natives_5plots_curves_estimates.csv",sep=",",row.names=F)
 
 envs<-summarize(group_by(rangez.tog, geo_entity2), mean_MAP=mean(meanMAP),
                 mean_PET=mean(meanPET),r_PET=mean(r_PET),  m_PlotArea=mean(totPlotArea))
 
-write.table(envs,"Cleaned_Data/Scen3_Native_7plots_EnvConditions_summarized.csv",sep=",",row.names=F)
+write.table(envs,"Cleaned_Data/Scen3_Native_5plots_EnvConditions_summarized.csv",sep=",",row.names=F)
 
-write.table(beta.tog,"Cleaned_Data/Scen3_Natives_7plots_BetaPIE.csv",sep=",",row.names=F)
+write.table(beta.tog,"Cleaned_Data/Scen3_Natives_5plots_BetaPIE.csv",sep=",",row.names=F)
 
-write.table(rad.tog,"Cleaned_Data//Scen3_Natives_7plots_RAD.csv",sep=",",row.names=F)
+write.table(rad.tog,"Cleaned_Data//Scen3_Natives_5plots_RAD.csv",sep=",",row.names=F)
 

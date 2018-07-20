@@ -54,7 +54,7 @@ curves<-do.call(rbind.data.frame,h$iNextEst)
 curves$geo_entity2<-rownames(curves)
 curves$geo_entity2 <- gsub("\\..*","",curves$geo_entity2)
 
-write.table(curves,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_curves_estimates.csv",sep=",",row.names=F)
+write.table(curves,"Cleaned_Data/Scen1_Natives_curves_estimates.csv",sep=",",row.names=F)
 
 # SACs (zoom) up to 10,000
 
@@ -64,7 +64,7 @@ curves3<-do.call(rbind.data.frame,jj$iNextEst)
 curves3$geo_entity2<-rownames(curves3)
 curves3$geo_entity2 <- gsub("\\..*","",curves3$geo_entity2)
 
-write.table(curves3,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_zoom_curves_estimates.csv",sep=",",row.names=F)
+write.table(curves3,"Cleaned_Data/Scen1_Natives_zoom_curves_estimates.csv",sep=",",row.names=F)
 
 #################
 # hill Numbers  #
@@ -191,5 +191,5 @@ treeN<- summarize(group_by(datt, geo_entity2), Abundance_tot_raw=sum(Abundance),
 
 rangeZ<-left_join(rangezz, treeN, by="geo_entity2")
 
-write.table(rangeZ,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_EnvConditions.csv",sep=",",row.names=F)
+write.table(rangeZ,"Cleaned_Data/Scen1_Natives_EnvConditions.csv",sep=",",row.names=F)
 

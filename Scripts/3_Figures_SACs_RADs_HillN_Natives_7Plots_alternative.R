@@ -21,8 +21,8 @@ SACs_1<-read.csv("Cleaned_Data/Scen1_Natives_SACs_GAMMestimates.csv")
 
 HillN_1<-read.csv("Cleaned_Data/Scen1_Natives_HillNumbers.csv")
 
-RAD_1<-read.csv("Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv")
-
+#RAD_1<-read.csv("Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv")
+RAD_1<-read.csv("Cleaned_Data/Scen1_Natives_RAD.csv")
 
 ##################
 # Scenario 2 #####
@@ -32,8 +32,9 @@ SACs_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_SACs_GAMMestimates.csv")
 
 HillN_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_HillN.csv")
 
-RAD_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_RAD_GAMMestimates.csv")
+#RAD_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_RAD_GAMMestimates.csv")
 
+RAD_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_RADs.csv",sep=",",header=T)
 
 ##################
 # Scenario 3 #####
@@ -43,7 +44,9 @@ SACs_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_SACs_GAMMestimates.csv")
 
 HillN_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_HillN.csv")
 
-RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD_GAMMestimates.csv")
+#RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD_GAMMestimates.csv")
+
+RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD.csv",sep=",",header=T)
 
 ##################
 # SACs ###########
@@ -166,9 +169,8 @@ RAD_1$geo_entity2<-as.factor(RAD_1$geo_entity2)
 RAD_1$geo_entity2<-factor(RAD_1$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
 
-raDs_1<-ggplot(RAD_1,aes(y=Rank_N,x=log(RelAbund),group=geo_entity2,color=geo_entity2))+ 
-  geom_point(position = position_jitter(w = 0, h = 0.02),size=0.5,alpha=0.9)+
-  geom_smooth(data=RAD_1, aes(y=RankN_pred,x=log(RelAbund), group=geo_entity2, color=geo_entity2),method="gam", formula=y~s(x),size=1,se=FALSE)+
+raDs_1<-ggplot(RAD_1, aes(y=Rank_N, x=log(RelAbund),group=geo_entity2,colour=geo_entity2))+
+  stat_ecdf(geom="line",size=1)+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   ylab("% Species")+xlab("% Abundance (log scale)")+
   #scale_color_npg()+
@@ -183,7 +185,6 @@ raDs_1<-ggplot(RAD_1,aes(y=Rank_N,x=log(RelAbund),group=geo_entity2,color=geo_en
                    legend.title=element_text(colour="black",face="bold",size=6),
                    legend.key.size = unit(2.5, 'lines'),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
 
 #Scenario 2
 
@@ -196,10 +197,14 @@ RAD_2$geo_entity2<-as.factor(RAD_2$geo_entity2)
 RAD_2$geo_entity2<-as.factor(RAD_2$geo_entity2)
 RAD_2$geo_entity2<-factor(RAD_2$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
+RAD_2<- RAD_2%>%
+  unite( "Island_Iter", c("geo_entity2","iteration"),remove=FALSE)
 
-raDs_2<-ggplot(RAD_2,aes(y=Rank_N,x=log(RelAbund),group=geo_entity2,color=geo_entity2))+ 
-  geom_point(position = position_jitter(w = 0, h = 0.02),size=0.5,alpha=0.1)+
-  geom_smooth(data=RAD_2, aes(y=RankN_pred,x=log(RelAbund), group=geo_entity2, color=geo_entity2),method="gam", formula=y~s(x),size=1,se=FALSE)+
+
+raDs_2<-ggplot(RAD_2, aes(y=Rank_N, x=log(RelAbund),group=Island_Iter,colour=geo_entity2))+
+  stat_ecdf(geom="line",alpha=0.1)+
+  stat_ecdf(data=RAD_2, aes(y=Rank_N,x=log(RelAbund), group=geo_entity2, color=geo_entity2),
+            geom="line", linetype=1,size=1)+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   ylab("% Species")+xlab("% Abundance (log scale)")+
   #scale_color_npg()+
@@ -215,7 +220,6 @@ raDs_2<-ggplot(RAD_2,aes(y=Rank_N,x=log(RelAbund),group=geo_entity2,color=geo_en
                    legend.key.size = unit(2.5, 'lines'),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-
 #Scenario 3
 
 RAD_3$geo_entity2<-as.character(RAD_3$geo_entity2)
@@ -227,9 +231,14 @@ RAD_3$geo_entity2<-as.factor(RAD_3$geo_entity2)
 RAD_3$geo_entity2<-as.factor(RAD_3$geo_entity2)
 RAD_3$geo_entity2<-factor(RAD_3$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
-raDs_3<-ggplot(RAD_3,aes(y=Rank_N,x=log(RelAbund),group=geo_entity2,color=geo_entity2))+ 
-  geom_point(position = position_jitter(w = 0, h = 0.02),size=0.5,alpha=0.1)+
-  geom_smooth(data=RAD_3, aes(y=RankN_pred,x=log(RelAbund), group=geo_entity2, color=geo_entity2),method="gam", formula=y~s(x),size=1,se=FALSE)+
+
+RAD_3<- RAD_3%>%
+  unite( "Island_Iter", c("geo_entity2","iteration"),remove=FALSE)
+
+raDs_3<-ggplot(RAD_3, aes(y=Rank_N, x=log(RelAbund),group=Island_Iter,colour=geo_entity2))+
+  stat_ecdf(geom="line",alpha=0.1)+
+  stat_ecdf(data=RAD_3, aes(y=Rank_N,x=log(RelAbund), group=geo_entity2, color=geo_entity2),
+            geom="line", linetype=1,size=1)+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   ylab("% Species")+xlab("% Abundance (log scale)")+
   #scale_color_npg()+
@@ -257,7 +266,7 @@ togg2<-plot_grid(SACs_11,SACs_22,SACs_33,raDs_1,raDs_2,raDs_3,
                  labels=c("a)","b)","c)","d)","e)","f)"),label_size = 6,
                  ncol=3)
 
-png(filename="Figures/SACs_RADs_Natives_7plots_Fig2.png", 
+png(filename="Figures/SACs_RADs_Natives_7plots_Fig2_alternative.png", 
     units="in", 
     width=8, 
     height=6, 
@@ -352,7 +361,7 @@ HillNN$Scenario<-as.factor(HillNN$Scenario)
 HillNN$Scenario<-factor(HillNN$Scenario,levels=c("Area+Het+Age","Het+Age","Age"))
 
 HillNN<- HillNN%>%
-         unite( "Scen_Order", c("Scenario","order"),remove=FALSE)
+  unite( "Scen_Order", c("Scenario","order"),remove=FALSE)
 
 
 # Scen1 + order 0
@@ -375,7 +384,7 @@ Hill_Sc1_Or0<-ggplot(H_Sc1_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
   labs(x="",y="Species diversity (q = 0)")+
   guides(colour=guide_legend(title="Area+Het+Age",title.position = "top", hjust=0.5))+
   theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
-                  axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_text(colour="black",face="bold",size=6),
                    axis.text.x=element_blank(),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
@@ -384,7 +393,7 @@ Hill_Sc1_Or0<-ggplot(H_Sc1_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
-                  legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
+                   legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
                    legend.position=c("top"),
                    #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())

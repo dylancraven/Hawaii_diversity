@@ -250,5 +250,5 @@ write.table(envs,"Cleaned_Data/Scen3_Native_5plots_EnvConditions_summarized.csv"
 
 write.table(beta.tog,"Cleaned_Data/Scen3_Natives_5plots_BetaPIE.csv",sep=",",row.names=F)
 
-write.table(rad.tog,"Cleaned_Data//Scen3_Natives_5plots_RAD.csv",sep=",",row.names=F)
+write.table(rad.tog,"Cleaned_Data/Scen3_Natives_5plots_RAD.csv",sep=",",row.names=F)
 

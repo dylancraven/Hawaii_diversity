@@ -3,7 +3,7 @@
 # RADs ###########
 ##################
 # Natives       ##
-# 7 plots       ##
+# 5 plots       ##
 ##################
 
 require(dplyr)
@@ -14,23 +14,21 @@ require(gamm4)
 # Scenario 1 #
 ##############
 
-RAD_1<-read.csv("Cleaned_Data/Scen1_Natives_RAD.csv")
+radd<-read.csv("Cleaned_Data/Scen1_Natives_RAD.csv",header=T)
 
-#RAD_1$iteration<-as.factor(RAD_1$iteration)
+radd$logRelAbund<-log(radd$RelAbund)
 
-RAD_1$logRelAbund<-log(RAD_1$RelAbund)
-
-rad_MN<-filter(RAD_1,geo_entity2=="Maui Nui")
+rad_MN<-filter(radd,geo_entity2=="Maui Nui")
 rad_MN$geo_entity2<-droplevels(rad_MN$geo_entity2)
 
 
-rad_HA<-filter(RAD_1,geo_entity2=="Hawai'i Island")
+rad_HA<-filter(radd,geo_entity2=="Hawai'i Island")
 rad_HA$geo_entity2<-droplevels(rad_HA$geo_entity2)
 
-rad_KA<-filter(RAD_1,geo_entity2=="Kaua'i Island")
+rad_KA<-filter(radd,geo_entity2=="Kaua'i Island")
 rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 
-rad_OA<-filter(RAD_1,geo_entity2=="O'ahu Island")
+rad_OA<-filter(radd,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
 
 ############
@@ -63,32 +61,31 @@ rad_OA$pred<-predict(fit.oa$gam, rad_OA,type="response")
 
 # merge
 
-rad_tog<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
-rad_tog<-dplyr::select(rad_tog,-logRelAbund)
-colnames(rad_tog)[6]<-"RankN_pred"
-
-write.table(rad_tog,"Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv",sep=",",row.names=T)
+rad_tog1<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
+rad_tog1<-dplyr::select(rad_tog1,-logRelAbund)
+colnames(rad_tog1)[6]<-"RankN_pred"
 
 ##############
 # Scenario 2 #
 ##############
 
-rad.tog2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_RADs.csv",sep=",",header=T)
+load("Cleaned_Data/Scen2_natives_5plots.RData")
 
-rad.tog2$iteration<-as.factor(rad.tog2$iteration)
+Scen2_rad.tog<-rad.tog
+Scen2_rad.tog$iteration<-as.factor(Scen2_rad.tog$iteration)
 
-rad.tog2$logRelAbund<-log(rad.tog2$RelAbund)
+Scen2_rad.tog$logRelAbund<-log(Scen2_rad.tog$RelAbund)
 
-rad_MN<-filter(rad.tog2,geo_entity2=="Maui Nui")
+rad_MN<-filter(Scen2_rad.tog,geo_entity2=="Maui Nui")
 rad_MN$geo_entity2<-droplevels(rad_MN$geo_entity2)
 
-rad_HA<-filter(rad.tog2,geo_entity2=="Hawai'i Island")
+rad_HA<-filter(Scen2_rad.tog,geo_entity2=="Hawai'i Island")
 rad_HA$geo_entity2<-droplevels(rad_HA$geo_entity2)
 
-rad_KA<-filter(rad.tog2,geo_entity2=="Kaua'i Island")
+rad_KA<-filter(Scen2_rad.tog,geo_entity2=="Kaua'i Island")
 rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 
-rad_OA<-filter(rad.tog2,geo_entity2=="O'ahu Island")
+rad_OA<-filter(Scen2_rad.tog,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
 
 ############
@@ -125,28 +122,27 @@ rad_tog2<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
 rad_tog2<-dplyr::select(rad_tog2,-logRelAbund)
 colnames(rad_tog2)[7]<-"RankN_pred"
 
-write.table(rad_tog2,"Cleaned_Data/Scen2_Natives_7plots_RAD_GAMMestimates.csv",sep=",",row.names=T)
 
 ##########
 # SCEN 3 #
 ##########
 
-rad.tog3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD.csv",sep=",",header=T)
+Scen3_rad.tog<-read.csv("Cleaned_Data/Scen3_Natives_5plots_RAD.csv",header=TRUE)
 
-rad.tog3$iteration<-as.factor(rad.tog3$iteration)
+Scen3_rad.tog$iteration<-as.factor(Scen3_rad.tog$iteration)
 
-rad.tog3$logRelAbund<-log(rad.tog3$RelAbund)
+Scen3_rad.tog$logRelAbund<-log(Scen3_rad.tog$RelAbund)
 
-rad_MN<-filter(rad.tog3,geo_entity2=="Maui Nui")
+rad_MN<-filter(Scen3_rad.tog,geo_entity2=="Maui Nui")
 rad_MN$geo_entity2<-droplevels(rad_MN$geo_entity2)
 
-rad_HA<-filter(rad.tog3,geo_entity2=="Hawai'i Island")
+rad_HA<-filter(Scen3_rad.tog,geo_entity2=="Hawai'i Island")
 rad_HA$geo_entity2<-droplevels(rad_HA$geo_entity2)
 
-rad_KA<-filter(rad.tog3,geo_entity2=="Kaua'i Island")
+rad_KA<-filter(Scen3_rad.tog,geo_entity2=="Kaua'i Island")
 rad_KA$geo_entity2<-droplevels(rad_KA$geo_entity2)
 
-rad_OA<-filter(rad.tog3,geo_entity2=="O'ahu Island")
+rad_OA<-filter(Scen3_rad.tog,geo_entity2=="O'ahu Island")
 rad_OA$geo_entity2<-droplevels(rad_OA$geo_entity2)
 
 ############
@@ -183,4 +179,7 @@ rad_tog3<-rbind.data.frame(rad_MN,rad_HA, rad_KA, rad_OA)
 rad_tog3<-dplyr::select(rad_tog3,-logRelAbund)
 colnames(rad_tog3)[7]<-"RankN_pred"
 
-write.table(rad_tog3,"Cleaned_Data/Scen3_Natives_7plots_RAD_GAMMestimates.csv",sep=",",row.names=T)
+####
+
+save(rad_tog1,rad_tog2, rad_tog3, 
+     file="Cleaned_Data/Scen123_Native_5plots_RAD_GAMMestimates.RData")

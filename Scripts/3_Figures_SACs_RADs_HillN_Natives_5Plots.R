@@ -1,6 +1,6 @@
 ###############
 # All natives #
-# 7 plots #####
+# 5 plots #####
 ###############
 
 require(tidyr)
@@ -14,36 +14,20 @@ library(rms)
 #shapes: scale_shape_manual(values=c(15,16,17)
 
 ##################
-# Scenario 1 #####
+# Data #####
 ##################
-
-SACs_1<-read.csv("Cleaned_Data/Scen1_Natives_SACs_GAMMestimates.csv")
 
 HillN_1<-read.csv("Cleaned_Data/Scen1_Natives_HillNumbers.csv")
 
-RAD_1<-read.csv("Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv")
+load(file="Cleaned_Data/Scen2_natives_5plots.RData") #Scen. 2 hill N:'orders.tog'
 
+HillN_2<-orders.tog
 
-##################
-# Scenario 2 #####
-##################
+HillN_3<-read.csv("Cleaned_Data/Scen3_Natives_5plots_HillN.csv")
 
-SACs_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_SACs_GAMMestimates.csv")
+load("Cleaned_Data/Scen123_Native_5plots_SAC_GAMMestimates.RData")
 
-HillN_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_HillN.csv")
-
-RAD_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_RAD_GAMMestimates.csv")
-
-
-##################
-# Scenario 3 #####
-##################
-
-SACs_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_SACs_GAMMestimates.csv")
-
-HillN_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_HillN.csv")
-
-RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD_GAMMestimates.csv")
+load("Cleaned_Data/Scen123_Native_5plots_RAD_GAMMestimates.RData")
 
 ##################
 # SACs ###########
@@ -51,6 +35,7 @@ RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD_GAMMestimates.csv")
 
 # Scenario 1
 
+SACs_1<-sac_togg1
 SACs_1$m<-as.factor(SACs_1$m)
 
 SACs_1$geo_entity2<-as.character(SACs_1$geo_entity2)
@@ -84,6 +69,7 @@ SACs_11<-ggplot(SACs_1,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
 
 #Scenario 2
 
+SACs_2<-sac_togg2
 SACs_2$m<-as.factor(SACs_2$m)
 
 SACs_2$geo_entity2<-as.character(SACs_2$geo_entity2)
@@ -117,6 +103,7 @@ SACs_22<-ggplot(SACs_2,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
 
 #Scenario 3
 
+SACs_3<-sac_togg3
 SACs_3$m<-as.factor(SACs_3$m)
 
 SACs_3$geo_entity2<-as.character(SACs_3$geo_entity2)
@@ -156,6 +143,7 @@ SACs_33<-ggplot(SACs_3,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
 #Scenario 1  #
 ##############
 
+RAD_1<-rad_tog1
 RAD_1$geo_entity2<-as.character(RAD_1$geo_entity2)
 RAD_1$geo_entity2<-ifelse(RAD_1$geo_entity2=="Hawai'i Island","Hawai'i",RAD_1$geo_entity2)
 RAD_1$geo_entity2<-ifelse(RAD_1$geo_entity2=="Kaua'i Island","Kaua'i",RAD_1$geo_entity2)
@@ -187,6 +175,7 @@ raDs_1<-ggplot(RAD_1,aes(y=Rank_N,x=log(RelAbund),group=geo_entity2,color=geo_en
 
 #Scenario 2
 
+RAD_2<-rad_tog2
 RAD_2$geo_entity2<-as.character(RAD_2$geo_entity2)
 RAD_2$geo_entity2<-ifelse(RAD_2$geo_entity2=="Hawai'i Island","Hawai'i",RAD_2$geo_entity2)
 RAD_2$geo_entity2<-ifelse(RAD_2$geo_entity2=="Kaua'i Island","Kaua'i",RAD_2$geo_entity2)
@@ -218,6 +207,7 @@ raDs_2<-ggplot(RAD_2,aes(y=Rank_N,x=log(RelAbund),group=geo_entity2,color=geo_en
 
 #Scenario 3
 
+RAD_3<-rad_tog3
 RAD_3$geo_entity2<-as.character(RAD_3$geo_entity2)
 RAD_3$geo_entity2<-ifelse(RAD_3$geo_entity2=="Hawai'i Island","Hawai'i",RAD_3$geo_entity2)
 RAD_3$geo_entity2<-ifelse(RAD_3$geo_entity2=="Kaua'i Island","Kaua'i",RAD_3$geo_entity2)
@@ -257,7 +247,7 @@ togg2<-plot_grid(SACs_11,SACs_22,SACs_33,raDs_1,raDs_2,raDs_3,
                  labels=c("a)","b)","c)","d)","e)","f)"),label_size = 6,
                  ncol=3)
 
-png(filename="Figures/SACs_RADs_Natives_7plots_Fig2.png", 
+png(filename="Figures/SACs_RADs_Natives_5plots_Fig2.png", 
     units="in", 
     width=8, 
     height=6, 
@@ -352,7 +342,7 @@ HillNN$Scenario<-as.factor(HillNN$Scenario)
 HillNN$Scenario<-factor(HillNN$Scenario,levels=c("Area+Het+Age","Het+Age","Age"))
 
 HillNN<- HillNN%>%
-         unite( "Scen_Order", c("Scenario","order"),remove=FALSE)
+  unite( "Scen_Order", c("Scenario","order"),remove=FALSE)
 
 
 # Scen1 + order 0
@@ -375,7 +365,7 @@ Hill_Sc1_Or0<-ggplot(H_Sc1_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
   labs(x="",y="Species diversity (q = 0)")+
   guides(colour=guide_legend(title="Area+Het+Age",title.position = "top", hjust=0.5))+
   theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
-                  axis.title.x=element_text(colour="black",face="bold",size=6),
+                   axis.title.x=element_text(colour="black",face="bold",size=6),
                    axis.title.y=element_text(colour="black",face="bold",size=6),
                    axis.text.x=element_blank(),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
@@ -384,7 +374,7 @@ Hill_Sc1_Or0<-ggplot(H_Sc1_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
-                  legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
+                   legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
                    legend.position=c("top"),
                    #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
@@ -505,7 +495,7 @@ Hill_Sc2_Or1<-ggplot(H_Sc2_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
   
   #scale_color_d3(palette="category20c")+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  scale_y_continuous(limits=c(0, 15),breaks=c(5,10,15),labels=c("5","10","15"))+
+  scale_y_continuous(limits=c(0, 17),breaks=c(5,10,15),labels=c("5","10","15"))+
   # scale_shape_manual(values=c(17,15,16))+
   #facet_grid(order~Scenario,scales="free_y")+
   labs(x="",y="Species diversity")+
@@ -665,7 +655,7 @@ require(cowplot)
 hill_tog<-plot_grid(Hill_Sc1_Or0, Hill_Sc2_Or0, Hill_Sc3_Or0, Hill_Sc1_Or1, Hill_Sc2_Or1, Hill_Sc3_Or1,Hill_Sc1_Or2, Hill_Sc2_Or2, Hill_Sc3_Or2,
                     labels=c("a)","b)","c)","d)","e)","f)","g)","h)","i)"),label_size = 6, ncol=3,rel_heights = c(1.2,1,1))
 
-png(filename="Figures/HillN_Natives_7plots_Fig3.png", 
+png(filename="Figures/HillN_Natives_5plots_Fig3.png", 
     units="in", 
     width=7, 
     height=7, 

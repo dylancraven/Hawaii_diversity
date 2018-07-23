@@ -4,7 +4,7 @@
 # iteration ###
 ###############
 # Natives ##### 
-# 5 plots #####
+# 9 plots #####
 ###############
 
 require(dplyr)
@@ -69,7 +69,7 @@ colnames(sac_togg1)[11]<-"qD_pred"
 # Scenario 2 #
 ##############
 
-load("Cleaned_Data/Scen2_natives_5plots.RData")
+load("Cleaned_Data/Scen2_natives_9plots.RData")
 
 Scen2_curves.tog<-curves.tog
 Scen2_curves.tog$geo_entity2<-as.factor(Scen2_curves.tog$geo_entity2)
@@ -95,7 +95,7 @@ sac_OA$geo_entity2<-droplevels(sac_OA$geo_entity2)
 
 ##################
 #for each island #
-##################
+##################rabinowitz seven forms of rarityrabinowitz seven forms of rarity
 
 # Maui Nui
 
@@ -126,7 +126,7 @@ colnames(sac_togg2)[12]<-"qD_pred"
 # SCEN 3 #
 ##########
 
-Scen3_curves.tog<-read.csv("Cleaned_Data/Scen3_Natives_5plots_curves_estimates.csv",header=TRUE)
+Scen3_curves.tog<-read.csv("Cleaned_Data/Scen3_Natives_9plots_curves_estimates.csv",header=TRUE)
 
 Scen3_curves.tog$geo_entity2<-as.factor(Scen3_curves.tog$geo_entity2)
 Scen3_curves.tog<-filter(Scen3_curves.tog, m %in% c(1,100,200,300,400,500, 600,700,800,900,1000))
@@ -178,4 +178,4 @@ sac_OA$pred<-predict(fit.oa$gam, sac_OA,type="response")
 sac_togg3<-rbind.data.frame(sac_MN,sac_HA, sac_KA, sac_OA)
 colnames(sac_togg3)[12]<-"qD_pred"
 
-save(sac_togg1,sac_togg2, sac_togg3, file="Cleaned_Data/Scen123_Native_5plots_SAC_GAMMestimates.RData")
+save(sac_togg1,sac_togg2, sac_togg3, file="Cleaned_Data/Scen123_Native_9plots_SAC_GAMMestimates.RData")

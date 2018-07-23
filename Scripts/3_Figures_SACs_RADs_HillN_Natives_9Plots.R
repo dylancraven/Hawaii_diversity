@@ -1,62 +1,59 @@
 ###############
 # All natives #
-# 7 plots #####
+# 9 plots #####
 ###############
 
 require(tidyr)
 require(dplyr)
 require(ggplot2)
-require(scales)
 require(grid)
+require(scales)
 require(reshape2)
 library(rms)
 
-#colors:  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))
-#shapes: scale_shape_manual(values=c(15,16,17)
+########
+# Data #
+########
+
+load(file="Cleaned_Data/Scen123_Native_9plots_SAC_GAMMestimates.RData")
 
 ##################
 # Scenario 1 #####
 ##################
 
-SACs_1<-read.csv("Cleaned_Data/Scen1_Natives_SACs_GAMMestimates.csv")
-#SACs_1<-read.csv("Cleaned_Data/Scen1_Natives_curves_estimates.csv")
-
 HillN_1<-read.csv("Cleaned_Data/Scen1_Natives_HillNumbers.csv")
 
-#RAD_1<-read.csv("Cleaned_Data/Scen1_Natives_RAD_GAMMestimates.csv")
 RAD_1<-read.csv("Cleaned_Data/Scen1_Natives_RAD.csv")
+
+SACs_1<-read.csv("Cleaned_Data/Scen1_Natives_SACs_GAMMestimates.csv")
 
 ##################
 # Scenario 2 #####
 ##################
 
-SACs_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_SACs_GAMMestimates.csv")
+load(file="Cleaned_Data/Scen2_natives_9plots.RData")
 
-HillN_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_HillN.csv")
+HillN_2<-orders.tog
 
-#RAD_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_RAD_GAMMestimates.csv")
+RAD_2<-rad.tog
 
-RAD_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_RADs.csv",sep=",",header=T)
+SACs_2<-sac_togg2
 
 ##################
 # Scenario 3 #####
 ##################
 
-SACs_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_SACs_GAMMestimates.csv")
+SACs_3<-sac_togg3
 
-HillN_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_HillN.csv")
+HillN_3<-read.csv("Cleaned_Data/Scen3_Natives_9plots_HillN.csv")
 
-#RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD_GAMMestimates.csv")
-
-RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD.csv",sep=",",header=T)
+RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_9plots_RAD.csv",sep=",",header=T)
 
 ##################
 # SACs ###########
 ##################
 
 # Scenario 1
-
-#SACs_1$m<-as.factor(SACs_1$m)
 
 SACs_1$geo_entity2<-as.character(SACs_1$geo_entity2)
 SACs_1$geo_entity2<-ifelse(SACs_1$geo_entity2=="Hawai'i Island","Hawai'i",SACs_1$geo_entity2)
@@ -121,8 +118,6 @@ SACs_22<-ggplot(SACs_2,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
 
 
 #Scenario 3
-
-#SACs_3$m<-as.factor(SACs_3$m)
 
 SACs_3$geo_entity2<-as.character(SACs_3$geo_entity2)
 SACs_3$geo_entity2<-ifelse(SACs_3$geo_entity2=="Hawai'i Island","Hawai'i",SACs_3$geo_entity2)
@@ -268,7 +263,7 @@ togg2<-plot_grid(SACs_11,SACs_22,SACs_33,raDs_1,raDs_2,raDs_3,
                  labels=c("a)","b)","c)","d)","e)","f)"),label_size = 6,
                  ncol=3)
 
-png(filename="Figures/SACs_RADs_Natives_7plots_Fig3.png", 
+png(filename="Figures/SACs_RADs_Natives_9plots_S2.png", 
     units="in", 
     width=8, 
     height=6, 
@@ -516,7 +511,7 @@ Hill_Sc2_Or1<-ggplot(H_Sc2_Or1, aes(x=geo_entity2,y=qD,group=geo_entity2,color=g
   
   #scale_color_d3(palette="category20c")+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  scale_y_continuous(limits=c(0, 15),breaks=c(5,10,15),labels=c("5","10","15"))+
+  scale_y_continuous(limits=c(0, 16.8),breaks=c(5,10,15),labels=c("5","10","15"))+
   # scale_shape_manual(values=c(17,15,16))+
   #facet_grid(order~Scenario,scales="free_y")+
   labs(x="",y="Species diversity")+
@@ -676,7 +671,7 @@ require(cowplot)
 hill_tog<-plot_grid(Hill_Sc1_Or0, Hill_Sc2_Or0, Hill_Sc3_Or0, Hill_Sc1_Or1, Hill_Sc2_Or1, Hill_Sc3_Or1,Hill_Sc1_Or2, Hill_Sc2_Or2, Hill_Sc3_Or2,
                     labels=c("a)","b)","c)","d)","e)","f)","g)","h)","i)"),label_size = 6, ncol=3,rel_heights = c(1.2,1,1))
 
-png(filename="Figures/HillN_Natives_7plots_Fig4.png", 
+png(filename="Figures/HillN_Natives_9plots_S4.png", 
     units="in", 
     width=7, 
     height=7, 
@@ -686,3 +681,4 @@ png(filename="Figures/HillN_Natives_7plots_Fig4.png",
 hill_tog
 
 dev.off()
+

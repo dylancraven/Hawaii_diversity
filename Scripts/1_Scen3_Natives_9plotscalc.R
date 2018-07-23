@@ -1,7 +1,7 @@
 #####################
 # Island - Scen. 3 ##
 # 1. natives       ##
-##2. 7 plots      ### 
+##2. 9 plots      ### 
 #####################
 
 require(dplyr)
@@ -29,7 +29,7 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 dat3<-read.csv("Cleaned_Data/Scen3_Natives_9plots_SimComms.csv")
 dat3$Abundance_ha<-round(dat3$Abundance_ha)
 
-length(unique(dat3$iteration)) # 4940
+length(unique(dat3$iteration)) # 1119
 
 ######################
 # select  100 ########
@@ -250,5 +250,5 @@ write.table(envs,"Cleaned_Data/Scen3_Native_9plots_EnvConditions_summarized.csv"
 
 write.table(beta.tog,"Cleaned_Data/Scen3_Natives_9plots_BetaPIE.csv",sep=",",row.names=F)
 
-write.table(rad.tog,"Cleaned_Data//Scen3_Natives_9plots_RAD.csv",sep=",",row.names=F)
+write.table(rad.tog,"Cleaned_Data/Scen3_Natives_9plots_RAD.csv",sep=",",row.names=F)
 

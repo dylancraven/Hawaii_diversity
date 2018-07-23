@@ -2,7 +2,7 @@
 # Beta ENSpie #
 ###############
 # All natives #
-# 7 plots #####
+# 5 plots #####
 ###############
 
 require(dplyr)
@@ -17,9 +17,10 @@ require(rms)
 
 Beta_1<-read.csv("Cleaned_Data/Scen1_Natives_BetaPIE.csv",sep=",",header=T)
 
-Beta_2<-read.csv("Cleaned_Data/Scen2_Natives_7plots_BetaPIE.csv",sep=",",header=T)
+load("Cleaned_Data/Scen2_natives_5plots.RData")
+Beta_2<-beta.tog
 
-Beta_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_BetaPIE.csv",sep=",",header=T)
+Beta_3<-read.csv("Cleaned_Data/Scen3_Natives_5plots_BetaPIE.csv",sep=",",header=T)
 
 #################
 # Beta ENS_PIE  #
@@ -72,7 +73,7 @@ Beta_Scen1<-ggplot(data=Beta_11, aes(x=geo_entity2,y=value,group=geo_entity2,col
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-write.csv(Beta_1s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen1_7plots.csv",row.names=F)
+write.csv(Beta_1s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen1_5plots.csv",row.names=F)
 
 ## Scenario 2
 
@@ -122,7 +123,7 @@ Beta_Scen2<-ggplot(data=Beta_22, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_enti
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-write.csv(Beta_2s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen2_7plots.csv",row.names=F)
+write.csv(Beta_2s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen2_5plots.csv",row.names=F)
 
 ## Scenario 3
 
@@ -173,7 +174,7 @@ Beta_Scen3<-ggplot(data=Beta_33, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_enti
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-write.csv(Beta_3s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen3_7plots.csv",row.names=F)
+write.csv(Beta_3s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen3_5plots.csv",row.names=F)
 
 #############
 # Beta S ####
@@ -221,7 +222,7 @@ Beta_Scen1s<-ggplot(data=Beta_111, aes(x=geo_entity2,y=value,group=geo_entity2,c
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-write.csv(Beta_1ss,"Cleaned_Data/Summary_Beta_S_Scen1_7plots.csv",row.names=F)
+write.csv(Beta_1ss,"Cleaned_Data/Summary_Beta_S_Scen1_5plots.csv",row.names=F)
 
 ## Scenario 2
 
@@ -250,7 +251,6 @@ colnames(Beta_2ss)[4]<-"h.QD"
 Beta_2ss$geo_entity2<-as.factor(Beta_2ss$geo_entity2)
 Beta_2ss$geo_entity2<-factor(Beta_2ss$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
-
 Beta_Scen2s<-ggplot(data=Beta_222, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2))+
   geom_point(data=Beta_222, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2),
              position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.1)+
@@ -273,7 +273,7 @@ Beta_Scen2s<-ggplot(data=Beta_222, aes(x=geo_entity2,y=beta_S,group=geo_entity2,
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-write.csv(Beta_2ss,"Cleaned_Data/Summary_Beta_S_Scen2_7plots.csv",row.names=F)
+write.csv(Beta_2ss,"Cleaned_Data/Summary_Beta_S_Scen2_5plots.csv",row.names=F)
 
 ## Scenario 3
 
@@ -322,7 +322,7 @@ Beta_Scen3s<-ggplot(data=Beta_333, aes(x=geo_entity2,y=beta_S,group=geo_entity2,
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-write.csv(Beta_3ss,"Cleaned_Data/Summary_Beta_S_Scen3_7plots.csv",row.names=F)
+write.csv(Beta_3ss,"Cleaned_Data/Summary_Beta_S_Scen3_5plots.csv",row.names=F)
 
 ###################
 # merge figures  #
@@ -335,7 +335,7 @@ togg2<-plot_grid(Beta_Scen1s, Beta_Scen2s, Beta_Scen3s,Beta_Scen1, Beta_Scen2, B
                  ncol=3)
 
 
-png(filename="Figures/Beta_ENSpie_S_FigS5_natives_7plots.png", 
+png(filename="Figures/Beta_ENSpie_S_FigS3_natives_5plots.png", 
     units="in", 
     width=8, 
     height=6, 
@@ -345,4 +345,3 @@ png(filename="Figures/Beta_ENSpie_S_FigS5_natives_7plots.png",
 togg2
 
 dev.off()
-

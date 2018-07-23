@@ -18,6 +18,7 @@ library(rms)
 ##################
 
 SACs_1<-read.csv("Cleaned_Data/Scen1_Natives_SACs_GAMMestimates.csv")
+#SACs_1<-read.csv("Cleaned_Data/Scen1_Natives_curves_estimates.csv")
 
 HillN_1<-read.csv("Cleaned_Data/Scen1_Natives_HillNumbers.csv")
 
@@ -54,7 +55,7 @@ RAD_3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_RAD.csv",sep=",",header=T)
 
 # Scenario 1
 
-SACs_1$m<-as.factor(SACs_1$m)
+#SACs_1$m<-as.factor(SACs_1$m)
 
 SACs_1$geo_entity2<-as.character(SACs_1$geo_entity2)
 SACs_1$geo_entity2<-ifelse(SACs_1$geo_entity2=="Hawai'i Island","Hawai'i",SACs_1$geo_entity2)
@@ -66,13 +67,11 @@ SACs_1$geo_entity2<-as.factor(SACs_1$geo_entity2)
 SACs_1$geo_entity2<-factor(SACs_1$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
 SACs_11<-ggplot(SACs_1,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+ 
-  geom_point(size=0.5)+
-  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  scale_x_discrete(breaks=c(1,100,1000,2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,10000))+
-  scale_y_continuous(limits=c(0,53),breaks=c(0,10, 20,30, 40,50))+
+  #geom_point(position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.3)+
   geom_line(size=1)+
-  ylab("Species diversity")+xlab("Number of individuals")+
-  #scale_color_npg()+
+  ylab("Species diversity")+xlab("Number of individuals (log scale)")+
+  scale_x_continuous(trans="log",breaks= c(0,10,100,1000,10000,100000,1000000),labels=comma)+
+  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   guides(colour=guide_legend(title="Area+Het+Age",title.position = "top"))+
   theme_bw()+theme(legend.position="top", axis.title.y=element_text(colour="black",face="bold",size=6),
                    axis.title.x=element_text(colour="black",face="bold",size=6),
@@ -81,13 +80,15 @@ SACs_11<-ggplot(SACs_1,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
+                   legend.key.size = unit(0.5,"cm"),
+                   legend.box="horizontal",
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 
 #Scenario 2
 
-SACs_2$m<-as.factor(SACs_2$m)
+#SACs_2$m<-as.factor(SACs_2$m)
 
 SACs_2$geo_entity2<-as.character(SACs_2$geo_entity2)
 SACs_2$geo_entity2<-ifelse(SACs_2$geo_entity2=="Hawai'i Island","Hawai'i",SACs_2$geo_entity2)
@@ -120,7 +121,7 @@ SACs_22<-ggplot(SACs_2,aes(x=m,y=qD,group=geo_entity2,color=geo_entity2))+
 
 #Scenario 3
 
-SACs_3$m<-as.factor(SACs_3$m)
+#SACs_3$m<-as.factor(SACs_3$m)
 
 SACs_3$geo_entity2<-as.character(SACs_3$geo_entity2)
 SACs_3$geo_entity2<-ifelse(SACs_3$geo_entity2=="Hawai'i Island","Hawai'i",SACs_3$geo_entity2)
@@ -266,7 +267,7 @@ togg2<-plot_grid(SACs_11,SACs_22,SACs_33,raDs_1,raDs_2,raDs_3,
                  labels=c("a)","b)","c)","d)","e)","f)"),label_size = 6,
                  ncol=3)
 
-png(filename="Figures/SACs_RADs_Natives_7plots_Fig2_alternative.png", 
+png(filename="Figures/SACs_RADs_Natives_7plots_Fig3.png", 
     units="in", 
     width=8, 
     height=6, 
@@ -275,7 +276,7 @@ png(filename="Figures/SACs_RADs_Natives_7plots_Fig2_alternative.png",
 
 togg2
 
-dev.off()
+
 
 #############
 # Hill N ####
@@ -674,7 +675,7 @@ require(cowplot)
 hill_tog<-plot_grid(Hill_Sc1_Or0, Hill_Sc2_Or0, Hill_Sc3_Or0, Hill_Sc1_Or1, Hill_Sc2_Or1, Hill_Sc3_Or1,Hill_Sc1_Or2, Hill_Sc2_Or2, Hill_Sc3_Or2,
                     labels=c("a)","b)","c)","d)","e)","f)","g)","h)","i)"),label_size = 6, ncol=3,rel_heights = c(1.2,1,1))
 
-png(filename="Figures/HillN_Natives_7plots_Fig3.png", 
+png(filename="Figures/HillN_Natives_7plots_Fig4.png", 
     units="in", 
     width=7, 
     height=7, 

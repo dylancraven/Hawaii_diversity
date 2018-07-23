@@ -16,7 +16,9 @@ require(gamm4)
 # Scenario 1 #
 ##############
 
-sac.tog<-read.csv("Cleaned_Data/Scen1_Natives_zoom_curves_estimates.csv",sep=",",header=T)
+#sac.tog<-read.csv("Cleaned_Data/Scen1_Natives_zoom_curves_estimates.csv",sep=",",header=T)
+
+sac.tog<-read.csv("Cleaned_Data/Scen1_Natives_curves_estimates.csv",sep=",",header=T)
 
 sac_MN<-filter(sac.tog,geo_entity2=="Maui Nui")
 sac_MN$geo_entity2<-droplevels(sac_MN$geo_entity2)

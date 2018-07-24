@@ -41,7 +41,7 @@ haw_study
 ```
 
 
-**Table 2.** Sampled area, number of plots, and number of individuals and species per island across the Hawaiian archipelago.      
+**Table 2.** Sampled area, number of plots, and number of individuals and species per island across the Hawaiian archipelago (7 plots).      
 ```{r, echo=FALSE}
 haw_scen1<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_EnvConditions.csv")
 haw_scen1<-select(haw_scen1, geo_entity2, "PlotArea_Scen1"=totPlotArea,"meanPET_scen1"=mean_PET, "rangePET_scen1"=r_PET)
@@ -74,4 +74,76 @@ haw_scenn<-kable(haw_scenn,format="markdown",align="c",digits=1, caption="Table 
 haw_scenn
 
 
+```
+
+**Table 3.** Sampled area, number of plots, and number of individuals and species per island across the Hawaiian archipelago (5 plots). 
+
+```{r, echo=FALSE}
+haw_scen1<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_EnvConditions.csv")
+haw_scen1<-select(haw_scen1, geo_entity2, "PlotArea_Scen1"=totPlotArea,"meanPET_scen1"=mean_PET, "rangePET_scen1"=r_PET)
+
+load(file="/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_natives_5plots.RData")
+
+haw_scen2<-envs
+haw_scen2<-select(haw_scen2, geo_entity2, "PlotArea_Scen2"=m_PlotArea,"meanPET_scen2"=mean_PET, "rangePET_scen2"=r_PET)
+
+haw_scen3<-read.table("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Native_5plots_EnvConditions_summarized.csv",sep=",",header=T)
+haw_scen3<-select(haw_scen3, geo_entity2, "PlotArea_Scen3"=m_PlotArea,"meanPET_scen3"=mean_PET, "rangePET_scen3"=r_PET)
+
+haw_scenn<-left_join(haw_scen1,haw_scen2,by="geo_entity2")%>%
+            left_join(.,haw_scen3, by="geo_entity2")
+
+haw_scenn$geo_entity2<-factor(haw_scenn$geo_entity2, levels=c("Hawai'i Island","Maui Nui", "O'ahu Island", "Kaua'i Island"))
+
+haw_scenn$PlotArea_Scen1<-round(haw_scenn$PlotArea_Scen1, digits=0)
+haw_scenn$meanPET_scen1<-round(haw_scenn$meanPET_scen1, digits=0)
+haw_scenn$rangePET_scen1<-round(haw_scenn$rangePET_scen1, digits=0)
+
+haw_scenn$PlotArea_Scen2<-round(haw_scenn$PlotArea_Scen2, digits=0)
+haw_scenn$meanPET_scen2<-round(haw_scenn$meanPET_scen2, digits=0)
+haw_scenn$rangePET_scen2<-round(haw_scenn$rangePET_scen2, digits=0)
+
+haw_scenn$PlotArea_Scen3<-round(haw_scenn$PlotArea_Scen3, digits=0)
+haw_scenn$meanPET_scen3<-round(haw_scenn$meanPET_scen3, digits=0)
+haw_scenn$rangePET_scen3<-round(haw_scenn$rangePET_scen3, digits=0)
+
+
+haw_scenn<-kable(haw_scenn,format="markdown",align="c",digits=1, caption="Table 3. Summary of sampled area and the range and mean of PET for each sampling scenario across forest plots in the Hawaiian archipelago (5 plots).")
+haw_scenn
+```
+
+**Table 4.** Sampled area, number of plots, and number of individuals and species per island across the Hawaiian archipelago (9 plots). 
+
+```{r, echo=FALSE}
+haw_scen1<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen1_Natives_EnvConditions.csv")
+haw_scen1<-select(haw_scen1, geo_entity2, "PlotArea_Scen1"=totPlotArea,"meanPET_scen1"=mean_PET, "rangePET_scen1"=r_PET)
+
+load(file="/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_natives_9plots.RData")
+
+haw_scen2<-envs
+haw_scen2<-select(haw_scen2, geo_entity2, "PlotArea_Scen2"=m_PlotArea,"meanPET_scen2"=mean_PET, "rangePET_scen2"=r_PET)
+
+haw_scen3<-read.table("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Native_9plots_EnvConditions_summarized.csv",sep=",",header=T)
+haw_scen3<-select(haw_scen3, geo_entity2, "PlotArea_Scen3"=m_PlotArea,"meanPET_scen3"=mean_PET, "rangePET_scen3"=r_PET)
+
+haw_scenn<-left_join(haw_scen1,haw_scen2,by="geo_entity2")%>%
+            left_join(.,haw_scen3, by="geo_entity2")
+
+haw_scenn$geo_entity2<-factor(haw_scenn$geo_entity2, levels=c("Hawai'i Island","Maui Nui", "O'ahu Island", "Kaua'i Island"))
+
+haw_scenn$PlotArea_Scen1<-round(haw_scenn$PlotArea_Scen1, digits=0)
+haw_scenn$meanPET_scen1<-round(haw_scenn$meanPET_scen1, digits=0)
+haw_scenn$rangePET_scen1<-round(haw_scenn$rangePET_scen1, digits=0)
+
+haw_scenn$PlotArea_Scen2<-round(haw_scenn$PlotArea_Scen2, digits=0)
+haw_scenn$meanPET_scen2<-round(haw_scenn$meanPET_scen2, digits=0)
+haw_scenn$rangePET_scen2<-round(haw_scenn$rangePET_scen2, digits=0)
+
+haw_scenn$PlotArea_Scen3<-round(haw_scenn$PlotArea_Scen3, digits=0)
+haw_scenn$meanPET_scen3<-round(haw_scenn$meanPET_scen3, digits=0)
+haw_scenn$rangePET_scen3<-round(haw_scenn$rangePET_scen3, digits=0)
+
+
+haw_scenn<-kable(haw_scenn,format="markdown",align="c",digits=1, caption="Table 3. Summary of sampled area and the range and mean of PET for each sampling scenario across forest plots in the Hawaiian archipelago (5 plots).")
+haw_scenn
 ```

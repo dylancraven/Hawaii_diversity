@@ -6,7 +6,7 @@
 ## Description  
 
 This repository contains used to assess biodiversity patterns in Hawaiian forests across islands that vary in
-age and area. Data used for these analyses have been published as an in the Biodiversity Data Journal and should be cited if used:
+age and area. Data used for these analyses have been published in the Biodiversity Data Journal and should be cited if used:
 
 Craven, D., T.M. Knight, K.E. Barton, L. Bialic-Murphy, S. Cordell, C.P. Giardina, T.W.
 Gillespie, R. Ostertag, L. Sack, and J. Chase. 2018. OpenNahele: the open Hawaiian

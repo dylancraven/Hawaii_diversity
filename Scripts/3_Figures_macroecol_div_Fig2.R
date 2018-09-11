@@ -11,7 +11,7 @@ require(ggsci)
 # data ##
 #########
 
-macro<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Data/Hawaii_Div_Macro_SIE.csv",sep=",",header=T)
+macro<-read.csv("Data/Hawaii_Div_Macro_SIE.csv",sep=",",header=T)
 
 macroo<-melt(macro, id.vars="geo_entity2", measure.vars=c("nativeSIE","native_woody_spp","total_SppN"),variable.name="Div",value.name="Div2")
 
@@ -49,14 +49,16 @@ macro_g<-ggplot(macroo2,aes(x=geo_entity2,y=Div2,colour=Div, fill=Div))+
                    legend.text=element_text(colour=c("black"),face="bold",size=7),
                    legend.title = element_text(colour=c("black"),face="bold",size=6),
                    legend.title.align = 0.5,
-                   legend.key.size = unit(1,"line"),
+                   legend.key.size = unit(0.25,"cm"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
 
-ggsave(filename = file.path("Figures", "Fig2_MacroEcolDiversity.png"), 
-       width    = 8, 
-       height   = 8, 
-       units    = "cm")
+png(filename="Figures/Fig2_MacroEcolDiversity.png", 
+    units="in", 
+    width=3.5, 
+    height=3.5, 
+    pointsize=2, 
+    res=500)
 
 macro_g
 

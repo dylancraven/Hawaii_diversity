@@ -15,10 +15,9 @@ require(rms)
 # Data  #####
 #############
 
-Beta_1<-read.csv("Cleaned_Data/Scen1_Natives_BetaPIE.csv",sep=",",header=T)
+# Beta_1<-read.csv("Cleaned_Data/Scen1_Natives_BetaPIE.csv",sep=",",header=T)
 
-load("Cleaned_Data/Scen2_natives_9plots.RData")
-Beta_2<-beta.tog
+Beta_2<-read.csv("Cleaned_Data/Scen2_Natives_9plots_BetaPIE.csv",sep=",",header=T)
 
 Beta_3<-read.csv("Cleaned_Data/Scen3_Natives_9plots_BetaPIE.csv",sep=",",header=T)
 
@@ -29,51 +28,51 @@ Beta_3<-read.csv("Cleaned_Data/Scen3_Natives_9plots_BetaPIE.csv",sep=",",header=
 ##############
 # Scenario 1 #
 ##############
-
-Beta_1$geo_entity2<-as.character(Beta_1$geo_entity2)
-Beta_1$geo_entity2<-ifelse(Beta_1$geo_entity2=="Hawai'i Island","Hawai'i",Beta_1$geo_entity2)
-Beta_1$geo_entity2<-ifelse(Beta_1$geo_entity2=="Kaua'i Island","Kaua'i",Beta_1$geo_entity2)
-Beta_1$geo_entity2<-ifelse(Beta_1$geo_entity2=="O'ahu Island","O'ahu",Beta_1$geo_entity2)
-Beta_1$geo_entity2<-as.factor(Beta_1$geo_entity2)
-
-Beta_1$geo_entity2<-factor(Beta_1$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-Beta_11<-filter(Beta_1, index=="beta_S_PIE")
-
-Beta_1s<- Beta_11 %>%
-  group_by(geo_entity2) %>%
-  do(data.frame(rbind(smean.cl.boot(.$value, B=1000))))
-
-colnames(Beta_1s)[2]<-"value"
-colnames(Beta_1s)[3]<-"l.QD"
-colnames(Beta_1s)[4]<-"h.QD"
-
-Beta_1s$geo_entity2<-as.factor(Beta_1s$geo_entity2)
-Beta_1s$geo_entity2<-factor(Beta_1s$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-Beta_Scen1<-ggplot(data=Beta_11, aes(x=geo_entity2,y=value,group=geo_entity2,color=geo_entity2))+
-  geom_point(data=Beta_11, aes(x=geo_entity2,y=value,group=geo_entity2,color=geo_entity2),
-             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.1)+
-  
-  geom_point(data=Beta_1s, aes(x=geo_entity2,y=value,group=geo_entity2, colour=geo_entity2),size=2)+
-  geom_errorbar(data=Beta_1s,aes(ymin=l.QD,ymax=h.QD),width=0.1)+
-  # scale_y_continuous(limits=c(0,8.5))+
-  #scale_color_d3(palette="category20c")+
-  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  labs(x="",y=expression(bold(beta["ENSpie"])))+
-  guides(colour=guide_legend(title="Area+Het+Age",title.position = "top"))+
-  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
-                   legend.text=element_text(colour=c("black"),face="bold",size=6),
-                   legend.title = element_text(colour=c("black"),face="bold",size=6),
-                   legend.title.align = 0.5,
-                   legend.position=c("none"),
-                   legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
-write.csv(Beta_1s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen1_9plots.csv",row.names=F)
+# 
+# Beta_1$geo_entity2<-as.character(Beta_1$geo_entity2)
+# Beta_1$geo_entity2<-ifelse(Beta_1$geo_entity2=="Hawai'i Island","Hawai'i",Beta_1$geo_entity2)
+# Beta_1$geo_entity2<-ifelse(Beta_1$geo_entity2=="Kaua'i Island","Kaua'i",Beta_1$geo_entity2)
+# Beta_1$geo_entity2<-ifelse(Beta_1$geo_entity2=="O'ahu Island","O'ahu",Beta_1$geo_entity2)
+# Beta_1$geo_entity2<-as.factor(Beta_1$geo_entity2)
+# 
+# Beta_1$geo_entity2<-factor(Beta_1$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+# 
+# Beta_11<-filter(Beta_1, index=="beta_S_PIE")
+# 
+# Beta_1s<- Beta_11 %>%
+#   group_by(geo_entity2) %>%
+#   do(data.frame(rbind(smean.cl.boot(.$value, B=1000))))
+# 
+# colnames(Beta_1s)[2]<-"value"
+# colnames(Beta_1s)[3]<-"l.QD"
+# colnames(Beta_1s)[4]<-"h.QD"
+# 
+# Beta_1s$geo_entity2<-as.factor(Beta_1s$geo_entity2)
+# Beta_1s$geo_entity2<-factor(Beta_1s$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+# 
+# Beta_Scen1<-ggplot(data=Beta_11, aes(x=geo_entity2,y=value,group=geo_entity2,color=geo_entity2))+
+#   geom_point(data=Beta_11, aes(x=geo_entity2,y=value,group=geo_entity2,color=geo_entity2),
+#              position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.2)+
+#   
+#   geom_point(data=Beta_1s, aes(x=geo_entity2,y=value,group=geo_entity2, colour=geo_entity2),size=2)+
+#   geom_errorbar(data=Beta_1s,aes(ymin=l.QD,ymax=h.QD),width=0.1)+
+#   # scale_y_continuous(limits=c(0,8.5))+
+#   #scale_color_d3(palette="category20c")+
+#   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+#   labs(x="",y=expression(bold(beta["ENSpie"])))+
+#   guides(colour=guide_legend(title="Area+Het+Age",title.position = "top"))+
+#   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
+#                    axis.title.y=element_text(colour="black",face="bold",size=6),
+#                    axis.text.x=element_text(colour=c("black"),face="bold",size=6),
+#                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+#                    legend.text=element_text(colour=c("black"),face="bold",size=6),
+#                    legend.title = element_text(colour=c("black"),face="bold",size=6),
+#                    legend.title.align = 0.5,
+#                    legend.position=c("none"),
+#                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+#                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+# 
+# write.csv(Beta_1s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen1_7plots.csv",row.names=F)
 
 ## Scenario 2
 
@@ -103,17 +102,17 @@ Beta_2s$geo_entity2<-factor(Beta_2s$geo_entity2,levels=c("Hawai'i","Maui Nui","O
 
 Beta_Scen2<-ggplot(data=Beta_22, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entity2,color=geo_entity2))+
   geom_point(data=Beta_22, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entity2,color=geo_entity2),
-             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.1)+
+             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.2)+
   
   geom_point(data=Beta_2s, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entity2, colour=geo_entity2),size=2)+
   geom_errorbar(data=Beta_2s,aes(ymin=l.QD,ymax=h.QD),width=0.1)+
-  #scale_y_continuous(limits=c(0,8.5))+
+  scale_y_continuous(limits=c(0,4),breaks=c(0,1,2,3,4))+
   #scale_color_d3(palette="category20c")+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   labs(x="",y=expression(bold(beta["ENSpie"])))+
   guides(colour=guide_legend(title="Het+Age",title.position = "top"))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.title.y=element_blank(),
+                   axis.title.y=element_text(colour="black",face="bold",size=6),
                    axis.text.x=element_text(colour=c("black"),face="bold",size=6),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
@@ -121,7 +120,7 @@ Beta_Scen2<-ggplot(data=Beta_22, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_enti
                    legend.title.align = 0.5,
                    legend.position=c("none"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
 
 write.csv(Beta_2s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen2_9plots.csv",row.names=F)
 
@@ -154,11 +153,11 @@ Beta_3s$geo_entity2<-factor(Beta_3s$geo_entity2,levels=c("Hawai'i","Maui Nui","O
 
 Beta_Scen3<-ggplot(data=Beta_33, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entity2,color=geo_entity2))+
   geom_point(data=Beta_33, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entity2,color=geo_entity2),
-             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.1)+
+             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.2)+
   
   geom_point(data=Beta_3s, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entity2, colour=geo_entity2),size=2)+
   geom_errorbar(data=Beta_3s,aes(ymin=l.QD,ymax=h.QD),width=0.1)+
-  #scale_y_continuous(limits=c(0,8.5))+
+  scale_y_continuous(limits=c(0,4),breaks=c(0,1,2,3,4))+
   #scale_color_d3(palette="category20c")+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   labs(x="",y=expression(bold(beta["ENSpie"])))+
@@ -172,7 +171,7 @@ Beta_Scen3<-ggplot(data=Beta_33, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_enti
                    legend.title.align = 0.5,
                    legend.position=c("none"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
 
 write.csv(Beta_3s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen3_9plots.csv",row.names=F)
 
@@ -184,45 +183,45 @@ write.csv(Beta_3s,"Cleaned_Data/Summary_Beta_ENS_PIE_Scen3_9plots.csv",row.names
 # Scenario 1 #
 ##############
 
-Beta_111<-filter(Beta_1, index=="beta_S")
-
-Beta_111$geo_entity2<-as.factor(Beta_111$geo_entity2)
-Beta_111$geo_entity2<-factor(Beta_111$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-Beta_1ss<- Beta_111 %>%
-  group_by(geo_entity2) %>%
-  do(data.frame(rbind(smean.cl.boot(.$value, B=1000))))
-
-colnames(Beta_1ss)[2]<-"value"
-colnames(Beta_1ss)[3]<-"l.QD"
-colnames(Beta_1ss)[4]<-"h.QD"
-
-Beta_1ss$geo_entity2<-as.factor(Beta_1ss$geo_entity2)
-Beta_1ss$geo_entity2<-factor(Beta_1ss$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-Beta_Scen1s<-ggplot(data=Beta_111, aes(x=geo_entity2,y=value,group=geo_entity2,color=geo_entity2))+
-  geom_point(data=Beta_111, aes(x=geo_entity2,y=value,group=geo_entity2,color=geo_entity2),
-             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.1)+
-  
-  geom_point(data=Beta_1ss, aes(x=geo_entity2,y=value,group=geo_entity2, colour=geo_entity2),size=2)+
-  geom_errorbar(data=Beta_1ss,aes(ymin=l.QD,ymax=h.QD),width=0.1)+
-  #scale_y_continuous(limits=c(0,8.5))+
-  #scale_color_d3(palette="category20c")+
-  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  labs(x="",y=expression(bold(beta["S"])))+
-  guides(colour=guide_legend(title="Area+Het+Age",title.position = "top"))+
-  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_blank(),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
-                   legend.text=element_text(colour=c("black"),face="bold",size=6),
-                   legend.title = element_text(colour=c("black"),face="bold",size=6),
-                   legend.title.align = 0.5,
-                   legend.position=c("top"),
-                   legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
-write.csv(Beta_1ss,"Cleaned_Data/Summary_Beta_S_Scen1_9plots.csv",row.names=F)
+# Beta_111<-filter(Beta_1, index=="beta_S")
+# 
+# Beta_111$geo_entity2<-as.factor(Beta_111$geo_entity2)
+# Beta_111$geo_entity2<-factor(Beta_111$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+# 
+# Beta_1ss<- Beta_111 %>%
+#   group_by(geo_entity2) %>%
+#   do(data.frame(rbind(smean.cl.boot(.$value, B=1000))))
+# 
+# colnames(Beta_1ss)[2]<-"value"
+# colnames(Beta_1ss)[3]<-"l.QD"
+# colnames(Beta_1ss)[4]<-"h.QD"
+# 
+# Beta_1ss$geo_entity2<-as.factor(Beta_1ss$geo_entity2)
+# Beta_1ss$geo_entity2<-factor(Beta_1ss$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+# 
+# Beta_Scen1s<-ggplot(data=Beta_111, aes(x=geo_entity2,y=value,group=geo_entity2,color=geo_entity2))+
+#   geom_point(data=Beta_111, aes(x=geo_entity2,y=value,group=geo_entity2,color=geo_entity2),
+#              position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.2)+
+#   
+#   geom_point(data=Beta_1ss, aes(x=geo_entity2,y=value,group=geo_entity2, colour=geo_entity2),size=2)+
+#   geom_errorbar(data=Beta_1ss,aes(ymin=l.QD,ymax=h.QD),width=0.1)+
+#   #scale_y_continuous(limits=c(0,8.5))+
+#   #scale_color_d3(palette="category20c")+
+#   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
+#   labs(x="",y=expression(bold(beta["S"])))+
+#   guides(colour=guide_legend(title="Area+Het+Age",title.position = "top"))+
+#   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
+#                    axis.title.y=element_text(colour="black",face="bold",size=6),
+#                    axis.text.x=element_blank(),
+#                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
+#                    legend.text=element_text(colour=c("black"),face="bold",size=6),
+#                    legend.title = element_text(colour=c("black"),face="bold",size=6),
+#                    legend.title.align = 0.5,
+#                    legend.position=c("top"),
+#                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+#                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+# 
+# write.csv(Beta_1ss,"Cleaned_Data/Summary_Beta_S_Scen1_7plots.csv",row.names=F)
 
 ## Scenario 2
 
@@ -253,17 +252,17 @@ Beta_2ss$geo_entity2<-factor(Beta_2ss$geo_entity2,levels=c("Hawai'i","Maui Nui",
 
 Beta_Scen2s<-ggplot(data=Beta_222, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2))+
   geom_point(data=Beta_222, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2),
-             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.1)+
+             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.2)+
   
   geom_point(data=Beta_2ss, aes(x=geo_entity2,y=beta_S,group=geo_entity2, colour=geo_entity2),size=2)+
   geom_errorbar(data=Beta_2ss,aes(ymin=l.QD,ymax=h.QD),width=0.1)+
-  #cale_y_continuous(limits=c(0,8.5))+
+  scale_y_continuous(limits=c(0,17.7),breaks=c(0,5,10,15))+
   # scale_color_d3(palette="category20c")+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   labs(x="",y=expression(bold(beta["S"])))+
   guides(colour=guide_legend(title="Het+Age",title.position = "top"))+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.title.y=element_blank(),
+                   axis.title.y=element_text(colour="black",face="bold",size=6),
                    axis.text.x=element_blank(),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
@@ -271,7 +270,7 @@ Beta_Scen2s<-ggplot(data=Beta_222, aes(x=geo_entity2,y=beta_S,group=geo_entity2,
                    legend.title.align = 0.5,
                    legend.position=c("top"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
 
 write.csv(Beta_2ss,"Cleaned_Data/Summary_Beta_S_Scen2_9plots.csv",row.names=F)
 
@@ -302,11 +301,11 @@ Beta_3ss$geo_entity2<-factor(Beta_3ss$geo_entity2,levels=c("Hawai'i","Maui Nui",
 
 Beta_Scen3s<-ggplot(data=Beta_333, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2))+
   geom_point(data=Beta_333, aes(x=geo_entity2,y=beta_S,group=geo_entity2,color=geo_entity2),
-             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.1)+
+             position = position_jitter(w = 0.02, h = 0),size=0.5,alpha=0.2)+
   
   geom_point(data=Beta_3ss, aes(x=geo_entity2,y=beta_S,group=geo_entity2, colour=geo_entity2),size=2)+
   geom_errorbar(data=Beta_3ss,aes(ymin=l.QD,ymax=h.QD),width=0.1)+
-  #scale_y_continuous(limits=c(0,100))+
+  scale_y_continuous(limits=c(0,17.7),breaks=c(0,5,10,15))+
   #scale_color_d3(palette="category20c")+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   labs(x="",y=expression(bold(beta["S"])))+
@@ -320,7 +319,7 @@ Beta_Scen3s<-ggplot(data=Beta_333, aes(x=geo_entity2,y=beta_S,group=geo_entity2,
                    legend.title.align = 0.5,
                    legend.position=c("top"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
 
 write.csv(Beta_3ss,"Cleaned_Data/Summary_Beta_S_Scen3_9plots.csv",row.names=F)
 
@@ -330,12 +329,11 @@ write.csv(Beta_3ss,"Cleaned_Data/Summary_Beta_S_Scen3_9plots.csv",row.names=F)
 
 require(cowplot)
 
-togg2<-plot_grid(Beta_Scen1s, Beta_Scen2s, Beta_Scen3s,Beta_Scen1, Beta_Scen2, Beta_Scen3,
-                 labels=c("a)","b)","c)","d)","e)","f)"),label_size = 6,
-                 ncol=3)
+togg2<-plot_grid(Beta_Scen2s, Beta_Scen3s, Beta_Scen2, Beta_Scen3,
+                 labels=c("a)","b)","c)","d)"),label_size = 6,
+                 ncol=2)
 
-
-png(filename="Figures/Beta_ENSpie_S_FigS3_natives_9plots.png", 
+png(filename="Figures/Fig5_Beta_ENSpie_S_natives_9plots.png", 
     units="in", 
     width=8, 
     height=6, 
@@ -345,3 +343,4 @@ png(filename="Figures/Beta_ENSpie_S_FigS3_natives_9plots.png",
 togg2
 
 dev.off()
+

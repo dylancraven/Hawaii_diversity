@@ -12,16 +12,6 @@ require(BBmisc)
 require(ggplot2)
 require(mobr)
 
-sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
-  # regroup when done
-  grps = tbl %>% groups %>% lapply(as.character) %>% unlist
-  # check length of groups non-zero
-  keep = tbl %>% summarise() %>% ungroup() %>% sample_n(size, replace, weight)
-  # keep only selected groups, regroup because joins change count.
-  # regrouping may be unnecessary but joins do something funky to grouping variable
-  tbl %>% right_join(keep, by=grps) %>% group_by_(.dots = grps)
-}
-
 ######################
 ## data ##############
 ######################
@@ -29,46 +19,22 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
 dat3<-read.csv("Cleaned_Data/Scen3_Natives_7plots_SimComms.csv")
 dat3$Abundance_ha<-round(dat3$Abundance_ha)
 
-length(unique(dat3$iteration)) # 4940
-
-######################
-# select  100 ########
-######################
-
-set.seed(27)
-un<-data.frame(unique(dat3$iteration))
-nn<-dim(un)[1]
-un$Iteration2<-seq(from=1,to=nn,by=1)
-colnames(un)[1]<-"iteration"
-
-un_sel<-data.frame(Iteration2=sample(un$Iteration2, 100, replace = FALSE))
-
-un_sel<-merge(un_sel,un,by.y="Iteration2")
-
-un_sel$Iteration2<-seq(from=1,to=100,by=1)
-
-#un_sel<-filter(un, Iteration2<101)  # only 100
-
-dat33<-merge(un_sel, dat3,by.y="iteration")
-
-dat33<-select(dat33, Iteration2, geo_entity2, PlotID, SPP_CODE3A, Abundance_ha, r_PET,meanPET, meanMAP,totPlotArea)
-
 ############################
 # quick data summary & QC # 
 ###########################
 
-# is there variation in PET range and Plot Area?
-summ2<-summarize(group_by(dat33,geo_entity2), r_PET=mean(r_PET),PlotArea=mean(totPlotArea), var_PlotArea=sd(totPlotArea), 
-                 meanPET=mean(meanPET),meanMAP=mean(meanMAP))
+dat33<-distinct(select(dat3, Iteration, geo_entity2, r_PET, meanPET, totPlotArea))
 
+# is there variation in PET range and Plot Area?
+summ2<-summarize(group_by(dat33,geo_entity2), r_PET=mean(r_PET),PlotArea=mean(totPlotArea), var_PlotArea=sd(totPlotArea))
 summ2
 
 # always 7 plots per island per iteration?
 
-summ3<-summarize(group_by(dat33,Iteration2,geo_entity2),PlotN=length(unique(PlotID)))
+summ3<-summarize(group_by(dat3,Iteration,geo_entity2),PlotN=length(unique(PlotID)))
 summ33<-summarize(group_by(summ3,geo_entity2), meanPlotN=mean(PlotN), minP=min(PlotN),maxP=max(PlotN))
-
 summ33
+
 ######################
 
 set.seed(27)
@@ -76,7 +42,7 @@ curveZ<-list(); orderZ<-list();rangeZ<-list();alphaZ<-list();betaZ<-list(); radZ
 
 for(i in 1:100){
   
-  testt<-subset(dat33, dat33$Iteration2==(unique(dat33$Iteration2))[i])  
+  testt<-subset(dat3, dat3$Iteration==(unique(dat3$Iteration))[i])  
   
   togg2<-summarize(group_by(testt, geo_entity2, SPP_CODE3A),Abundance=sum(Abundance_ha))
   
@@ -202,7 +168,6 @@ for(i in 1:100){
   rangezz$Iteration<-i
   #rangezz<-ungroup(rangezz)
   
-  
   # output
   cat("progress", i, sep=' ','\n')
   
@@ -225,8 +190,6 @@ orders.tog<-do.call(rbind.data.frame,orderZ)
 
 rangez.tog<-do.call(rbind.data.frame,rangeZ)
 
-#alpha.tog<-do.call(rbind.data.frame,alphaZ)
-
 beta.tog<-do.call(rbind.data.frame,betaZ)
 
 rad.tog<-do.call(rbind.data.frame,radZ)
@@ -236,15 +199,16 @@ rad.tog<-do.call(rbind.data.frame,radZ)
 # across samples #
 ##################
 
-
 # All
 
 write.table(orders.tog,"Cleaned_Data/Scen3_Natives_7plots_HillN.csv",sep=",",row.names=F)
 
 write.table(curves.tog,"Cleaned_Data/Scen3_Natives_7plots_curves_estimates.csv",sep=",",row.names=F)
 
-envs<-summarize(group_by(rangez.tog, geo_entity2), mean_MAP=mean(meanMAP),
-                mean_PET=mean(meanPET),r_PET=mean(r_PET),  m_PlotArea=mean(totPlotArea))
+envs<-dplyr::summarize(group_by(rangez.tog, geo_entity2), mean_MAP=mean(meanMAP),
+                       mean_PET=mean(meanPET),r_PET=mean(r_PET),
+                       m_PlotArea=mean(totPlotArea),
+                       sd_PlotArea=sd(totPlotArea))
 
 write.table(envs,"Cleaned_Data/Scen3_Native_7plots_EnvConditions_summarized.csv",sep=",",row.names=F)
 

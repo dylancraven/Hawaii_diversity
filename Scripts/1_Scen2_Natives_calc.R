@@ -1,8 +1,7 @@
-#####################
-# Island - SAC ######
-#####################
-# Scenario 2 ########
-#####################
+#########################
+# Island - SAC         ##
+# Scenario: 'Het + Age'##
+#########################
 
 require(dplyr)
 require(reshape2)
@@ -68,6 +67,7 @@ big<-filter(datt,geo_entity2=="Hawai'i Island")
 ###########
 
 set.seed(27)
+
 curveZ<-list(); orderZ<-list();rangeZ<-list();alphaZ<-list();betaZ<-list(); radZ<-list();
 
 for(i in 1:100){

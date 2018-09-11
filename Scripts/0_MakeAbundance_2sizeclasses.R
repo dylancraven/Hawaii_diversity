@@ -31,7 +31,7 @@ spp$Scientific_name<-str_replace_all(spp$Scientific_name, "spp6", "spp.")
 spp<-unique(spp)
 
 
-tog<-read.delim("Data/oHawFor_Tree_Data.csv",sep=",",header=T)
+tog<-read.delim("Data/OpenNahele_Tree_Data.csv",sep=",",header=T)
 
 togg<-select(tog, Island, Study, PlotID, Plot_Area,Scientific_name, Native_Status, Tree_ID, DBH_cm,Abundance, Abundance_ha)
 

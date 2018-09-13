@@ -9,7 +9,6 @@ replace_na_with_last<-function(x,a=!is.na(x)){
   x[which(a)[c(1,1:sum(a))][cumsum(a)+1]]
 }
 
-require(here)
 require(dplyr)
 require(tidyr)
 require(stringr)
@@ -32,7 +31,6 @@ spp<-unique(spp)
 
 
 tog<-read.delim("Data/OpenNahele_Tree_Data.csv",sep=",",header=T)
-
 togg<-select(tog, Island, Study, PlotID, Plot_Area,Scientific_name, Native_Status, Tree_ID, DBH_cm,Abundance, Abundance_ha)
 
 togg$geo_entity2<-togg$Island
@@ -75,27 +73,11 @@ all$Abundance_ha<-round(all$Abundance_ha)
 
 all$SizeClass<-"5"
 
-#################
-# trees > 10 cm  #
-#################
-
-big<- filter(togg1, DBH_cm>=10 & is.na(DBH_cm)==FALSE )
-
-bigg<-summarize(group_by(big, Study, Island, geo_entity2, PlotID,Plot_Area, Scientific_name,SPP_CODE3A, Native_Status), Abundance=sum(Abundance),
-               Abundance_ha=sum(Abundance_ha))
-
-bigg$Abundance_ha<-round(bigg$Abundance_ha)
-
-bigg$SizeClass<-"10"
-
-
-all_big<-rbind.data.frame(all, bigg) # both size classes together
-
 #########################################
 # Part II: Identify highly invaded plots  #
 #########################################
 
-tog_tog<- dcast(all_big, PlotID +SizeClass~Native_Status,value.var="Abundance_ha",sum)
+tog_tog<- dcast(all, PlotID +SizeClass~Native_Status,value.var="Abundance_ha",sum)
 tog_tog<-tog_tog %>%
   mutate(Tot_Abund= alien+native+uncertain) 
 
@@ -104,7 +86,7 @@ tog_tog<-tog_tog %>%
 
 tog_tog<-select(tog_tog, PlotID, SizeClass,PropInvaded)
 
-all_bigg<-merge(all_big, tog_tog,by.y=c("PlotID", "SizeClass"))
+all_bigg<-merge(all, tog_tog,by.y=c("PlotID", "SizeClass"))
 
 ########################
 # add in climate data ##
@@ -125,5 +107,5 @@ all_bigg2<-select(all_bigg, PlotID, Study, Island, geo_entity2, Plot_Area, Lat_D
 
 all_bigg2<-arrange(all_bigg2, PlotID, SizeClass)
 
-write.table(all_bigg2,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",sep=",",row.names=F)
+write.table(all_bigg2,"Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",sep=",",row.names=F)
 

@@ -2,6 +2,8 @@
 # Island - SAC         ##
 # Scenario: 'Het + Age'##
 #########################
+# 5 plots               #
+#########################
 
 require(dplyr)
 require(reshape2)
@@ -79,7 +81,6 @@ ka_plotarea$geo_entity2<-"Kaua'i Island"
 ka_iteration_plots<-distinct(select(ka_sel_plots, Iteration, PlotID))
 ka_iteration_plots$geo_entity2<-"Kaua'i Island"
 
-
 ######################################################################
 # Step 2: select plots from other islands within area ranges of Kauai#
 ######################################################################
@@ -118,7 +119,12 @@ for(i in 1:3)
 
 outt<-do.call(rbind.data.frame, outt)
 
+#### QC: how many iterations per island?
+
+qc<-dplyr::summarize(group_by(outt, geo_entity2), iterations=length(unique(Iteration)))
+                     
 # randomly select 100 iterations from each island
+
 outt2<-list();
 
 for(i in 1:3){
@@ -146,6 +152,13 @@ outt3<-left_join(outt2, iterss, by=c('geo_entity2','Iteration'))
 outt3<-select(outt3, Iteration=Iteration2, geo_entity2, PlotID, Plot_Area,-Iteration)
 
 scen2_selplots<-rbind.data.frame(outt3,ka_sel_plots)
+
+# QC
+
+qcc<-dplyr::summarize(group_by(scen2_selplots, geo_entity2, Iteration), plotn=length(unique(PlotID)))
+
+qcc2<-dplyr::summarize(group_by(scen2_selplots, geo_entity2), iter=length(unique(Iteration)))
+
 
 #####################################
 # Step 4: estimate diversity stuff  #

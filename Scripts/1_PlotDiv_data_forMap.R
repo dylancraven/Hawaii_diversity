@@ -11,7 +11,7 @@ require(mobr)
 
 ########
 
-datt<-read.csv("/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
+datt<-read.csv("Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",header=T)
 
 
 datt<-filter(datt, Plot_Prop_Invaded<=0.75 & SizeClass==5) %>%
@@ -57,4 +57,4 @@ h_map_data<-distinct(select(datt, geo_entity2, PlotID, Lat_Dec, Long_Dec, Elev_m
 
 h_map_data<-left_join(h_map_data, h_plot_div, by="PlotID",all.x=TRUE)
 
-write.table(h_map_data,"/homes/dc78cahe/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Hawaii_mapdata.csv",sep=",",row.names=F)
+write.table(h_map_data,"Cleaned_Data/Hawaii_mapdata.csv",sep=",",row.names=F)

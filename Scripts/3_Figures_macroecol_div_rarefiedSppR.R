@@ -1,7 +1,8 @@
-##########
-# Fig.x #
-##########
-# discard
+################################
+# Rarefied diversity by island #
+# for different # of indiv.    #
+################################
+# move to SI
 
 require(dplyr)
 require(ggplot2)
@@ -63,15 +64,10 @@ All_bar<-ggplot(SppR,aes(x=Loc_Rare,y=S,colour=Rarefy2, fill=Rarefy2))+
                    legend.text=element_text(colour=c("black"),face="bold",size=6),
                    legend.title = element_text(colour="black",face="bold",size=6),
                    legend.title.align = 0.5,
-                   legend.key.size = unit(2,"line"),
+                   legend.key.size = unit(0.25,"cm"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-#################
-# combine panels#
-#################
-
-#require(cowplot)
 
 png(filename="Figures/IslandLevel_Rare_SppDiv_FigS1.png", 
     units="in", 
@@ -84,5 +80,3 @@ All_bar
 
 
 dev.off()
-
-

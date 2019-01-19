@@ -29,6 +29,10 @@ spp$Scientific_name<-str_replace_all(spp$Scientific_name, "spp6", "spp.")
 
 spp<-unique(spp)
 
+alienz<-read.csv("Data/Hawaii_aliens.csv")
+nat_alienz<-filter(alienz, Naturalized_Introduced=="Not_Naturalized")
+nat_alienz$Naturalized_Introduced<-as.character(nat_alienz$Naturalized_Introduced)
+nat_alienzz<-as.character(nat_alienz$SPP_CODE3A)
 
 tog<-read.delim("Data/OpenNahele_Tree_Data.csv",sep=",",header=T)
 togg<-select(tog, Island, Study, PlotID, Plot_Area,Scientific_name, Native_Status, Tree_ID, DBH_cm,Abundance, Abundance_ha)
@@ -49,10 +53,15 @@ togg<-select(togg, PlotID, Study, Island, geo_entity2, Plot_Area, Tree_ID, Scien
 # Part I: Filter data        #
 ##############################
 
-# Criteria: plot size > 100 m2 & eliminate HIPPNET (too big) 
+# Criteria 1: plot size > 100 m2 & eliminate HIPPNET (too big) 
 
 togg1<- filter(togg, Plot_Area>=100)%>%
-        filter(., Study!="HIPPNET")
+        filter(., Study!="HIPPNET") 
+
+# Criteria 2: remove spp. that are not naturalized or uncertain 
+
+togg1<- filter(togg1, !SPP_CODE3A %in% nat_alienzz)%>%
+        filter(., Native_Status=="native"|Native_Status=="alien")
 
 #########
 ## qc ###
@@ -79,7 +88,7 @@ all$SizeClass<-"5"
 
 tog_tog<- dcast(all, PlotID +SizeClass~Native_Status,value.var="Abundance_ha",sum)
 tog_tog<-tog_tog %>%
-  mutate(Tot_Abund= alien+native+uncertain) 
+  mutate(Tot_Abund= alien+native) 
 
 tog_tog<-tog_tog %>%
   mutate(PropInvaded= alien/Tot_Abund) 

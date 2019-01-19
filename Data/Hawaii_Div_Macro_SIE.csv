@@ -1,5 +1,17 @@
-geo_entity2,SIE,nativeSIE,total_SppN,native_woody_spp,TotalArea,SppN_plotdata,plot_native_SIE
-Hawai'i Island,112,66,486,213,10433,96,7
-Kaua'i Island,185,164,536,307,1431,57,10
-Maui Nui,169,123,604,316,3038,84,6
-O'ahu Island,181,109,583,281,1547,55,4
+"geo_entity2","species_group","SppN"
+"Hawai'i Island","exotic",272
+"Hawai'i Island","native",214
+"Kaua'i Island","exotic",227
+"Kaua'i Island","native",309
+"Maui Nui","exotic",288
+"Maui Nui","native",318
+"O'ahu Island","exotic",302
+"O'ahu Island","native",283
+"Hawai'i Island","all",486
+"Kaua'i Island","all",536
+"Maui Nui","all",604
+"O'ahu Island","all",583
+"Hawai'i Island","nSIE",66
+"Kaua'i Island","nSIE",163
+"Maui Nui","nSIE",89
+"O'ahu Island","nSIE",108

@@ -60,6 +60,7 @@ scen2_SACs_iterr<-summarize(group_by(scen2_SACs_iter2, iteration, geo_entity2), 
 
 range(scen2_SACs_iterr$m_n) # ok - this will depend on the selected plots per iteration/island
 
+                            # 335 - 1000
 
 
 ######################
@@ -117,3 +118,4 @@ scen3_SACs_iter2<-summarize(group_by(scen3_SACs_iter2, iteration, geo_entity2), 
 
 range(scen3_SACs_iter2$m_n) # ok - this will depend on the selected plots per iteration/island
 
+                         # 337 - 1000 

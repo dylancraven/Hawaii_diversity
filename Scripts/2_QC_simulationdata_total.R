@@ -57,6 +57,7 @@ scen2_SACs_iter2<-filter(scen2_SACs, method=="interpolated")
 scen2_SACs_iterr<-summarize(group_by(scen2_SACs_iter2, iteration, geo_entity2), m_n= length(unique(m)))
 
 range(scen2_SACs_iterr$m_n) # ok - this will depend on the selected plots per iteration/island
+                            # 357 - 1000
 
 ######################
 # Scenario 3 #########
@@ -112,6 +113,5 @@ scen3_SACs_iter2<-filter(scen3_SACs, method=="interpolated")
 scen3_SACs_iter2<-summarize(group_by(scen3_SACs_iter2, iteration, geo_entity2), m_n= length(unique(m)))
 
 range(scen3_SACs_iter2$m_n) # ok - this will depend on the selected plots per iteration/island
-
-
+                            # 1000 - 1000
   

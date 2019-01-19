@@ -6,8 +6,7 @@
 
 require(lme4)
 require(MuMIn)
-require(car)
-require(ggplot2)
+require(lmerTest)
 require(ggeffects)
 
 #################
@@ -36,13 +35,14 @@ sac.tog$geo_entity2<-factor(sac.tog$geo_entity2,levels=c("Hawai'i","Maui Nui","O
 a<-lmer(qD~log(m)+geo_entity2+log(m):geo_entity2+(1|geo_entity2:iteration),
         data=sac.tog,control=lmerControl(optimizer="Nelder_Mead"))
 
-summ_sac_scen2<-broom::tidy(Anova(a))
+summ_sac_scen2<-broom::tidy(anova(a,ddf="Satterthwaite"))
 sac_scen2_r2<-r.squaredGLMM(a,pj2014 = FALSE)
 
-scatter.smooth(fitted(a),residuals(a, type="pearson"),
-                       main="Shannon: Model Structure II",xlab="Fitted Values",ylab="Inner Residuals")
-        abline(h=0,col="red")
-        
+# validate assumptions
+
+plot(fitted(a),residuals(a))
+abline(h=0,col="red")
+
 qqnorm(residuals(a))
 qqline(residuals(a))
         
@@ -51,7 +51,7 @@ qqline(unlist(ranef(a)))
 
 # make predictions
 
-pred <- ggpredict(a, terms = c("m [exp]","geo_entity2"))
+pred <- ggpredict(a, terms = c("m [exp]","geo_entity2"), type="fe")
 
 pred$group<-as.character(pred$group)
 pred$group<-ifelse(pred$group=="Hawai'i Island","Hawai'i",pred$group)
@@ -61,28 +61,6 @@ pred$group<-as.factor(pred$group)
 
 pred$group<-as.factor(pred$group)
 pred$group<-factor(pred$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-p_scen2<-ggplot(pred, aes(x, predicted,group=group,colour=group,fill=group)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = conf.low, ymax = conf.high,fill=group), colour="transparent", alpha = .3)+
-  scale_y_continuous(breaks=c(0,5, 10, 15, 20,25,30))+
-  scale_x_continuous(breaks=c(0,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000))+
-  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  scale_fill_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  coord_cartesian(ylim=c(0,32))+
-  
-  ylab("Species diversity")+xlab("Number of individuals")+
-  guides(colour=guide_legend(title="Het+Age",title.position = "top"),fill="none")+
-  
-  theme_bw()+theme(legend.position="top", axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
-                   legend.text=element_text(colour=c("black"),face="bold",size=6),
-                   legend.title = element_text(colour=c("black"),face="bold",size=6),
-                   legend.title.align = 0.5,
-                   legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
 
 ################
 # Scenario 3 ###
@@ -107,11 +85,10 @@ sac.tog3$geo_entity2<-factor(sac.tog3$geo_entity2,levels=c("Hawai'i","Maui Nui",
 b<-lmer(qD~log(m)+geo_entity2+log(m):geo_entity2+(1|geo_entity2:iteration),
         data=sac.tog3,control=lmerControl(optimizer="Nelder_Mead"))
 
-summ_sac_scen3<- broom::tidy(Anova(b))
+summ_sac_scen3<-broom::tidy(anova(b,ddf="Satterthwaite"))
 sac_scen2_r3<-r.squaredGLMM(b,pj2014 = FALSE)
 
-scatter.smooth(fitted(b),residuals(b, type="pearson"),
-               main="Shannon: Model Structure II",xlab="Fitted Values",ylab="Inner Residuals")
+plot(fitted(b),residuals(b))
 abline(h=0,col="red")
 
 qqnorm(residuals(b))
@@ -122,7 +99,7 @@ qqline(unlist(ranef(b)))
 
 # make predictions
 
-pred2 <- ggpredict(b, terms = c("m [exp]","geo_entity2"))
+pred2 <- ggpredict(b, terms = c("m [exp]","geo_entity2"),type="fe")
 
 pred2$group<-as.character(pred2$group)
 pred2$group<-ifelse(pred2$group=="Hawai'i Island","Hawai'i",pred2$group)
@@ -132,28 +109,6 @@ pred2$group<-as.factor(pred2$group)
 
 pred2$group<-as.factor(pred2$group)
 pred2$group<-factor(pred2$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-p_scen3<-ggplot(pred2, aes(x, predicted,group=group,colour=group,fill=group)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = conf.low, ymax = conf.high,fill=group), colour="transparent", alpha = .3)+
-  scale_y_continuous(breaks=c(0,5, 10, 15, 20,25,30))+
-  scale_x_continuous(breaks=c(0,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000))+
-  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  scale_fill_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  coord_cartesian(ylim=c(0,32))+
-  
-  ylab("Species diversity")+xlab("Number of individuals")+
-  guides(colour=guide_legend(title="Age",title.position = "top"),fill="none")+
-  
-  theme_bw()+theme(legend.position="top", axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
-                   legend.text=element_text(colour=c("black"),face="bold",size=6),
-                   legend.title = element_text(colour=c("black"),face="bold",size=6),
-                   legend.title.align = 0.5,
-                   legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
 
 #############
 # RADs ######
@@ -170,7 +125,7 @@ rad.tog2$logRelAbund<-log(rad.tog2$RelAbund)
 rad2<-lmer(Rank_N~ poly(logRelAbund,3)*geo_entity2+(1|geo_entity2:iteration),
            data=rad.tog2)
 
-summ_rad_scen2<-broom::tidy(Anova(rad2))
+summ_rad_scen2<-broom::tidy(anova(rad2,ddf="Satterthwaite"))
 rad_scen2_r2<-r.squaredGLMM(rad2,pj2014 = FALSE)
 
 plot(fitted(rad2),residuals(rad2))
@@ -183,36 +138,16 @@ qqnorm(unlist(ranef(rad2)))
 qqline(unlist(ranef(rad2)))
 
 # make predictions
-pred2 <- ggpredict(rad2, terms = c("logRelAbund [n=8]","geo_entity2"))
+rad_pred2 <- ggpredict(rad2, terms = c("logRelAbund [n=8]","geo_entity2"),type="fe")
 
-pred2$group<-as.character(pred2$group)
-pred2$group<-ifelse(pred2$group=="Hawai'i Island","Hawai'i",pred2$group)
-pred2$group<-ifelse(pred2$group=="Kaua'i Island","Kaua'i",pred2$group)
-pred2$group<-ifelse(pred2$group=="O'ahu Island","O'ahu",pred2$group)
-pred2$group<-as.factor(pred2$group)
+rad_pred2$group<-as.character(rad_pred2$group)
+rad_pred2$group<-ifelse(rad_pred2$group=="Hawai'i Island","Hawai'i",rad_pred2$group)
+rad_pred2$group<-ifelse(rad_pred2$group=="Kaua'i Island","Kaua'i",rad_pred2$group)
+rad_pred2$group<-ifelse(rad_pred2$group=="O'ahu Island","O'ahu",rad_pred2$group)
+rad_pred2$group<-as.factor(rad_pred2$group)
 
-pred2$group<-as.factor(pred2$group)
-pred2$group<-factor(pred2$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-rad_scen2<-ggplot(pred2, aes(x, predicted,group=group,colour=group,fill=group)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = conf.low, ymax = conf.high,fill=group), colour="transparent", alpha = .3)+
-  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  scale_fill_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  coord_cartesian(ylim=c(0,1))+
-  ylab("% Species")+xlab("% Abundance (log scale)")+
-  #scale_color_npg()+
-  guides(colour=guide_legend(title=""),fill="none")+
-  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
-                   legend.text=element_text(colour="black",face="bold",size=6),
-                   legend.title.align = 0,
-                   legend.position=c("none"),
-                   legend.title=element_text(colour="black",face="bold",size=6),
-                   legend.key.size = unit(2.5, 'lines'),
-                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
+rad_pred2$group<-as.factor(rad_pred2$group)
+rad_pred2$group<-factor(rad_pred2$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
 ################
 # Scenario 3 ###
@@ -228,7 +163,7 @@ rad.tog3$logRelAbund<-log(rad.tog3$RelAbund)
 rad3<-lmer(Rank_N~ poly(logRelAbund,3)*geo_entity2+(1|geo_entity2:iteration),
            data=rad.tog3)
 
-summ_rad_scen3<-broom::tidy(Anova(rad3))
+summ_rad_scen3<-broom::tidy(anova(rad3,ddf="Satterthwaite"))
 rad_scen3_r2<-r.squaredGLMM(rad3,pj2014 = FALSE)
 
 plot(fitted(rad3),residuals(rad3))
@@ -241,59 +176,22 @@ qqnorm(unlist(ranef(rad3)))
 qqline(unlist(ranef(rad3)))
 
 # make predictions
-pred3 <- ggpredict(rad3, terms = c("logRelAbund [n=8.30]","geo_entity2"))
+rad_pred3 <- ggpredict(rad3, terms = c("logRelAbund [n=8.30]","geo_entity2"),type="fe")
 
-pred3$group<-as.character(pred3$group)
-pred3$group<-ifelse(pred3$group=="Hawai'i Island","Hawai'i",pred3$group)
-pred3$group<-ifelse(pred3$group=="Kaua'i Island","Kaua'i",pred3$group)
-pred3$group<-ifelse(pred3$group=="O'ahu Island","O'ahu",pred3$group)
-pred3$group<-as.factor(pred3$group)
+rad_pred3$group<-as.character(rad_pred3$group)
+rad_pred3$group<-ifelse(rad_pred3$group=="Hawai'i Island","Hawai'i",rad_pred3$group)
+rad_pred3$group<-ifelse(rad_pred3$group=="Kaua'i Island","Kaua'i",rad_pred3$group)
+rad_pred3$group<-ifelse(rad_pred3$group=="O'ahu Island","O'ahu",rad_pred3$group)
+rad_pred3$group<-as.factor(rad_pred3$group)
 
-pred3$group<-as.factor(pred3$group)
-pred3$group<-factor(pred3$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-rad_scen3<-ggplot(pred3, aes(x, predicted,group=group,colour=group,fill=group)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = conf.low, ymax = conf.high,fill=group), colour="transparent", alpha = .3)+
-  scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  scale_fill_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
-  coord_cartesian(ylim=c(0,1))+
-  ylab("% Species")+xlab("% Abundance (log scale)")+
-  #scale_color_npg()+
-  guides(colour=guide_legend(title=""),fill="none")+
-  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
-                   legend.text=element_text(colour="black",face="bold",size=6),
-                   legend.title.align = 0,
-                   legend.position=c("none"),
-                   legend.title=element_text(colour="black",face="bold",size=6),
-                   legend.key.size = unit(2.5, 'lines'),
-                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
+rad_pred3$group<-as.factor(rad_pred3$group)
+rad_pred3$group<-factor(rad_pred3$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
 ########################
-# combine all ##########
+# save data   ##########
 ########################
 
-require(cowplot)
-
-# just SACs & RADs
-
-togg2<-plot_grid(p_scen2,p_scen3,rad_scen2,rad_scen3,
-                 labels=c("a)","b)","c)","d)"),label_size = 6,
-                 ncol=2)
-
-png(filename="Figures/SACs_RADs_Natives_10plots_Fig3.png", 
-    units="in", 
-    width=8, 
-    height=6, 
-    pointsize=2, 
-    res=400)
-
-togg2
-
-dev.off()
+save(pred, pred2, rad_pred2, rad_pred3,file="Cleaned_Data/modelpredictions_SAC_RAD_Scen23_Native_10plots.RData")
 
 save(sac_scen2_r2,sac_scen2_r3, summ_sac_scen2,summ_sac_scen3, 
      rad_scen2_r2,rad_scen3_r2, summ_rad_scen2,summ_rad_scen3,file="Cleaned_Data/model_summary_SAC_RAD_Native_10plots.RData")

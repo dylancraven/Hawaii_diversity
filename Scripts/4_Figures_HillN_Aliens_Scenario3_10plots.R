@@ -25,11 +25,6 @@ HillNN<-read.csv("Cleaned_Data/Scen3_Aliens_10plots_HillN.csv")
 # organize  #
 #############
 
-# HillN_All$Scenario<-"All"
-# HillN_Natives$Scenario<-"Native"
-# 
-# HillNN<-rbind.data.frame(HillN_All, HillN_Natives)
-
 HillNN$geo_entity2<-as.character(HillNN$geo_entity2)
 HillNN$geo_entity2<-ifelse(HillNN$geo_entity2=="O'ahu Island (incl. Mokoli'i Islet)","O'ahu",HillNN$geo_entity2)
 HillNN$geo_entity2<-ifelse(HillNN$geo_entity2=="O'ahu Island","O'ahu",HillNN$geo_entity2)
@@ -38,16 +33,6 @@ HillNN$geo_entity2<-ifelse(HillNN$geo_entity2=="Kaua'i Island","Kaua'i",HillNN$g
 
 HillNN$geo_entity2<-as.factor(HillNN$geo_entity2)
 HillNN$geo_entity2<-factor(HillNN$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-HillNN<-melt(HillNN, id.vars=c("geo_entity2","iteration","m","method","SC"),measure.vars = c("q...0","q...1","q...2"),
-             variable.name="order",value.name = "qD")
-
-HillNN$order<-as.character(HillNN$order)
-HillNN$order<-ifelse(HillNN$order=="q...0",0,HillNN$order)
-HillNN$order<-ifelse(HillNN$order=="q...1",1,HillNN$order)
-HillNN$order<-ifelse(HillNN$order=="q...2",2,HillNN$order)
-
-HillNN$order<-as.factor(HillNN$order)
 
 HillNN$geo_order<-paste(HillNN$geo_entity2,HillNN$order,sep="_")
 
@@ -85,26 +70,6 @@ HillNN_f<-ungroup(HillNN_f)
 # order x island x scenario  #
 ##############################
 
-# HillNN_f$Scenario<-as.character(HillNN_f$Scenario)
-# HillNN_f$Scenario<-ifelse(HillNN_f$Scenario=="II","Het+Age",HillNN_f$Scenario)
-# HillNN_f$Scenario<-ifelse(HillNN_f$Scenario=="III","Age",HillNN_f$Scenario)
-# HillNN_f$Scenario<-as.factor(HillNN_f$Scenario)
-
-# HillNN_f$Scenario<-factor(HillNN_f$Scenario,levels=c("All","Native"))
-# 
-# HillNN_f<- HillNN_f%>%
-#   unite( "Scen_Order", c("Scenario","order"),remove=FALSE)
-
-# HillNN$Scenario<-as.character(HillNN$Scenario)
-# HillNN$Scenario<-ifelse(HillNN$Scenario=="II","Het+Age",HillNN$Scenario)
-# HillNN$Scenario<-ifelse(HillNN$Scenario=="III","Age",HillNN$Scenario)
-# HillNN$Scenario<-as.factor(HillNN$Scenario)
-
-#HillNN$Scenario<-factor(HillNN$Scenario,levels=c("All","Native"))
-
-# HillNN<- HillNN%>%
-#   unite( "Scen_Order", c("Scenario","order"),remove=FALSE)
-
 ###################
 #  order 0        #
 ###################
@@ -121,8 +86,7 @@ Hill_Or0<-ggplot(H_Sc2_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2))+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   
   scale_y_continuous(limits=c(0, 22),breaks=c(0,5,10,15,20),labels=c("0","5","10","15","20"))+
-  # scale_shape_manual(values=c(17,15,16))+
-  #facet_grid(order~Scenario,scales="free_y")+
+
   labs(x="",y="Species richness (q = 0)")+
   guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
   theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
@@ -139,8 +103,9 @@ Hill_Or0<-ggplot(H_Sc2_Or0, aes(x=geo_entity2,y=qD,group=geo_entity2))+
                    legend.position=c("top"),
                    #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
-
-# Order 2
+###########
+# Order 2 #
+###########
 
 H_Sc2_Or2<-filter(HillNN, order==2)
 
@@ -155,8 +120,6 @@ Hill_Or2<-ggplot(H_Sc2_Or2, aes(x=geo_entity2,y=qD,group=geo_entity2))+
   scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
   
   scale_y_continuous(limits=c(0, 7),breaks=c(0,5),labels=c("0","5"))+
-  # scale_shape_manual(values=c(17,15,16))+
-  #facet_grid(order~Scenario,scales="free_y")+
   labs(x="",y="Simpson diversity (q = 2)")+
   guides(colour=guide_legend(title="",title.position = "top", hjust=0.5))+
   theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),

@@ -1,0 +1,84 @@
+---
+title: "Model summaries for SACs & RADs"
+author: "Dylan Craven"
+date: "January 19, 2019"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(knitr,quietly = TRUE)
+require(dplyr,quietly = TRUE)
+require(tidyr, quietly=TRUE)
+```
+
+**Table S3.**  Fixed effects and model fit information for linear mixed-effects models of species accumulation curves for ‘Het+Age’ and ‘Age’ sampling scenarios.
+```{r, echo=FALSE}
+load(file="/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/model_summary_SAC_RAD_Native_10plots.RData")
+
+sac_scen2_r2[1:2]<-round(sac_scen2_r2[1:2], digits=2)
+sac_scen2_r3[1:2]<-round(sac_scen2_r3[1:2], digits=2)
+
+summ_sac_scen2$Scenario<-c("Het+Age","","")
+summ_sac_scen2$MarginalR2<-c(sac_scen2_r2[1],"","")
+summ_sac_scen2$ConditionalR2<-c(sac_scen2_r2[2],"","")
+summ_sac_scen22<-select(summ_sac_scen2, Scenario, term,NumDF, DenDF,statistic, p.value, MarginalR2, ConditionalR2 )
+
+summ_sac_scen3$Scenario<-c("Age","","")
+summ_sac_scen3$MarginalR2<-c(sac_scen2_r3[1],"","")
+summ_sac_scen3$ConditionalR2<-c(sac_scen2_r3[2],"","")
+summ_sac_scen33<-select(summ_sac_scen3, Scenario, term,NumDF, DenDF,statistic, p.value, MarginalR2, ConditionalR2 )
+
+summ_sac<-rbind.data.frame(summ_sac_scen22,summ_sac_scen33)
+
+summ_sac$term<-as.character(summ_sac$term)
+summ_sac$term<-ifelse(summ_sac$term=="log(m)","log(individuals)",summ_sac$term)
+summ_sac$term<-ifelse(summ_sac$term=="geo_entity2","Island",summ_sac$term)
+summ_sac$term<-ifelse(summ_sac$term=="log(m):geo_entity2","log(individuals) x Island",summ_sac$term)
+
+summ_sac$p.value<-round(summ_sac$p.value, digits=3)
+summ_sac$DenDF<-round(summ_sac$DenDF, digits=1)
+summ_sac$statistic<-round(summ_sac$statistic, digits=1)
+
+summ_sac<-select(summ_sac, Scenario,"Fixed Effects"=term,"F statistic"=statistic,"P"=p.value,
+                 "Marginal R^2^"=MarginalR2,"Conditional R^2^"=ConditionalR2)
+
+summ_sacc<-kable(summ_sac,format="markdown",align="c", caption="Table S3.  Fixed effects and model fit information for linear mixed-effects models of species accumulation curves for ‘Het+Age’ and ‘Age’ sampling scenarios")
+summ_sacc
+```
+
+**Table S4.**  Fixed effects and model fit information for linear mixed-effects models of relative abundance distributions for ‘Het+Age’ and ‘Age’ sampling scenarios.
+```{r, echo=FALSE}
+load(file="/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/model_summary_SAC_RAD_Native_10plots.RData")
+
+rad_scen2_r2[1:2]<-round(rad_scen2_r2[1:2], digits=2)
+rad_scen3_r2[1:2]<-round(rad_scen3_r2[1:2], digits=2)
+
+summ_rad_scen2$Scenario<-c("Het+Age","","")
+summ_rad_scen2$MarginalR2<-c(rad_scen2_r2[1],"","")
+summ_rad_scen2$ConditionalR2<-c(rad_scen2_r2[2],"","")
+summ_rad_scen22<-select(summ_rad_scen2, Scenario, term,NumDF, DenDF,statistic, p.value, MarginalR2, ConditionalR2 )
+
+summ_rad_scen3$Scenario<-c("Age","","")
+summ_rad_scen3$MarginalR2<-c(rad_scen3_r2[1],"","")
+summ_rad_scen3$ConditionalR2<-c(rad_scen3_r2[2],"","")
+summ_rad_scen33<-select(summ_rad_scen3, Scenario, term,NumDF, DenDF,statistic, p.value, MarginalR2, ConditionalR2 )
+
+summ_rad<-rbind.data.frame(summ_rad_scen22,summ_rad_scen33)
+
+summ_rad$term<-as.character(summ_rad$term)
+summ_rad$term<-ifelse(summ_rad$term=="poly(logRelAbund, 3)","polynomial(log(Relative Abundance), 3)",summ_rad$term)
+summ_rad$term<-ifelse(summ_rad$term=="geo_entity2","Island",summ_rad$term)
+summ_rad$term<-ifelse(summ_rad$term=="poly(logRelAbund, 3):geo_entity2","polynomial(log(Relative Abundance), 3) x Island",summ_rad$term)
+
+summ_rad$p.value<-round(summ_rad$p.value, digits=3)
+summ_rad$DenDF<-round(summ_rad$DenDF, digits=1)
+summ_rad$statistic<-round(summ_rad$statistic, digits=1)
+
+summ_rad<-select(summ_rad, Scenario,"Fixed Effects"=term,"F statistic"=statistic,"P"=p.value,
+                 "Marginal R^2^"=MarginalR2,"Conditional R^2^"=ConditionalR2)
+
+summ_radd<-kable(summ_rad,format="markdown",align="c", caption="Table S4. Fixed effects and model fit information for linear mixed-effects models of relative abundance distributions for ‘Het+Age’ and ‘Age’ sampling scenarios.")
+
+summ_radd
+```

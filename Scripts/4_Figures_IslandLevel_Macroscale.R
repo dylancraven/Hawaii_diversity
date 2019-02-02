@@ -13,8 +13,6 @@ require(ggsci)
 
 macroo<-read.csv("Data/Hawaii_Div_Macro_SIE.csv",sep=",",header=T)
 
-# macroo<-melt(macro, id.vars="geo_entity2", measure.vars=c("nSIE","native","exotic","all"),variable.name="Div",value.name="Div2")
-
 macroo$geo_entity2<-as.factor(macroo$geo_entity2)
 macroo$geo_entity2<-factor(macroo$geo_entity2,levels=c("Hawai'i Island","Maui Nui","O'ahu Island","Kaua'i Island"))
 
@@ -34,12 +32,12 @@ macroo2<-filter(macroo, species_group!="Total Woody Spp.")
 ###########
 
 macro_g<-ggplot(macroo2,aes(x=geo_entity2,y=SppN,colour=species_group, fill=species_group))+ 
-  geom_bar(stat="identity",position=position_dodge(),width=0.5)+
+  geom_bar(stat="identity",position=position_dodge(width=0.8),width=0.7)+
   scale_x_discrete(labels=c("Hawai'i Island"="Hawai'i","Maui Nui"="Maui Nui","O'ahu Island"="O'ahu","Kaua'i Island"="Kaua'i"))+
   #scale_color_npg() + scale_fill_npg()+
   
-  scale_fill_manual(values=c("#00BF9A","#008975","#E64B35FF","#3C5488FF"))+
-  scale_colour_manual(values=c("#00BF9A","#008975","#E64B35FF","#3C5488FF"))+
+  scale_fill_manual(values=c("#abd9e9","#2c7bb6","#d7191c","#3C5488FF"))+
+  scale_colour_manual(values=c("#abd9e9","#2c7bb6","#d7191c","#3C5488FF"))+
   # 
   scale_y_continuous(breaks=c(0,100, 200, 300,400, 500,600))+
   guides(colour=FALSE,fill=guide_legend(title="",title.position = "top"))+

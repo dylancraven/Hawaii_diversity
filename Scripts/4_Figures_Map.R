@@ -78,8 +78,9 @@ haw_allplots<-ggplot(data = HW_df) +
     #     legend.title.align = 0,
     #    legend.position = c(0.97, 0.5))
   
-    theme(legend.position=c(0.05,0.3), axis.text=element_text(size=6),
-          axis.text.x=element_text(size=6), axis.text.y=element_text(size=6),
+    theme(legend.position=c(0.05,0.3), axis.text=element_text(size=8),
+          axis.text.x=element_text(size=8), axis.text.y=element_text(size=8),
+          axis.title.x = element_text(size=8),axis.title.y = element_text(size=8),
           title=element_text(size=6,color="black",face="bold",hjust=0.5),
           legend.title = element_text(size=7, color="black",face="bold"),
           legend.background = element_rect(fill="transparent"),

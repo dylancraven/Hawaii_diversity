@@ -101,7 +101,7 @@ all_bigg<-merge(all, tog_tog,by.y=c("PlotID", "SizeClass"))
 # add in climate data ##
 ########################
 
-env<-read.csv("Data/Hawaiian_Env_Soil_1km.csv",sep=",",header=T)
+env<-read.csv("Data/Hawaiian_Env_Soil_1km_v2.csv",sep=",",header=T)
 colnames(env)[1]<-"PlotID"
 
 all_bigg<-left_join(all_bigg, env,by.y=c("PlotID"))
@@ -111,7 +111,7 @@ all_bigg<-left_join(all_bigg, env,by.y=c("PlotID"))
 ########################
 
 all_bigg2<-select(all_bigg, PlotID, Study, Island, geo_entity2, Plot_Area, Lat_Dec, Long_Dec, Elev_m,MAT, MAP, PrecipSeasonality, TempSeasonality, PET,
-                HFP, HII, Plot_Prop_Invaded=PropInvaded, SizeClass, Scientific_name, SPP_CODE3A, Native_Status, Abundance, Abundance_ha)
+                  AridInd, HFP, HII, Plot_Prop_Invaded=PropInvaded, SizeClass, Scientific_name, SPP_CODE3A, Native_Status, Abundance, Abundance_ha)
 
 
 all_bigg2<-arrange(all_bigg2, PlotID, SizeClass)

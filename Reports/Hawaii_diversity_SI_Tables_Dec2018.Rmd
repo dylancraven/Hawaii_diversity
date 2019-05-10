@@ -1,7 +1,7 @@
 ---
 title: "Tables for MS"
 author: "D. Craven et al."
-date: "Dec. 2018"
+date: "May 2019"
 output: word_document
 ---
   
@@ -20,34 +20,37 @@ dat<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring data
 datt<-filter(dat, SizeClass==5) %>%
   filter(., Native_Status=="alien" |Native_Status=="native")
 
-haw_study<-select(datt, PlotID, geo_entity2, Plot_Area, Elev_m, MAT,MAP, PET ) %>%
+haw_study<-select(datt, PlotID, geo_entity2, Plot_Area, Elev_m, MAT,MAP, AridInd, SubstrateAge_range ) %>%
            distinct(.)
 
 haw_study<-haw_study %>%
            group_by(geo_entity2)%>%
-           summarise(totPlotArea=sum(Plot_Area), mean_MAT=mean(MAT), mean_MAP=mean(MAP), mean_PET=mean(PET),min_PET=min(PET), 
-           max_PET=max(PET),max_Elev=max(Elev_m), PlotN=length(unique(PlotID)))
-haw_study$r_PET<-haw_study$max_PET-haw_study$min_PET
+           summarise(totPlotArea=sum(Plot_Area), mean_MAT=mean(MAT), mean_MAP=mean(MAP), 
+                     mean_Arid=mean(AridInd),min_Arid=min(AridInd), max_Arid=max(AridInd),
+                     min_Elev=min(Elev_m),max_Elev=max(Elev_m), soilAge=mean(SubstrateAge_range,na.rm=T),                       PlotN=length(unique(PlotID)))
+haw_study$r_Arid<-haw_study$max_Arid-haw_study$min_Arid
+haw_study$r_Elev<-haw_study$max_Elev-haw_study$min_Elev
 
 haw_study$geo_entity2<-factor(haw_study$geo_entity2, levels=c("Hawai'i Island","Maui Nui", "O'ahu Island", "Kaua'i Island"))
 
 haw_study$totPlotArea<-round(haw_study$totPlotArea, digits=0)
 haw_study$mean_MAT<-round(haw_study$mean_MAT, digits=1)
 haw_study$mean_MAP<-round(haw_study$mean_MAP, digits=0)
-haw_study$mean_PET<-round(haw_study$mean_PET, digits=0)
-haw_study$r_PET<-round(haw_study$r_PET, digits=0)
-haw_study$max_Elev<-round(haw_study$max_Elev, digits=0)
+haw_study$mean_Arid<-round(haw_study$mean_Arid, digits=2)
+haw_study$r_Arid<-round(haw_study$r_Arid, digits=2)
+haw_study$r_Elev<-round(haw_study$r_Elev, digits=0)
 
 inds<-summarise(group_by(datt, geo_entity2), Abundance_tot_raw=sum(Abundance))
 
 haw_study<-left_join(haw_study, inds, by="geo_entity2")
 
 haw_study<-select(haw_study, "Islands"=geo_entity2,"Plots (#)"=PlotN, "Sampled area (m2)"=totPlotArea, "Individuals (#)"= Abundance_tot_raw, 
-                  "MAT (C)"=mean_MAT, "MAP (mm yr-1)"=mean_MAP, "PET (mm yr-1)"=mean_PET, "PET range"=r_PET,"Max. elevation (m)"=max_Elev)
+                  "MAT (C)"=mean_MAT, "MAP (mm yr-1)"=mean_MAP, "Aridity (MAP/PET)"=mean_Arid, "Aridity range"=r_Arid,
+                  "Elevation range (m)"=r_Elev, "Soil age (y)"=soilAge)
 
 haw_study<-arrange(haw_study, Islands)
 
-haw_study<-kable(haw_study,format="markdown",align="c",digits=1, caption="Table 1.  Summary of number of plots, sampled area, and environmental conditions across forest plots in the Hawaiian archipelago.")
+haw_study<-kable(haw_study,format="markdown",align="c",digits=1, caption="Table 1. Summary of number of plots, sampled area, and environmental conditions across forest plots in the Hawaiian archipelago.")
 haw_study
 
 ```
@@ -66,25 +69,27 @@ std<- function(x,y,z){
 }
 
 haw_scen2<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Natives_10plots_Envconditions_summarized.csv",header=T)
-haw_scen2<-select(haw_scen2, geo_entity2, "PlotArea_Scen2"=m_PlotArea,sd_PlotArea,"meanPET_scen2"=mean_PET, "rangePET_scen2"=r_PET)
+haw_scen2<-select(haw_scen2, geo_entity2, "PlotArea_Scen2"=m_PlotArea,sd_PlotArea,"rangeArid_scen2"=r_Arid, "meanArid_scen2"=mean_Arid, "rangeElev_scen2"=r_Elev)
 
 haw_scen2$n<-100
 CIs_2<-std(haw_scen2$sd_PlotArea,haw_scen2$n,haw_scen2$PlotArea_Scen2)
 haw_scen2<-cbind.data.frame(haw_scen2,CIs_2[1],CIs_2[2])
-colnames(haw_scen2)[7]<-"PlotArea_loCI_Scen2"
-colnames(haw_scen2)[8]<-"PlotArea_hiCI_Scen2"
+colnames(haw_scen2)[8]<-"PlotArea_loCI_Scen2"
+colnames(haw_scen2)[9]<-"PlotArea_hiCI_Scen2"
 
-haw_scen2<-select(haw_scen2, geo_entity2,PlotArea_Scen2,PlotArea_loCI_Scen2,PlotArea_hiCI_Scen2, meanPET_scen2,rangePET_scen2)
+haw_scen2<-select(haw_scen2, geo_entity2,PlotArea_Scen2,PlotArea_loCI_Scen2,PlotArea_hiCI_Scen2, rangeArid_scen2,rangeElev_scen2)
 
-haw_scen3<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Native_10plots_EnvConditions_summarized.csv",sep=",",header=T)
-haw_scen3<-select(haw_scen3, geo_entity2, "PlotArea_Scen3"=m_PlotArea,sd_PlotArea,"meanPET_scen3"=mean_PET, "rangePET_scen3"=r_PET)
+haw_scen3<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Natives_10plots_Envconditions_summarized.csv",sep=",",header=T)
+
+haw_scen3<-select(haw_scen3, geo_entity2, "PlotArea_scen3"=m_PlotArea,sd_PlotArea,"rangeArid_scen3"=r_Arid,"rangeElev_scen3"=r_Elev)
+
 haw_scen3$n<-100
-CIs_3<-std(haw_scen3$sd_PlotArea,haw_scen3$n,haw_scen3$PlotArea_Scen3)
-haw_scen3<-cbind.data.frame(haw_scen3,CIs_3[1],CIs_3[2])
-colnames(haw_scen3)[7]<-"PlotArea_loCI_Scen3"
-colnames(haw_scen3)[8]<-"PlotArea_hiCI_Scen3"
+CIs_2<-std(haw_scen3$sd_PlotArea,haw_scen3$n,haw_scen3$PlotArea_scen3)
+haw_scen3<-cbind.data.frame(haw_scen3,CIs_2[1],CIs_2[2])
+colnames(haw_scen3)[7]<-"PlotArea_loCI_scen3"
+colnames(haw_scen3)[8]<-"PlotArea_hiCI_scen3"
 
-haw_scen3<-select(haw_scen3, geo_entity2,PlotArea_Scen3,PlotArea_loCI_Scen3,PlotArea_hiCI_Scen3, meanPET_scen3,rangePET_scen3)
+haw_scen3<-select(haw_scen3, geo_entity2,PlotArea_scen3,PlotArea_loCI_scen3,PlotArea_hiCI_scen3, rangeArid_scen3,rangeElev_scen3)
 
 haw_scenn<-left_join(haw_scen2,haw_scen3,by="geo_entity2")
 
@@ -96,18 +101,19 @@ haw_scenn$PlotArea_hiCI_Scen2<-round(haw_scenn$PlotArea_hiCI_Scen2, digits=0)
 
 haw_scenn$PlotArea_Scen2<-paste(haw_scenn$PlotArea_Scen2, "(",haw_scenn$PlotArea_loCI_Scen2,",",haw_scenn$PlotArea_hiCI_Scen2,")")
 
-haw_scenn$meanPET_scen2<-round(haw_scenn$meanPET_scen2, digits=0)
-haw_scenn$rangePET_scen2<-round(haw_scenn$rangePET_scen2, digits=0)
+#Whaw_scenn$meanArid_scen2<-round(haw_scenn$meanArid_scen2, digits=2)
+haw_scenn$rangeArid_scen2<-round(haw_scenn$rangeArid_scen2, digits=2)
+haw_scenn$rangeElev_scen2<-round(haw_scenn$rangeElev_scen2, digits=2)
 
-haw_scenn$PlotArea_Scen3<-round(haw_scenn$PlotArea_Scen3, digits=0)
-haw_scenn$PlotArea_loCI_Scen3<-round(haw_scenn$PlotArea_loCI_Scen3, digits=0)
-haw_scenn$PlotArea_hiCI_Scen3<-round(haw_scenn$PlotArea_hiCI_Scen3, digits=0)
-haw_scenn$PlotArea_Scen3<-paste(haw_scenn$PlotArea_Scen3, "(",haw_scenn$PlotArea_loCI_Scen3,",",haw_scenn$PlotArea_hiCI_Scen3,")")
+haw_scenn$PlotArea_scen3<-round(haw_scenn$PlotArea_scen3, digits=0)
+haw_scenn$PlotArea_loCI_scen3<-round(haw_scenn$PlotArea_loCI_scen3, digits=0)
+haw_scenn$PlotArea_hiCI_scen3<-round(haw_scenn$PlotArea_hiCI_scen3, digits=0)
+haw_scenn$PlotArea_scen3<-paste(haw_scenn$PlotArea_scen3, "(",haw_scenn$PlotArea_loCI_scen3,",",haw_scenn$PlotArea_hiCI_scen3,")")
 
-haw_scenn$meanPET_scen3<-round(haw_scenn$meanPET_scen3, digits=0)
-haw_scenn$rangePET_scen3<-round(haw_scenn$rangePET_scen3, digits=0)
+#haw_scenn$meanArid_scen3<-round(haw_scenn$meanArid_scen3, digits=2)
+haw_scenn$rangeArid_scen3<-round(haw_scenn$rangeArid_scen3, digits=2)
 
-haw_scenn<-select(haw_scenn, geo_entity2, PlotArea_Scen2, meanPET_scen2, rangePET_scen2,PlotArea_Scen3, meanPET_scen3,rangePET_scen3)
+haw_scenn<-select(haw_scenn, geo_entity2, PlotArea_Scen2, rangeArid_scen2, rangeElev_scen2,PlotArea_scen3, rangeArid_scen3,rangeElev_scen3)
 haw_scenn<-arrange(haw_scenn, geo_entity2)
 
 haw_scenn<-kable(haw_scenn,format="markdown",align="c",digits=1, caption="Table 2. Summary of sampled area and the range and mean of PET for each sampling scenario across forest plots in the Hawaiian archipelago (just native species).")
@@ -129,25 +135,27 @@ std<- function(x,y,z){
 }
 
 haw_scen2<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Total_10plots_Envconditions_summarized.csv",header=T)
-haw_scen2<-select(haw_scen2, geo_entity2, "PlotArea_Scen2"=m_PlotArea,sd_PlotArea,"meanPET_scen2"=mean_PET, "rangePET_scen2"=r_PET)
+haw_scen2<-select(haw_scen2, geo_entity2, "PlotArea_Scen2"=m_PlotArea,sd_PlotArea,"rangeArid_scen2"=r_Arid, "meanArid_scen2"=mean_Arid, "rangeElev_scen2"=r_Elev)
 
 haw_scen2$n<-100
 CIs_2<-std(haw_scen2$sd_PlotArea,haw_scen2$n,haw_scen2$PlotArea_Scen2)
 haw_scen2<-cbind.data.frame(haw_scen2,CIs_2[1],CIs_2[2])
-colnames(haw_scen2)[7]<-"PlotArea_loCI_Scen2"
-colnames(haw_scen2)[8]<-"PlotArea_hiCI_Scen2"
+colnames(haw_scen2)[8]<-"PlotArea_loCI_Scen2"
+colnames(haw_scen2)[9]<-"PlotArea_hiCI_Scen2"
 
-haw_scen2<-select(haw_scen2, geo_entity2,PlotArea_Scen2,PlotArea_loCI_Scen2,PlotArea_hiCI_Scen2, meanPET_scen2,rangePET_scen2)
+haw_scen2<-select(haw_scen2, geo_entity2,PlotArea_Scen2,PlotArea_loCI_Scen2,PlotArea_hiCI_Scen2, rangeArid_scen2,rangeElev_scen2)
 
 haw_scen3<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Total_10plots_EnvConditions_summarized.csv",sep=",",header=T)
-haw_scen3<-select(haw_scen3, geo_entity2, "PlotArea_Scen3"=m_PlotArea,sd_PlotArea,"meanPET_scen3"=mean_PET, "rangePET_scen3"=r_PET)
-haw_scen3$n<-100
-CIs_3<-std(haw_scen3$sd_PlotArea,haw_scen3$n,haw_scen3$PlotArea_Scen3)
-haw_scen3<-cbind.data.frame(haw_scen3,CIs_3[1],CIs_3[2])
-colnames(haw_scen3)[7]<-"PlotArea_loCI_Scen3"
-colnames(haw_scen3)[8]<-"PlotArea_hiCI_Scen3"
 
-haw_scen3<-select(haw_scen3, geo_entity2,PlotArea_Scen3,PlotArea_loCI_Scen3,PlotArea_hiCI_Scen3, meanPET_scen3,rangePET_scen3)
+haw_scen3<-select(haw_scen3, geo_entity2, "PlotArea_scen3"=m_PlotArea,sd_PlotArea,"rangeArid_scen3"=r_Arid, "rangeElev_scen3"=r_Elev)
+
+haw_scen3$n<-100
+CIs_2<-std(haw_scen3$sd_PlotArea,haw_scen3$n,haw_scen3$PlotArea_scen3)
+haw_scen3<-cbind.data.frame(haw_scen3,CIs_2[1],CIs_2[2])
+colnames(haw_scen3)[7]<-"PlotArea_loCI_scen3"
+colnames(haw_scen3)[8]<-"PlotArea_hiCI_scen3"
+
+haw_scen3<-select(haw_scen3, geo_entity2,PlotArea_scen3,PlotArea_loCI_scen3,PlotArea_hiCI_scen3, rangeArid_scen3,rangeElev_scen3)
 
 haw_scenn<-left_join(haw_scen2,haw_scen3,by="geo_entity2")
 
@@ -159,18 +167,18 @@ haw_scenn$PlotArea_hiCI_Scen2<-round(haw_scenn$PlotArea_hiCI_Scen2, digits=0)
 
 haw_scenn$PlotArea_Scen2<-paste(haw_scenn$PlotArea_Scen2, "(",haw_scenn$PlotArea_loCI_Scen2,",",haw_scenn$PlotArea_hiCI_Scen2,")")
 
-haw_scenn$meanPET_scen2<-round(haw_scenn$meanPET_scen2, digits=0)
-haw_scenn$rangePET_scen2<-round(haw_scenn$rangePET_scen2, digits=0)
+#haw_scenn$meanArid_scen2<-round(haw_scenn$meanArid_scen2, digits=2)
+haw_scenn$rangeArid_scen2<-round(haw_scenn$rangeArid_scen2, digits=2)
 
-haw_scenn$PlotArea_Scen3<-round(haw_scenn$PlotArea_Scen3, digits=0)
-haw_scenn$PlotArea_loCI_Scen3<-round(haw_scenn$PlotArea_loCI_Scen3, digits=0)
-haw_scenn$PlotArea_hiCI_Scen3<-round(haw_scenn$PlotArea_hiCI_Scen3, digits=0)
-haw_scenn$PlotArea_Scen3<-paste(haw_scenn$PlotArea_Scen3, "(",haw_scenn$PlotArea_loCI_Scen3,",",haw_scenn$PlotArea_hiCI_Scen3,")")
+haw_scenn$PlotArea_scen3<-round(haw_scenn$PlotArea_scen3, digits=0)
+haw_scenn$PlotArea_loCI_scen3<-round(haw_scenn$PlotArea_loCI_scen3, digits=0)
+haw_scenn$PlotArea_hiCI_scen3<-round(haw_scenn$PlotArea_hiCI_scen3, digits=0)
+haw_scenn$PlotArea_scen3<-paste(haw_scenn$PlotArea_scen3, "(",haw_scenn$PlotArea_loCI_scen3,",",haw_scenn$PlotArea_hiCI_scen3,")")
 
-haw_scenn$meanPET_scen3<-round(haw_scenn$meanPET_scen3, digits=0)
-haw_scenn$rangePET_scen3<-round(haw_scenn$rangePET_scen3, digits=0)
+#haw_scenn$meanArid_scen3<-round(haw_scenn$meanArid_scen3, digits=2)
+haw_scenn$rangeArid_scen3<-round(haw_scenn$rangeArid_scen3, digits=2)
 
-haw_scenn<-select(haw_scenn, geo_entity2, PlotArea_Scen2, meanPET_scen2, rangePET_scen2,PlotArea_Scen3, meanPET_scen3,rangePET_scen3)
+haw_scenn<-select(haw_scenn, geo_entity2, PlotArea_Scen2, rangeArid_scen2,rangeElev_scen2,PlotArea_scen3, rangeArid_scen3,rangeElev_scen3)
 haw_scenn<-arrange(haw_scenn, geo_entity2)
 
 haw_scenn<-kable(haw_scenn,format="markdown",align="c",digits=1, caption="Table 3. Summary of sampled area and the range and mean of PET for each sampling scenario across forest plots in the Hawaiian archipelago (native & alien species).")
@@ -190,7 +198,8 @@ std<- function(x,y,z){
 }
 
 haw_scen2<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_Aliens_10plots_Envconditions_summarized.csv",header=T)
-haw_scen2<-select(haw_scen2, geo_entity2, "PlotArea_Scen2"=m_PlotArea,sd_PlotArea,"meanPET_scen2"=mean_PET, "rangePET_scen2"=r_PET)
+
+haw_scen2<-select(haw_scen2, geo_entity2, "PlotArea_Scen2"=m_PlotArea,sd_PlotArea,"rangeArid_scen2"=r_Arid,  "rangeElev_scen2"=r_Elev)
 
 haw_scen2$n<-100
 CIs_2<-std(haw_scen2$sd_PlotArea,haw_scen2$n,haw_scen2$PlotArea_Scen2)
@@ -198,17 +207,20 @@ haw_scen2<-cbind.data.frame(haw_scen2,CIs_2[1],CIs_2[2])
 colnames(haw_scen2)[7]<-"PlotArea_loCI_Scen2"
 colnames(haw_scen2)[8]<-"PlotArea_hiCI_Scen2"
 
-haw_scen2<-select(haw_scen2, geo_entity2,PlotArea_Scen2,PlotArea_loCI_Scen2,PlotArea_hiCI_Scen2, meanPET_scen2,rangePET_scen2)
+haw_scen2<-select(haw_scen2, geo_entity2,PlotArea_Scen2,PlotArea_loCI_Scen2,PlotArea_hiCI_Scen2, rangeArid_scen2,rangeElev_scen2)
 
 haw_scen3<-read.csv("/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_Aliens_10plots_EnvConditions_summarized.csv",sep=",",header=T)
-haw_scen3<-select(haw_scen3, geo_entity2, "PlotArea_Scen3"=m_PlotArea,sd_PlotArea,"meanPET_scen3"=mean_PET, "rangePET_scen3"=r_PET)
-haw_scen3$n<-100
-CIs_3<-std(haw_scen3$sd_PlotArea,haw_scen3$n,haw_scen3$PlotArea_Scen3)
-haw_scen3<-cbind.data.frame(haw_scen3,CIs_3[1],CIs_3[2])
-colnames(haw_scen3)[7]<-"PlotArea_loCI_Scen3"
-colnames(haw_scen3)[8]<-"PlotArea_hiCI_Scen3"
 
-haw_scen3<-select(haw_scen3, geo_entity2,PlotArea_Scen3,PlotArea_loCI_Scen3,PlotArea_hiCI_Scen3, meanPET_scen3,rangePET_scen3)
+
+haw_scen3<-select(haw_scen3, geo_entity2, "PlotArea_scen3"=m_PlotArea,sd_PlotArea,"rangeArid_scen3"=r_Arid, "rangeElev_scen3"=r_Elev)
+
+haw_scen3$n<-100
+CIs_2<-std(haw_scen3$sd_PlotArea,haw_scen3$n,haw_scen3$PlotArea_scen3)
+haw_scen3<-cbind.data.frame(haw_scen3,CIs_2[1],CIs_2[2])
+colnames(haw_scen3)[7]<-"PlotArea_loCI_scen3"
+colnames(haw_scen3)[8]<-"PlotArea_hiCI_scen3"
+
+haw_scen3<-select(haw_scen3, geo_entity2,PlotArea_scen3,PlotArea_loCI_scen3,PlotArea_hiCI_scen3, rangeArid_scen3,rangeElev_scen3)
 
 haw_scenn<-left_join(haw_scen2,haw_scen3,by="geo_entity2")
 
@@ -220,18 +232,18 @@ haw_scenn$PlotArea_hiCI_Scen2<-round(haw_scenn$PlotArea_hiCI_Scen2, digits=0)
 
 haw_scenn$PlotArea_Scen2<-paste(haw_scenn$PlotArea_Scen2, "(",haw_scenn$PlotArea_loCI_Scen2,",",haw_scenn$PlotArea_hiCI_Scen2,")")
 
-haw_scenn$meanPET_scen2<-round(haw_scenn$meanPET_scen2, digits=0)
-haw_scenn$rangePET_scen2<-round(haw_scenn$rangePET_scen2, digits=0)
+#haw_scenn$meanArid_scen2<-round(haw_scenn$meanArid_scen2, digits=2)
+haw_scenn$rangeArid_scen2<-round(haw_scenn$rangeArid_scen2, digits=2)
 
-haw_scenn$PlotArea_Scen3<-round(haw_scenn$PlotArea_Scen3, digits=0)
-haw_scenn$PlotArea_loCI_Scen3<-round(haw_scenn$PlotArea_loCI_Scen3, digits=0)
-haw_scenn$PlotArea_hiCI_Scen3<-round(haw_scenn$PlotArea_hiCI_Scen3, digits=0)
-haw_scenn$PlotArea_Scen3<-paste(haw_scenn$PlotArea_Scen3, "(",haw_scenn$PlotArea_loCI_Scen3,",",haw_scenn$PlotArea_hiCI_Scen3,")")
+haw_scenn$PlotArea_scen3<-round(haw_scenn$PlotArea_scen3, digits=0)
+haw_scenn$PlotArea_loCI_scen3<-round(haw_scenn$PlotArea_loCI_scen3, digits=0)
+haw_scenn$PlotArea_hiCI_scen3<-round(haw_scenn$PlotArea_hiCI_scen3, digits=0)
+haw_scenn$PlotArea_scen3<-paste(haw_scenn$PlotArea_scen3, "(",haw_scenn$PlotArea_loCI_scen3,",",haw_scenn$PlotArea_hiCI_scen3,")")
 
-haw_scenn$meanPET_scen3<-round(haw_scenn$meanPET_scen3, digits=0)
-haw_scenn$rangePET_scen3<-round(haw_scenn$rangePET_scen3, digits=0)
+#haw_scenn$meanArid_scen3<-round(haw_scenn$meanArid_scen3, digits=2)
+haw_scenn$rangeArid_scen3<-round(haw_scenn$rangeArid_scen3, digits=2)
 
-haw_scenn<-select(haw_scenn, geo_entity2, PlotArea_Scen2, meanPET_scen2, rangePET_scen2,PlotArea_Scen3, meanPET_scen3,rangePET_scen3)
+haw_scenn<-select(haw_scenn, geo_entity2, PlotArea_Scen2, rangeArid_scen2,rangeElev_scen2,PlotArea_scen3, rangeArid_scen3,rangeElev_scen3)
 haw_scenn<-arrange(haw_scenn, geo_entity2)
 
 haw_scenn<-kable(haw_scenn,format="markdown",align="c",digits=1, caption="Table 3. Summary of sampled area and the range and mean of PET for each sampling scenario across forest plots in the Hawaiian archipelago (native & alien species).")

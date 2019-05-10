@@ -1,7 +1,7 @@
 ---
 title: "Model summaries for SACs & RADs"
 author: "Dylan Craven"
-date: "January 19, 2019"
+date: "May 8, 2019"
 output: word_document
 ---
 
@@ -10,6 +10,69 @@ knitr::opts_chunk$set(echo = TRUE)
 require(knitr,quietly = TRUE)
 require(dplyr,quietly = TRUE)
 require(tidyr, quietly=TRUE)
+```
+
+**for main text** Model summary and fit information for one-way ANOVAs for all species ('native' and 'alien') 'Het+Age' and 'Age' scenarios.  
+
+```{r, echo=FALSE}
+load(file="/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_All_Native_HillN_anova_summary.RData")
+
+Scen2_AllSpp_q0_modelsumm$Scenario<-"Het+Age"
+Scen2_AllSpp_q0_modelsumm$Group<-"All_species"
+Scen2_AllSpp_q0_modelsumm$q<-"Species_richness"
+Scen2_AllSpp_q0_modelsumm$R2<-c(Scen2_AllSpp_q0_r2, NA)
+Scen2_AllSpp_q2_modelsumm$Scenario<-"Het+Age"
+Scen2_AllSpp_q2_modelsumm$Group<-"All_species"
+Scen2_AllSpp_q2_modelsumm$R2<-c(Scen2_AllSpp_q2_r2, NA)
+Scen2_AllSpp_q2_modelsumm$q<-"Simpson diversity"
+
+load(file="/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_All_Native_HillN_anova_summary.RData")
+
+Scen3_AllSpp_q0_modelsumm$Scenario<-"Het+Age"
+Scen3_AllSpp_q0_modelsumm$Group<-"All_species"
+Scen3_AllSpp_q0_modelsumm$q<-"Species_richness"
+Scen3_AllSpp_q0_modelsumm$R2<-c(Scen3_AllSpp_q0_r2, NA)
+Scen3_AllSpp_q2_modelsumm$Scenario<-"Het+Age"
+Scen3_AllSpp_q2_modelsumm$Group<-"All_species"
+Scen3_AllSpp_q2_modelsumm$R2<-c(Scen3_AllSpp_q2_r2, NA)
+Scen3_AllSpp_q2_modelsumm$q<-"Simpson diversity"
+
+scen_togg<-rbind.data.frame(Scen2_AllSpp_q0_modelsumm,Scen3_AllSpp_q0_modelsumm,
+                            Scen2_AllSpp_q2_modelsumm,Scen3_AllSpp_q2_modelsumm)
+   
+scen_togg_t<-kable(scen_togg,format="markdown",align="c", caption="Main text. Model summary and fit information for one-way ANOVAs for all species ('native' and 'alien') and 'Het+Age' and 'Age' scenarios." )
+scen_togg_t
+```
+**for main text** Model summary and fit information for one-way ANOVAs for just native species and 'Het+Age' and 'Age' scenarios.  
+
+```{r, echo=FALSE}
+load(file="/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen2_All_Native_HillN_anova_summary.RData")
+
+Scen2_NativesSpp_q0_modelsumm$Scenario<-"Het+Age"
+Scen2_NativesSpp_q0_modelsumm$Group<-"Natives"
+Scen2_NativesSpp_q0_modelsumm$q<-"Species_richness"
+Scen2_NativesSpp_q0_modelsumm$R2<-c(Scen2_NativesSpp_q0_r2, NA)
+Scen2_NativesSpp_q2_modelsumm$Scenario<-"Het+Age"
+Scen2_NativesSpp_q2_modelsumm$Group<-"Natives"
+Scen2_NativesSpp_q2_modelsumm$R2<-c(Scen2_NativesSpp_q2_r2, NA)
+Scen2_NativesSpp_q2_modelsumm$q<-"Simpson diversity"
+
+load(file="/home/dylan/Dropbox (iDiv)/Research_projects/Veg. monitoring databases/databases and field protocols/database/IslandForests/Hawaii_only/Diversity_Age/Hawaii_diversity/Cleaned_Data/Scen3_All_Native_HillN_anova_summary.RData")
+
+Scen3_NativesSpp_q0_modelsumm$Scenario<-"Het+Age"
+Scen3_NativesSpp_q0_modelsumm$Group<-"Natives"
+Scen3_NativesSpp_q0_modelsumm$q<-"Species_richness"
+Scen3_NativesSpp_q0_modelsumm$R2<-c(Scen3_NativesSpp_q0_r2, NA)
+Scen3_NativesSpp_q2_modelsumm$Scenario<-"Het+Age"
+Scen3_NativesSpp_q2_modelsumm$Group<-"Natives"
+Scen3_NativesSpp_q2_modelsumm$R2<-c(Scen3_NativesSpp_q2_r2, NA)
+Scen3_NativesSpp_q2_modelsumm$q<-"Simpson diversity"
+
+scen_togg<-rbind.data.frame(Scen2_NativesSpp_q0_modelsumm,Scen3_NativesSpp_q0_modelsumm,
+                            Scen2_NativesSpp_q2_modelsumm,Scen3_NativesSpp_q2_modelsumm)
+   
+scen_togg_tt<-kable(scen_togg,format="markdown",align="c", caption="Main text. Model summary and fit information for one-way ANOVAs for only native species and 'Het+Age' and 'Age' scenarios." )
+scen_togg_tt
 ```
 
 **Table S3.**  Fixed effects and model fit information for linear mixed-effects models of species accumulation curves for ‘Het+Age’ and ‘Age’ sampling scenarios.

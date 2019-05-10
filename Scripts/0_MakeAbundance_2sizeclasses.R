@@ -110,11 +110,9 @@ all_bigg<-left_join(all_bigg, env,by.y=c("PlotID"))
 # arrange ##############
 ########################
 
-all_bigg2<-select(all_bigg, PlotID, Study, Island, geo_entity2, Plot_Area, Lat_Dec, Long_Dec, Elev_m,MAT, MAP, PrecipSeasonality, TempSeasonality, PET,
-                  AridInd, HFP, HII, Plot_Prop_Invaded=PropInvaded, SizeClass, Scientific_name, SPP_CODE3A, Native_Status, Abundance, Abundance_ha)
-
+all_bigg2<-select(all_bigg, PlotID, Study, Island, geo_entity2, Plot_Area, Lat_Dec, Long_Dec, Elev_m,MAT, MAP, PET,AridInd,
+                  SubstrateAge_range, SubstrateAge_code, HFP, HII, Plot_Prop_Invaded=PropInvaded, SizeClass, Scientific_name, SPP_CODE3A, Native_Status, Abundance, Abundance_ha)
 
 all_bigg2<-arrange(all_bigg2, PlotID, SizeClass)
 
 write.table(all_bigg2,"Cleaned_Data/HawIslandsAbundance_2SizeClasses_100plus.csv",sep=",",row.names=F)
-

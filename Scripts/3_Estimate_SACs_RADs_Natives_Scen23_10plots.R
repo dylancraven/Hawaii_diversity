@@ -51,7 +51,7 @@ qqline(unlist(ranef(a)))
 
 # make predictions
 
-pred <- ggpredict(a, terms = c("m [exp]","geo_entity2"), type="fe")
+pred <- ggeffect(a, terms = c("m [exp]","geo_entity2"), type="fe")
 
 pred$group<-as.character(pred$group)
 pred$group<-ifelse(pred$group=="Hawai'i Island","Hawai'i",pred$group)
@@ -99,7 +99,7 @@ qqline(unlist(ranef(b)))
 
 # make predictions
 
-pred2 <- ggpredict(b, terms = c("m [exp]","geo_entity2"),type="fe")
+pred2 <- ggeffect(b, terms = c("m [exp]","geo_entity2"),type="fe")
 
 pred2$group<-as.character(pred2$group)
 pred2$group<-ifelse(pred2$group=="Hawai'i Island","Hawai'i",pred2$group)
@@ -138,7 +138,7 @@ qqnorm(unlist(ranef(rad2)))
 qqline(unlist(ranef(rad2)))
 
 # make predictions
-rad_pred2 <- ggpredict(rad2, terms = c("logRelAbund [n=8]","geo_entity2"),type="fe")
+rad_pred2 <- ggeffect(rad2, terms = c("logRelAbund [n=8]","geo_entity2"),type="fe")
 
 rad_pred2$group<-as.character(rad_pred2$group)
 rad_pred2$group<-ifelse(rad_pred2$group=="Hawai'i Island","Hawai'i",rad_pred2$group)
@@ -153,7 +153,7 @@ rad_pred2$group<-factor(rad_pred2$group,levels=c("Hawai'i","Maui Nui","O'ahu","K
 # Scenario 3 ###
 ################
 
-rad.tog3<-read.csv("Cleaned_Data/Scen3_Natives_10plots_RAD.csv",sep=",",header=T)
+rad.tog3<-read.csv("Cleaned_Data/Scen3_Natives_10plots_RADs.csv",sep=",",header=T)
 
 rad.tog3$iteration<-as.factor(rad.tog3$iteration)
 rad.tog3$logRelAbund<-log(rad.tog3$RelAbund)
@@ -176,7 +176,7 @@ qqnorm(unlist(ranef(rad3)))
 qqline(unlist(ranef(rad3)))
 
 # make predictions
-rad_pred3 <- ggpredict(rad3, terms = c("logRelAbund [n=8.30]","geo_entity2"),type="fe")
+rad_pred3 <- ggeffect(rad3, terms = c("logRelAbund [n=8.30]","geo_entity2"),type="fe")
 
 rad_pred3$group<-as.character(rad_pred3$group)
 rad_pred3$group<-ifelse(rad_pred3$group=="Hawai'i Island","Hawai'i",rad_pred3$group)

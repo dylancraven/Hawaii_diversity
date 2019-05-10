@@ -7,12 +7,7 @@
 require(dplyr)
 require(ggplot2)
 require(grid)
-require(ggsci)
 require(reshape2)
-
-#########
-# data ##
-#########
 
 #########
 # data ##
@@ -57,26 +52,22 @@ All_bar<-ggplot(SppR,aes(x=Loc_Rare,y=S,colour=Rarefy2, fill=Rarefy2))+
   guides(colour=FALSE,fill=guide_legend(title="Sample size (individuals)",title.position = "top"))+
   labs(x="",y="Species diversity")+
   theme_bw()+theme(legend.position="top", 
-                   axis.title.y=element_text(colour="black",face="bold",size=8),
-                   axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=8, hjust=c(0.2,0,0,0)),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=8),
-                   legend.text=element_text(colour=c("black"),face="bold",size=6),
-                   legend.title = element_text(colour="black",face="bold",size=6),
+                   axis.title.y=element_text(colour="black",face="bold",size=12, family="sans"),
+                   axis.title.x=element_text(colour="black",face="bold",size=12,family="sans"),
+                   axis.text.x=element_text(colour=c("black"),face="bold",size=11, family="sans",hjust=c(0.2,0,0,0)),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=11,family="sans"),
+                   legend.text=element_text(colour=c("black"),face="bold",size=8, family="sans"),
+                   legend.title = element_text(colour="black",face="bold",size=11, family="sans"),
                    legend.title.align = 0.5,
                    legend.key.size = unit(0.25,"cm"),
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
                    panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-
-png(filename="Figures/IslandLevel_Rare_SppDiv_FigS1.png", 
-    units="in", 
-    width=4, 
-    height=3.5, 
-    pointsize=2, 
-    res=400)
+ggsave(filename = file.path("Figures", "IslandLevel_Rare_SppDiv_FigS1.png"), 
+       width    = 8.7, 
+       height   = 6.7, 
+       units    = "cm",dpi = 900)
 
 All_bar
-
 
 dev.off()

@@ -1,140 +1,147 @@
-###############
-# Beta ENSpie #
-###############
-# All natives #
+################
+## beta_S_PIE  #
+################
 # 10 plots #####
 ###############
 # only Scenario II: "Het + Age"
+# just Beta S
 
+require(tidyr)
 require(dplyr)
 require(ggplot2)
-require(grid)
+#require(ggridges)
+#require(grid)
 require(reshape2)
-require(rms)
 
 #############
 # Data  #####
 #############
 
-Beta_N<-read.csv("Cleaned_Data/Scen2_Natives_10plots_BetaPIE.csv",sep=",",header=T)
-Beta_N$Scenario<-"Native"
+load("Cleaned_Data/Scen2_All_Native_BetaS_anova_summary.RData")
 
 Beta_All<-read.csv("Cleaned_Data/Scen2_Total_10plots_BetaPIE.csv",sep=",",header=T)
-Beta_All$Scenario<-"All"
 
-Beta_togg<-rbind.data.frame(Beta_N,Beta_All)
+Beta_All$geo_entity2<-as.character(Beta_All$geo_entity2)
+Beta_All$geo_entity2<-ifelse(Beta_All$geo_entity2=="O'ahu Island (incl. Mokoli'i Islet)","O'ahu",Beta_All$geo_entity2)
+Beta_All$geo_entity2<-ifelse(Beta_All$geo_entity2=="O'ahu Island","O'ahu",Beta_All$geo_entity2)
+Beta_All$geo_entity2<-ifelse(Beta_All$geo_entity2=="Hawai'i Island","Hawai'i",Beta_All$geo_entity2)
+Beta_All$geo_entity2<-ifelse(Beta_All$geo_entity2=="Kaua'i Island","Kaua'i",Beta_All$geo_entity2)
+
+Beta_All$geo_entity2<-as.factor(Beta_All$geo_entity2)
+Beta_All$geo_entity2<-factor(Beta_All$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+
+# take average of beta diversity per iteration
+Beta_All<- Beta_All %>% group_by(Iteration,geo_entity2, index) %>%
+  summarize(beta=mean(value)) 
+Beta_All<-filter(Beta_All, index=="beta_S")
+Beta_All$Scenario<-"All species"
+
+Beta_N<-read.csv("Cleaned_Data/Scen2_Natives_10plots_BetaPIE.csv",sep=",",header=T)
+
+Beta_N$geo_entity2<-as.character(Beta_N$geo_entity2)
+Beta_N$geo_entity2<-ifelse(Beta_N$geo_entity2=="O'ahu Island (incl. Mokoli'i Islet)","O'ahu",Beta_N$geo_entity2)
+Beta_N$geo_entity2<-ifelse(Beta_N$geo_entity2=="O'ahu Island","O'ahu",Beta_N$geo_entity2)
+Beta_N$geo_entity2<-ifelse(Beta_N$geo_entity2=="Hawai'i Island","Hawai'i",Beta_N$geo_entity2)
+Beta_N$geo_entity2<-ifelse(Beta_N$geo_entity2=="Kaua'i Island","Kaua'i",Beta_N$geo_entity2)
+
+Beta_N$geo_entity2<-as.factor(Beta_N$geo_entity2)
+Beta_N$geo_entity2<-factor(Beta_N$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+
+# take average of beta diversity per iteration
+Beta_N<- Beta_N %>% group_by(Iteration,geo_entity2, index) %>%
+  summarize(beta=mean(value))
+Beta_N<-filter(Beta_N, index=="beta_S")
+Beta_N$Scenario<-"Native species"
+
+Beta_SS<-rbind.data.frame(Beta_All, Beta_N)
+
+Beta_SS<- Beta_SS%>%
+  unite( "Isl_Scen", c("geo_entity2","Scenario"),remove=FALSE)
+
+Beta_SS$Scenario<-factor(Beta_SS$Scenario,levels=c("All species","Native species"))
+
+Beta_SS$geo_entity2<-as.character(Beta_SS$geo_entity2)
+Beta_SS$x_axis<-ifelse(Beta_SS$geo_entity2=="Hawai'i" & Beta_SS$Scenario=="All species", 0.90, NA)
+Beta_SS$x_axis<-ifelse(Beta_SS$geo_entity2=="Hawai'i" & Beta_SS$Scenario=="Native species", 1.10, Beta_SS$x_axis)
+Beta_SS$x_axis<-ifelse(Beta_SS$geo_entity2=="Maui Nui" & Beta_SS$Scenario=="All species", 1.90, Beta_SS$x_axis)
+Beta_SS$x_axis<-ifelse(Beta_SS$geo_entity2=="Maui Nui" & Beta_SS$Scenario=="Native species", 2.10, Beta_SS$x_axis)
+Beta_SS$x_axis<-ifelse(Beta_SS$geo_entity2=="O'ahu" & Beta_SS$Scenario=="All species", 2.90, Beta_SS$x_axis)
+Beta_SS$x_axis<-ifelse(Beta_SS$geo_entity2=="O'ahu" & Beta_SS$Scenario=="Native species", 3.10, Beta_SS$x_axis)
+Beta_SS$x_axis<-ifelse(Beta_SS$geo_entity2=="Kaua'i" & Beta_SS$Scenario=="All species", 3.90, Beta_SS$x_axis)
+Beta_SS$x_axis<-ifelse(Beta_SS$geo_entity2=="Kaua'i" & Beta_SS$Scenario=="Native species", 4.10, Beta_SS$x_axis)
+
+# join models
+
+Scen2_AllSpp_BetaS_modelpred$Scenario<-"All species"
+
+Scen2_AllSpp_BetaS_modelpred<-select(Scen2_AllSpp_BetaS_modelpred, Scenario,geo_entity2=x, beta=predicted,
+                                     beta.LCL=conf.low, beta.UCL=conf.high)
+
+Scen2_NativesSpp_BetaS_modelpred$Scenario<-"Native species"
+Scen2_NativesSpp_BetaS_modelpred<-select(Scen2_NativesSpp_BetaS_modelpred,Scenario,geo_entity2=x, beta=predicted,
+                                         beta.LCL=conf.low, beta.UCL=conf.high)
+
+BetaS_f<-rbind.data.frame(Scen2_AllSpp_BetaS_modelpred,Scen2_NativesSpp_BetaS_modelpred)
+
+BetaS_f$geo_entity2<-as.character(BetaS_f$geo_entity2)
+BetaS_f$x_axis<-ifelse(BetaS_f$geo_entity2=="Hawai'i" & BetaS_f$Scenario=="All species", 0.90, NA)
+BetaS_f$x_axis<-ifelse(BetaS_f$geo_entity2=="Hawai'i" & BetaS_f$Scenario=="Native species", 1.10, BetaS_f$x_axis)
+BetaS_f$x_axis<-ifelse(BetaS_f$geo_entity2=="Maui Nui" & BetaS_f$Scenario=="All species", 1.90, BetaS_f$x_axis)
+BetaS_f$x_axis<-ifelse(BetaS_f$geo_entity2=="Maui Nui" & BetaS_f$Scenario=="Native species", 2.10, BetaS_f$x_axis)
+BetaS_f$x_axis<-ifelse(BetaS_f$geo_entity2=="O'ahu" & BetaS_f$Scenario=="All species", 2.90, BetaS_f$x_axis)
+BetaS_f$x_axis<-ifelse(BetaS_f$geo_entity2=="O'ahu" & BetaS_f$Scenario=="Native species", 3.10, BetaS_f$x_axis)
+BetaS_f$x_axis<-ifelse(BetaS_f$geo_entity2=="Kaua'i" & BetaS_f$Scenario=="All species", 3.90, BetaS_f$x_axis)
+BetaS_f$x_axis<-ifelse(BetaS_f$geo_entity2=="Kaua'i" & BetaS_f$Scenario=="Native species", 4.10, BetaS_f$x_axis)
+
+BetaS_f$Scenario<-factor(BetaS_f$Scenario,levels=c("All species","Native species"))
+
+BetaS_f<- BetaS_f%>%
+  unite( "Isl_Scen", c("geo_entity2","Scenario"),remove=FALSE)
 
 ################
-## beta_S_PIE  #
+## figure      #
 ################
 
-Beta_33<-filter(Beta_togg, index=="beta_S")
-
-Beta_33<-dplyr::summarize(dplyr::group_by(Beta_33, geo_entity2, Scenario,Iteration),beta_S=mean(value))
-
-Beta_33$geo_entity2<-as.character(Beta_33$geo_entity2)
-Beta_33$geo_entity2<-ifelse(Beta_33$geo_entity2=="Hawai'i Island","Hawai'i",Beta_33$geo_entity2)
-Beta_33$geo_entity2<-ifelse(Beta_33$geo_entity2=="Kaua'i Island","Kaua'i",Beta_33$geo_entity2)
-Beta_33$geo_entity2<-ifelse(Beta_33$geo_entity2=="O'ahu Island","O'ahu",Beta_33$geo_entity2)
-Beta_33$geo_entity2<-as.factor(Beta_33$geo_entity2)
-
-Beta_33$geo_entity2<-as.factor(Beta_33$geo_entity2)
-Beta_33$geo_entity2<-factor(Beta_33$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-Beta_3s<- Beta_33 %>%
-  group_by(geo_entity2, Scenario) %>%
-  do(data.frame(rbind(smean.cl.boot(.$beta_S, B=1000))))
-
-colnames(Beta_3s)[3]<-"beta_S"
-colnames(Beta_3s)[4]<-"l.QD"
-colnames(Beta_3s)[5]<-"h.QD"
-
-Beta_3s$geo_entity2<-as.factor(Beta_3s$geo_entity2)
-Beta_3s$geo_entity2<-factor(Beta_3s$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-
-Beta_S<-ggplot(data=Beta_33, aes(x=geo_entity2,y=beta_S,group=geo_entity2))+
-  geom_point(data=Beta_33, aes(x=geo_entity2,y=beta_S,group=geo_entity2),
-             position = position_jitter(w = 0.02, h = 0),color="gray80",size=0.25,alpha=0.2)+
+p_BetaS<-ggplot(Beta_SS) +
+  # geom_vridgeline(aes(x = x_axis, y = qD,  width = ..density.., group=Isl_Scen,
+  #                     fill=Scenario,colour=Scenario),
+  #                stat = "ydensity",trim = FALSE, alpha = 0.2, scale = 1) +
   
-  geom_point(data=Beta_3s, aes(x=geo_entity2,y=beta_S,group=geo_entity2, colour=Scenario),size=1)+
-  geom_errorbar(data=Beta_3s,aes(ymin=l.QD,ymax=h.QD,colour=Scenario),width=0.1)+
-  scale_y_continuous(limits=c(0,24.5),breaks=c(0,5,10,15,20))+
-  #scale_color_d3(palette="category20c")+
-  scale_colour_manual(values=c("All"="#3C5488FF","Native"="#008975"))+
+  geom_point(data=Beta_SS,aes(x = x_axis, y = beta, group=Isl_Scen, colour=Scenario), 
+             position=position_dodge(0.2),alpha=0.05, shape=20, size=0.5) +
+  
+  geom_pointrange(data=BetaS_f, aes(x=x_axis,y = beta,ymin=beta.LCL,ymax=beta.UCL,
+                                        group=Isl_Scen, colour=Scenario),fatten=0.25,size=1)+
+  
+  scale_colour_manual(name="",values=c("All species"="#0571b0","Native species"="#008837"))+
+  scale_fill_manual(name="",values=c("All species"="#0571b0","Native species"="#008837"))+
+  
+  scale_x_continuous( breaks=c(1,2,3,4),labels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))+
+  
   labs(x="",y=expression(bold(beta["S"])))+
-  guides(colour=guide_legend(title="",title.position = "top"))+
-  theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
-                   axis.title.y=element_text(colour="black",face="bold",size=6),
-                   axis.text.x=element_text(colour=c("black"),face="bold",size=6),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=6),
-                   legend.text=element_text(colour=c("black"),face="bold",size=6),
-                   legend.title = element_text(colour=c("black"),face="bold",size=6),
+  
+  guides(colour = guide_legend(override.aes = list(size = 0.5,fill="transparent",linetype=0)))+
+  
+  theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
+                   axis.title.x=element_text(colour="black",face="bold",size=8,family="sans"),
+                   axis.title.y=element_text(colour="black",face="bold",size=7,family="sans"),
+                   axis.text.x=element_text(colour="black",face="bold",size=8,family="sans"),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=6,family="sans"),
+                   legend.text=element_text(colour=c("black"),face="bold",size=7,family="sans"),
+                   legend.title = element_text(colour=c("black"),face="bold",size=7,family="sans"),
                    legend.title.align = 0.5,
+                   legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
                    legend.position=c("top"),
-                   legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-                   panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())
+                   panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank())
 
+# write out 
 
-png(filename="Figures/FigS5_Beta_S_all_natives_Scenario2_10plots.png", 
-    units="in", 
-    width=4, 
-    height=3, 
-    pointsize=2, 
-    res=500)
+ggsave(filename = file.path("Figures", "FigS5_Beta_S_all_natives_Scenario2_10plots.png"), 
+       width    = 8.7, 
+       height   = 6.7, 
+       units    = "cm", dpi=900)
 
-
-Beta_S
+p_BetaS
 
 dev.off()
-
-# #################
-# # Beta ENS_PIE  #
-# #################
-# 
-# Beta_22<-filter(Beta_togg, index=="beta_S_PIE")
-# 
-# Beta_22<-dplyr::summarize(dplyr::group_by(Beta_22, geo_entity2, Scenario, Iteration),beta_ENS_PIE=mean(value))
-# 
-# Beta_22$geo_entity2<-as.character(Beta_22$geo_entity2)
-# Beta_22$geo_entity2<-ifelse(Beta_22$geo_entity2=="Hawai'i Island","Hawai'i",Beta_22$geo_entity2)
-# Beta_22$geo_entity2<-ifelse(Beta_22$geo_entity2=="Kaua'i Island","Kaua'i",Beta_22$geo_entity2)
-# Beta_22$geo_entity2<-ifelse(Beta_22$geo_entity2=="O'ahu Island","O'ahu",Beta_22$geo_entity2)
-# Beta_22$geo_entity2<-as.factor(Beta_22$geo_entity2)
-# 
-# Beta_22$geo_entity2<-as.factor(Beta_22$geo_entity2)
-# Beta_22$geo_entity2<-factor(Beta_22$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-# 
-# Beta_2s<- Beta_22 %>%
-#   group_by(geo_entity2, Scenario) %>%
-#   do(data.frame(rbind(smean.cl.boot(.$beta_ENS_PIE, B=1000))))
-# 
-# colnames(Beta_2s)[3]<-"beta_ENS_PIE"
-# colnames(Beta_2s)[4]<-"l.QD"
-# colnames(Beta_2s)[5]<-"h.QD"
-# 
-# ## figure
-# 
-# Beta_2s$geo_entity2<-as.factor(Beta_2s$geo_entity2)
-# Beta_2s$geo_entity2<-factor(Beta_2s$geo_entity2,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
-# 
-# Beta_ENS_PIE<-ggplot(data=Beta_22, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entity2))+
-#   geom_point(data=Beta_22, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entity2),
-#              position = position_jitter(w = 0.02, h = 0),color="gray80",size=0.25,alpha=0.2)+
-#   
-#   geom_point(data=Beta_2s, aes(x=geo_entity2,y=beta_ENS_PIE,group=geo_entity2, colour=Scenario),size=1)+
-#   geom_errorbar(data=Beta_2s,aes(ymin=l.QD,ymax=h.QD,colour=Scenario),width=0.1)+
-#   scale_y_continuous(limits=c(0,6),breaks=c(0,1,2,3,4,5,6))+
-#   #scale_color_d3(palette="category20c")+
-#   scale_colour_manual(values=c("All"="#3C5488FF","Native"="#008975"))+
-#   labs(x="",y=expression(bold(beta["ENSpie"])))+
-#   guides(colour=guide_legend(title="",title.position = "top"))+
-#   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=6),
-#                    axis.title.y=element_text(colour="black",face="bold",size=6),
-#                    axis.text.x=element_text(colour=c("black"),face="bold",size=6),
-#                    axis.text.y=element_text(colour=c("black"),face="bold",size=6),
-#                    legend.text=element_text(colour=c("black"),face="bold",size=6),
-#                    legend.title = element_text(colour=c("black"),face="bold",size=6),
-#                    legend.title.align = 0.5,
-#                    legend.position=c("top"),
-#                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
-#                    panel.background =element_rect(fill="transparent",colour="black"),panel.grid.minor=element_blank())

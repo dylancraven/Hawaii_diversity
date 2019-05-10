@@ -10,7 +10,8 @@ require(ggplot2)
 require(ggsn) # for north symbols and scale bars
 require(dplyr)
 require(reshape2)
-require(ggsci)
+#require(ggsci)
+require(viridis)
 require(cowplot)
 
 # read point data
@@ -43,15 +44,18 @@ haw_allplots<-ggplot(data = HW_df) +
                  colour=Plot_Prop_Invaded,
                  fill="white"),
              shape="O") +
-  scale_colour_gsea(name="% Invaded",reverse=FALSE)+
-    # Annotate (each island name) 
+    scale_colour_viridis(name="% Invaded", option="D") +
+      # Annotate (each island name) 
     
-    annotate("text", x = -159.5, y = 21.8, label = "Kaua'i",fontface="bold")+
-    annotate("text", x = -158, y = 21.8, label = "O'ahu", fontface="bold")+
-    annotate("text", x = -156.1, y = 21.0, label = "Maui Nui", fontface="bold")+
-    annotate("text", x = -155.2, y = 20.1, label = "Hawai'i", fontface="bold")+
+    annotate("text", x = -159.5, y = 21.8, label = "Kaua'i",fontface="bold", size=5)+
+    annotate("text", x = -158, y = 21.8, label = "O'ahu", fontface="bold", size=5)+
+    annotate("text", x = -156.1, y = 21.1, label = "Maui Nui", fontface="bold", size=5)+
+    annotate("text", x = -155.2, y = 20.2, label = "Hawai'i", fontface="bold", size=5)+
     
-    
+  labs(x="Longitude",y="Latitude")+
+  
+  guides(size=FALSE, fill=FALSE)+
+  
     # Add north arrow
     ggsn::north(data     = HW_df,
                 location = "topright",
@@ -60,32 +64,27 @@ haw_allplots<-ggplot(data = HW_df) +
     # add scale bar
     ggsn::scalebar(data     = HW_df,
                    location = "bottomleft",
+                   transform=TRUE,
                    dist     = 50,
+                   dist_unit="km",
                    height   = 0.01,
                    st.dist  = 0.02,
                    st.size  = 3,
-                   dd2km    = TRUE, 
+                   #dd2km    = TRUE, 
                    model    = 'WGS84') +
     coord_equal() + # same as coord_fixed(ratio = 1)
-    #guides(colour=guide_legend(title="% Invadede
-    # ggtitle("(a) Area + Het + Age")+
-    labs(x="Longitude",y="Latitude")+
-    
-  guides(size=FALSE, fill=FALSE)+
-    
+   
     theme_bw() +
-    #theme(legend.justification = c(1, 0),
-    #     legend.title.align = 0,
-    #    legend.position = c(0.97, 0.5))
   
-    theme(legend.position=c(0.05,0.3), axis.text=element_text(size=8),
-          axis.text.x=element_text(size=8), axis.text.y=element_text(size=8),
-          axis.title.x = element_text(size=8),axis.title.y = element_text(size=8),
+    theme(legend.position=c(0.07,0.3), axis.text=element_text(size=11),
+          axis.text.x=element_text(size=11), axis.text.y=element_text(size=11),
+          axis.title.x = element_text(size=14),axis.title.y = element_text(size=14),
           title=element_text(size=6,color="black",face="bold",hjust=0.5),
-          legend.title = element_text(size=7, color="black",face="bold"),
+          legend.title = element_text(size=11, color="black",face="bold"),
           legend.background = element_rect(fill="transparent"),
-          plot.margin =margin(t=0.01, r=0.1, b=0.01, l=0.1, unit="cm"))
-
+          plot.margin =margin(t=0.01, r=0.1, b=0.01, l=0.1, unit="cm"),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank())
 
 ############################
 # make the age/area arrow  #
@@ -120,14 +119,26 @@ white_space<-ggplot(dff, aes(x=x,y=y))+
 
 require(cowplot)
 
-haw_map<-plot_grid(white_space, haw_allplots, ncol=1, label_size = 7,rel_heights = c(1,7), rel_widths = c(1,8),vjust=c(1.5,1.3))
+haw_map<-plot_grid(white_space, haw_allplots, ncol=1, rel_heights = c(1,7), rel_widths = c(1,8),vjust=c(1.5,1.3))
 
 # Save as png file
 
 ggsave(filename = file.path("Figures", "Fig1_Map_Plots_LocalSppDiv.png"), 
-       width    = 29.7, 
-       height   = 25, 
-       units    = "cm")
+       width    = 17.8, 
+       height   = 15.0, 
+       units    = "cm", dpi=900)
+
+haw_map
+
+dev.off()
+
+# Save as pdf
+
+
+ggsave(filename = file.path("Figures", "Fig1_Map_Plots_LocalSppDiv.pdf"), 
+       width    = 17.8, 
+       height   = 15.0, 
+       units    = "cm", dpi=900)
 
 haw_map
 

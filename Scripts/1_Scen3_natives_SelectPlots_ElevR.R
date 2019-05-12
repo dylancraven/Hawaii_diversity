@@ -2,6 +2,7 @@
 # Island - SAC         ##
 # Plot selection       ##
 # Scenario: 'Age'      ##
+# based on elevation   ##
 #########################
 # just natives (10 plots)
 #########################
@@ -175,7 +176,7 @@ for(i in 1:7500){
   cat("progress", i, sep=' ','\n')
   
   if(min_dist_k<=0.1) next 
-  if(ka_rangezz$r_Arid>ka_range$Prob50q_Elev_r) next
+  if(ka_rangezz$r_Elev>ka_range$Prob50q_Elev_r) next
   if(ka_rangezz$totPlotArea<ka_plotarea_min | ka_rangezz$totPlotArea>ka_plotarea_max) next
   
   ka_out<-select(ka_rangez, geo_entity2, PlotID,Plot_Area )
@@ -256,7 +257,7 @@ for(i in 1:7500){
   cat("progress", i, sep=' ','\n')
   
   if(min_dist_m<=0.1) next 
-  if(ma_rangezz$r_Arid>maui_range$Prob50q_Elev_r) next
+  if(ma_rangezz$r_Elev>maui_range$Prob50q_Elev_r) next
   if(ma_rangezz$totPlotArea<ka_plotarea_min | ma_rangezz$totPlotArea>ka_plotarea_max) next
   
   ma_out<-select(ma_rangez, geo_entity2, PlotID,Plot_Area )
@@ -339,7 +340,7 @@ for(i in 1:7500){
   cat("progress", i, sep=' ','\n')
   
   if(min_dist_o<=0.1) next 
-  if(oa_rangezz$r_Arid>oah_range$Prob50q_Elev_r) next
+  if(oa_rangezz$r_Elev>oah_range$Prob50q_Elev_r) next
   if(oa_rangezz$totPlotArea<ka_plotarea_min | oa_rangezz$totPlotArea>ka_plotarea_max) next
   
   oa_out<-select(oa_rangez, geo_entity2, PlotID,Plot_Area )
@@ -420,7 +421,7 @@ for(i in 1:7500){
   cat("progress", i, sep=' ','\n')
   
   if(min_dist_h<=0.1) next 
-  if(ha_rangezz$r_Arid>haw_range$Prob50q_Elev_r) next
+  if(ha_rangezz$r_Elev>haw_range$Prob50q_Elev_r) next
   if(ha_rangezz$totPlotArea<ka_plotarea_min | ha_rangezz$totPlotArea>ka_plotarea_max) next
   
   ha_out<-select(ha_rangez, geo_entity2, PlotID,Plot_Area )

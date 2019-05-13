@@ -1,12 +1,19 @@
 ##########################
 # Figures: SACs & RADs   #
 # Scenarios 2 & 3 ########
+# alternative scenario:  #
+# Elevation range        #
 # just natives    ########
 ##########################
 
 require(ggplot2)
 require(viridis)
+
 load("Cleaned_Data/modelpredictions_SAC_RAD_Scen23_Native_10plots.RData")
+rem<-c('pred2','rad_pred3')
+rm(list=rem) # keep only objects from scenario 2
+
+load("Cleaned_Data/modelpredictions_SAC_RAD_Scen23_Native_ElevR_10plots.RData")
 
 ##############
 # Scenario 2 #
@@ -73,7 +80,7 @@ p_rad_scen2<-ggplot(rad_pred2, aes(x, predicted,group=group,colour=group,fill=gr
   scale_color_viridis_d(option="D")+
   scale_fill_viridis_d(option="D")+
   
-   coord_cartesian(ylim=c(0,1))+
+  coord_cartesian(ylim=c(0,1))+
   ylab("% Species")+xlab("% Abundance (log scale)")+
   guides(colour=guide_legend(title=""),fill="none")+
   theme_bw()+theme(axis.title.x=element_text(colour="black",face="bold",size=7,family="sans"),
@@ -96,16 +103,16 @@ p_rad_scen2<-ggplot(rad_pred2, aes(x, predicted,group=group,colour=group,fill=gr
 # SACs #  
 ########
 
-pred2$group<-as.character(pred2$group)
-pred2$group<-ifelse(pred2$group=="Hawai'i Island","Hawai'i",pred2$group)
-pred2$group<-ifelse(pred2$group=="Kaua'i Island","Kaua'i",pred2$group)
-pred2$group<-ifelse(pred2$group=="O'ahu Island","O'ahu",pred2$group)
-pred2$group<-as.factor(pred2$group)
+elev_sac_pred3$group<-as.character(elev_sac_pred3$group)
+elev_sac_pred3$group<-ifelse(elev_sac_pred3$group=="Hawai'i Island","Hawai'i",elev_sac_pred3$group)
+elev_sac_pred3$group<-ifelse(elev_sac_pred3$group=="Kaua'i Island","Kaua'i",elev_sac_pred3$group)
+elev_sac_pred3$group<-ifelse(elev_sac_pred3$group=="O'ahu Island","O'ahu",elev_sac_pred3$group)
+elev_sac_pred3$group<-as.factor(elev_sac_pred3$group)
 
-pred2$group<-as.factor(pred2$group)
-pred2$group<-factor(pred2$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+elev_sac_pred3$group<-as.factor(elev_sac_pred3$group)
+elev_sac_pred3$group<-factor(elev_sac_pred3$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
-p_sac_scen3<-ggplot(pred2, aes(x, predicted,group=group,colour=group,fill=group)) +
+p_sac_scen3<-ggplot(elev_sac_pred3, aes(x, predicted,group=group,colour=group,fill=group)) +
   geom_line() +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high,fill=group), colour="transparent", alpha = .3)+
   scale_y_continuous(breaks=c(0,5, 10, 15, 20,25,30))+
@@ -136,16 +143,16 @@ p_sac_scen3<-ggplot(pred2, aes(x, predicted,group=group,colour=group,fill=group)
 # RADs #  
 ########
 
-rad_pred3$group<-as.character(rad_pred3$group)
-rad_pred3$group<-ifelse(rad_pred3$group=="Hawai'i Island","Hawai'i",rad_pred3$group)
-rad_pred3$group<-ifelse(rad_pred3$group=="Kaua'i Island","Kaua'i",rad_pred3$group)
-rad_pred3$group<-ifelse(rad_pred3$group=="O'ahu Island","O'ahu",rad_pred3$group)
-rad_pred3$group<-as.factor(rad_pred3$group)
+elev_rad_pred3$group<-as.character(elev_rad_pred3$group)
+elev_rad_pred3$group<-ifelse(elev_rad_pred3$group=="Hawai'i Island","Hawai'i",elev_rad_pred3$group)
+elev_rad_pred3$group<-ifelse(elev_rad_pred3$group=="Kaua'i Island","Kaua'i",elev_rad_pred3$group)
+elev_rad_pred3$group<-ifelse(elev_rad_pred3$group=="O'ahu Island","O'ahu",elev_rad_pred3$group)
+elev_rad_pred3$group<-as.factor(elev_rad_pred3$group)
 
-rad_pred3$group<-as.factor(rad_pred3$group)
-rad_pred3$group<-factor(rad_pred3$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+elev_rad_pred3$group<-as.factor(elev_rad_pred3$group)
+elev_rad_pred3$group<-factor(elev_rad_pred3$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
 
-p_rad_scen3<-ggplot(rad_pred3, aes(x, predicted,group=group,colour=group,fill=group)) +
+p_rad_scen3<-ggplot(elev_rad_pred3, aes(x, predicted,group=group,colour=group,fill=group)) +
   geom_line() +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high,fill=group), colour="transparent", alpha = .3)+
   #scale_colour_manual(values=c("#d7191c","#fdae61","#abd9e9","#2c7bb6"))+
@@ -178,7 +185,7 @@ togg2<-plot_grid(p_sac_scen2,p_sac_scen3,p_rad_scen2,p_rad_scen3,
                  labels=c("A","B","C","D"),label_size = 7,
                  ncol=2)
 
-ggsave(filename = file.path("Figures", "SACs_RADs_Natives_Scen2_Scen3_10plots_Fig3.png"), 
+ggsave(filename = file.path("Figures", "SACs_RADs_Natives_ElevR_Scen2_Scen3_10plots_FigS2.png"), 
        width    = 11.4, 
        height   = 8.55, 
        units    = "cm", dpi=900)
@@ -190,7 +197,7 @@ dev.off()
 
 # as pdf
 
-ggsave(filename = file.path("Figures", "SACs_RADs_Natives_Scen2_Scen3_10plots_Fig3.pdf"), 
+ggsave(filename = file.path("Figures", "SACs_RADs_Natives_ElevR_Scen2_Scen3_10plots_FigS2.pdf"), 
        width    = 11.4, 
        height   = 8.55, 
        units    = "cm", dpi=900)

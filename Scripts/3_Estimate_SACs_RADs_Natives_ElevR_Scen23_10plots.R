@@ -62,6 +62,7 @@ pred2$group<-as.factor(pred2$group)
 
 pred2$group<-as.factor(pred2$group)
 pred2$group<-factor(pred2$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+elev_sac_pred3<-pred2
 
 #############
 # RADs ######
@@ -104,12 +105,14 @@ rad_pred3$group<-as.factor(rad_pred3$group)
 
 rad_pred3$group<-as.factor(rad_pred3$group)
 rad_pred3$group<-factor(rad_pred3$group,levels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))
+elev_rad_pred3<-rad_pred3
 
 ########################
 # save data   ##########
 ########################
 
-save(pred2,  rad_pred3,file="Cleaned_Data/modelpredictions_SAC_RAD_Scen23_Native_ElevR_10plots.RData")
+save(elev_sac_pred3,elev_rad_pred3,
+     file="Cleaned_Data/modelpredictions_SAC_RAD_Scen23_Native_ElevR_10plots.RData")
 
 save(sac_scen2_r3, summ_sac_scen3, 
-    rad_scen3_r2,summ_rad_scen3,file="Cleaned_Data/model_summary_SAC_RAD_Native_10plots.RData")
+    rad_scen3_r2,summ_rad_scen3,file="Cleaned_Data/model_summary_SAC_RAD_Scen23_Native_ElevR_10plots.RData")

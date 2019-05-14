@@ -139,7 +139,7 @@ p_BetaS<-ggplot(Beta_SS) +
 
 ggsave(filename = file.path("Figures", "Fig5_Beta_S_all_natives_Scen3_10plots.png"), 
        width    = 8.7, 
-       height   = 6.7, 
+       height   = 5.7, 
        units    = "cm", dpi=900)
 
 p_BetaS
@@ -149,7 +149,7 @@ dev.off()
 
 ggsave(filename = file.path("Figures", "Fig5_Beta_S_all_natives_Scen3_10plots.pdf"), 
        width    = 8.7, 
-       height   = 6.7, 
+       height   = 5.7, 
        units    = "cm", dpi=900)
 
 p_BetaS

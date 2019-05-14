@@ -42,9 +42,9 @@ p_sac_scen2<-ggplot(pred, aes(x, predicted,group=group,colour=group,fill=group))
   theme_bw()+theme(legend.position="top", 
                    axis.title.x=element_text(colour="black",face="bold",size=7,family="sans"),
                    axis.title.y=element_text(colour="black",face="bold",size=7,family="sans"),
-                   axis.text.x=element_text(colour="black",face="bold",size=5,family="sans"),
+                   axis.text.x=element_text(colour="black",face="bold",size=6,family="sans"),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6,family="sans"),
-                   legend.text=element_text(colour=c("black"),face="bold",size=4,family="sans"),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6,family="sans"),
                    legend.title = element_text(colour=c("black"),face="bold",size=6,family="sans"),
                    legend.title.align = 0.5,
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
@@ -80,7 +80,7 @@ p_rad_scen2<-ggplot(rad_pred2, aes(x, predicted,group=group,colour=group,fill=gr
                    axis.title.y=element_text(colour="black",face="bold",size=7,family="sans"),
                    axis.text.x=element_text(colour="black",face="bold",size=6,family="sans"),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6,family="sans"),
-                   legend.text=element_text(colour=c("black"),face="bold",size=4,family="sans"),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6,family="sans"),
                    legend.title = element_text(colour=c("black"),face="bold",size=6,family="sans"),
                    legend.title.align = 0,
                    legend.position=c("none"),
@@ -122,9 +122,9 @@ p_sac_scen3<-ggplot(pred2, aes(x, predicted,group=group,colour=group,fill=group)
   theme_bw()+theme(legend.position="top", 
                    axis.title.x=element_text(colour="black",face="bold",size=7,family="sans"),
                    axis.title.y=element_text(colour="black",face="bold",size=7,family="sans"),
-                   axis.text.x=element_text(colour="black",face="bold",size=5,family="sans"),
+                   axis.text.x=element_text(colour="black",face="bold",size=6,family="sans"),
                    axis.text.y=element_text(colour=c("black"),face="bold",size=6,family="sans"),
-                   legend.text=element_text(colour=c("black"),face="bold",size=4,family="sans"),
+                   legend.text=element_text(colour=c("black"),face="bold",size=6,family="sans"),
                    legend.title = element_text(colour=c("black"),face="bold",size=6,family="sans"),
                    legend.title.align = 0.5,
                    legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
@@ -176,11 +176,11 @@ require(cowplot)
 
 togg2<-plot_grid(p_sac_scen2,p_sac_scen3,p_rad_scen2,p_rad_scen3,
                  labels=c("A","B","C","D"),label_size = 7,
-                 ncol=2)
+                 ncol=2, rel_heights = c(1.3,1))
 
-ggsave(filename = file.path("Figures", "SACs_RADs_Natives_Scen2_Scen3_10plots_Fig3.png"), 
-       width    = 11.4, 
-       height   = 8.55, 
+ggsave(filename = file.path("Figures", "Fig3_SACs_RADs_Natives_Scen2_Scen3_10plots.png"), 
+       width    = 17.8, 
+       height   = 11.4, 
        units    = "cm", dpi=900)
 
 
@@ -190,9 +190,9 @@ dev.off()
 
 # as pdf
 
-ggsave(filename = file.path("Figures", "SACs_RADs_Natives_Scen2_Scen3_10plots_Fig3.pdf"), 
-       width    = 11.4, 
-       height   = 8.55, 
+ggsave(filename = file.path("Figures", "Fig3_SACs_RADs_Natives_Scen2_Scen3_10plots.pdf"), 
+       width    = 17.8, 
+       height   = 11.4, 
        units    = "cm", dpi=900)
 
 togg2

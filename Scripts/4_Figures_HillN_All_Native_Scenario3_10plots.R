@@ -135,16 +135,16 @@ Hill_Or0<-ggplot(H_Sc3_Or0) +
   
   theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
                    axis.title.x=element_text(colour="black",face="bold",size=8,family="sans"),
-                   axis.title.y=element_text(colour="black",face="bold",size=7,family="sans"),
-                   axis.text.x=element_blank(),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=6,family="sans"),
+                   axis.title.y=element_text(colour="black",face="bold",size=7,family="sans",vjust=1,hjust=0),
+                   axis.text.x=element_text(colour=c("transparent"),face="bold",size=1,family="sans"),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=5,family="sans"),
                    #legend.key = element_rect(fill=NA),
                    legend.text=element_text(colour=c("black"),face="bold",size=7,family="sans"),
                    legend.title = element_text(colour=c("black"),face="bold",size=7,family="sans"),
                    legend.title.align = 0.5,
                    legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
                    legend.position=c("top"),
-                   #legend.margin =margin(t=0, r=0, b=0, l=0, unit="cm"),
+                   plot.margin=margin(t=0.01, r=0.01, b=0, l=0.01, unit="cm"),
                    panel.grid.major = element_blank(),
                    panel.grid.minor = element_blank())
 
@@ -179,14 +179,15 @@ Hill_Or2<-ggplot(H_Sc3_Or2)+
   
   theme_bw()+theme(plot.title = element_text(colour="black",face="bold",size=7,hjust=0.5,vjust=0),
                    axis.title.x=element_text(colour="black",face="bold",size=8,family="sans"),
-                   axis.title.y=element_text(colour="black",face="bold",size=7,family="sans"),
+                   axis.title.y=element_text(colour="black",face="bold",size=7,family="sans", vjust=1,hjust=0),
                    axis.text.x=element_text(colour="black",face="bold",size=8,family="sans"),
-                   axis.text.y=element_text(colour=c("black"),face="bold",size=6,family="sans"),
+                   axis.text.y=element_text(colour=c("black"),face="bold",size=5,family="sans"),
                    legend.text=element_text(colour=c("black"),face="bold",size=7,family="sans"),
                    legend.title = element_text(colour=c("black"),face="bold",size=7,family="sans"),
                    legend.title.align = 0.5,
                    legend.margin=margin(t=0.00, r=0, b=0, l=0, unit="cm"),
                    legend.position=c("top"),
+                   plot.margin=margin(t=0.01, r=0.01, b=0, l=0.01, unit="cm"),
                    panel.grid.major = element_blank(),
                    panel.grid.minor = element_blank())
 
@@ -203,12 +204,12 @@ hill_tog<-plot_grid(Hill_Or0+theme(legend.position="none"),
 
 legend <- get_legend(Hill_Or0)
 
-hill_togg<- plot_grid( legend,hill_tog, rel_heights = c(0.15, 5),ncol=1)
+hill_togg<- plot_grid( legend,hill_tog, rel_heights = c(0.2, 5),ncol=1)
 
 #
-ggsave(filename = file.path("Figures", "HillN_All_Natives_10plots_Fig4.png"), 
+ggsave(filename = file.path("Figures", "Fig4_HillN_All_Natives_10plots.png"), 
        width    = 8.7, 
-       height   = 11, 
+       height   = 8.7, 
        units    = "cm",dpi=900)
 
 hill_togg
@@ -217,9 +218,9 @@ dev.off()
 
 # as pdf
 
-ggsave(filename = file.path("Figures", "HillN_All_Natives_10plots_Fig4.pdf"), 
+ggsave(filename = file.path("Figures", "Fig4_HillN_All_Natives_10plots.pdf"), 
        width    = 8.7, 
-       height   = 11, 
+       height   = 8.7, 
        units    = "cm",dpi=900)
 
 hill_togg

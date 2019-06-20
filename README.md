@@ -15,3 +15,5 @@ For questions regarding the analyses or data, please contact [Dylan Craven](mail
 ## Licence  
  
 This work is licensed under a [Creative Commons Attribution 2.0 Generic License](https://creativecommons.org/licenses/by/2.0/).
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3250638.svg)](https://doi.org/10.5281/zenodo.3250638)

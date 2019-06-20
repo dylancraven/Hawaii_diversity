@@ -1,4 +1,4 @@
-# Dissecting macro-ecological and macro-evolutionary patterns of biodiversity across the Hawaiian archipelago
+# Dissecting macro-ecological and macro-evolutionary patterns of forest biodiversity across the Hawaiian archipelago
 
 ## Authors
 *Dylan Craven, Tiffany M. Knight, Kasey E. Barton, Lalasia Bialic-Murphy, Jonathan Chase*  
@@ -12,7 +12,6 @@ Craven D, Knight T, Barton K, Bialic-Murphy L, Cordell S, Giardina C, Gillespie 
 
 For questions regarding the analyses or data, please contact [Dylan Craven](mailto:dylan.craven@aya.yale.edu).
 
-## License  
-
-This work is licensed under a [Creative Commons Attribution 2.0 Generic License](https://creativecommons.org/licenses/by/2.0/). 
-
+## Licence  
+ 
+This work is licensed under a [Creative Commons Attribution 2.0 Generic License](https://creativecommons.org/licenses/by/2.0/).

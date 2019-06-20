@@ -124,8 +124,8 @@ Hill_Or0<-ggplot(H_Sc2_Or0) +
  geom_pointrange(data=H_f_Sc2_Or0, aes(x=x_axis,y = qD,ymin=qD.LCL,ymax=qD.UCL,
            group=Isl_Scen, colour=Scenario),fatten=0.25,size=1)+
   
-  scale_colour_manual(name="",values=c("All species"="#0571b0","Native species"="#008837"))+
-  scale_fill_manual(name="",values=c("All species"="#0571b0","Native species"="#008837"))+
+  scale_colour_manual(name="",values=c("All species"="#460B6AFF","Native species"="#F8870EFF"))+
+  scale_fill_manual(name="",values=c("All species"="#460B6AFF","Native species"="#F8870EFF"))+
   
   scale_x_continuous( breaks=c(1,2,3,4),labels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))+
 
@@ -168,8 +168,8 @@ Hill_Or2<-ggplot(H_Sc2_Or2)+
   geom_pointrange(data=H_f_Sc2_Or0, aes(x=x_axis,y = qD,ymin=qD.LCL,ymax=qD.UCL,
                                         group=Isl_Scen, colour=Scenario),fatten=0.25,size=1)+
   
-  scale_colour_manual(name="",values=c("All species"="#0571b0","Native species"="#008837"))+
-  scale_fill_manual(name="",values=c("All species"="#0571b0","Native species"="#008837"))+
+  scale_colour_manual(name="",values=c("All species"="#460B6AFF","Native species"="#F8870EFF"))+
+  scale_fill_manual(name="",values=c("All species"="#460B6AFF","Native species"="#F8870EFF"))+
   
   scale_x_continuous( breaks=c(1,2,3,4),labels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))+
   

@@ -113,8 +113,8 @@ p_BetaS<-ggplot(Beta_SS) +
   geom_pointrange(data=BetaS_f, aes(x=x_axis,y = beta,ymin=beta.LCL,ymax=beta.UCL,
                                     group=Isl_Scen, colour=Scenario),fatten=0.25,size=1)+
   
-  scale_colour_manual(name="",values=c("All species"="#0571b0","Native species"="#008837"))+
-  scale_fill_manual(name="",values=c("All species"="#0571b0","Native species"="#008837"))+
+  scale_colour_manual(name="",values=c("All species"="#460B6AFF","Native species"="#F8870EFF"))+
+  scale_fill_manual(name="",values=c("All species"="#460B6AFF","Native species"="#F8870EFF"))+
   
   scale_x_continuous( breaks=c(1,2,3,4),labels=c("Hawai'i","Maui Nui","O'ahu","Kaua'i"))+
   
@@ -141,6 +141,7 @@ ggsave(filename = file.path("Figures", "Fig5_Beta_S_all_natives_Scen3_10plots.pn
        width    = 8.7, 
        height   = 5.7, 
        units    = "cm", dpi=900)
+
 
 p_BetaS
 
